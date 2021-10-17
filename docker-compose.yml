@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+
+  assistant:
+    image: "dainst/bibliography-assistant"
+    build: "./assistant"
+    ports:
+      - "4000:4000"

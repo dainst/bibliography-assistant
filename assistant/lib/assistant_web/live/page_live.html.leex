@@ -1,0 +1,12 @@
+<section class="phx-hero">
+  <%= if @current_page == "1" do
+      live_component @socket,
+        AssistantWeb.RawReferences,
+        id: "raw-references"
+    else
+      live_component @socket,
+      AssistantWeb.Evaluation,
+        id: "evaluation",
+        list: @list
+    end %>
+</section>

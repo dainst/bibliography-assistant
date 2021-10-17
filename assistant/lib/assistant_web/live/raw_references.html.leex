@@ -1,0 +1,14 @@
+<%= f = form_for :raw_references, "#",
+    id: "raw-references-form",
+    phx_submit: "save",
+    phx_target: @myself
+  %>
+
+  <h1>Bibliographische Referenzen</h1>
+
+  <p>Eine Zeile pro Eintrag</p>
+
+  <%= textarea f, :raw_references %>
+
+  <%= submit "Evaluate" %>
+</form>
