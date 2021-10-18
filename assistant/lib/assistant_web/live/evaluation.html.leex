@@ -1,23 +1,30 @@
-<%= for {raw, item} <- @list do %>
+<%= for {{raw, item}, {first_author, num_results}} <- @list do %>
 
   <div class="phx-hero card">
-    Raw: <%= raw %>
+    <%= raw %>
     <br>
     <br>
 
-    <%= for {k,v} <- item do %>
+    <%= if not is_nil(first_author) do %>
+      Number results of zenon search for first author '<%= first_author %>': <%= num_results %>
 
-      <%= if k == "author" do %>
+      <br>
+      <br>
 
-        <%= for author <- v do %>
+      <%= for {k,v} <- item do %>
 
-          <%= if author["family"] do %>
-            Author: <%= author["family"] %>
+        <%= if k == "author" do %>
+
+          <%= for author <- v do %>
+
+            <%= if author["family"] do %>
+              Author: <%= author["family"] %>
+            <% end %>
+
           <% end %>
-
         <% end %>
-      <% end %>
 
+      <% end %>
     <% end %>
     <hr>
     <br>
