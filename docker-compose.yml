@@ -7,3 +7,9 @@ services:
     build: "./assistant"
     ports:
       - "4000:4000"
+
+  anystyle:
+    image: "dainst/anystyle-sinatra"
+    build: "./anystyle"
+    ports:
+      - "4567:4567"

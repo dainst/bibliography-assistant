@@ -1,5 +1,8 @@
 use Mix.Config
 
+config :assistant,
+  anystyle_path: "localhost:4567"
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #

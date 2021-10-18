@@ -6,6 +6,8 @@ services:
     image: "dainst/bibliography-assistant"
     ports:
       - "4300:4000"
+    volumes:
+      - "assistant-config:/opt/src/assistant/config"
     networks:
       - web
       - default
@@ -15,6 +17,16 @@ services:
         - "traefik.enable=true"
         - "traefik.frontend.rule=Host:bibliography-assistant.idai.world"
         - "traefik.port=4000"
+
+  anystyle:
+    image: "dainst/anystyle-sinatra"
+    networks:
+      - default
+    ports:
+      - "4567:4567"
+
+volumes:
+  assistant-config:
 
 networks:
   web:
