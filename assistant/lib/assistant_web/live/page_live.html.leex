@@ -1,5 +1,5 @@
 <%= if @current_page == "1" do %>
-  <section class="phx-hero">
+  <section class="phx-hero width">
     <%= live_component @socket,
       AssistantWeb.RawReferences,
       id: "raw-references" %>
