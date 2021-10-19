@@ -15,7 +15,22 @@ defmodule Assistant.ZenonService do
       end
     else
       IO.puts "Zenon Service not configured"
-      {nil, 0, []}
+      {nil, 14, [
+        "zenon-result-1:#{author}",
+        "zenon-result-2:#{author}",
+        "zenon-result-3:#{author}",
+        "zenon-result-4:#{author}",
+        "zenon-result-5:#{author}",
+        "zenon-result-6:#{author}",
+        "zenon-result-7:#{author}",
+        "zenon-result-8:#{author}",
+        "zenon-result-9:#{author}",
+        "zenon-result-10:#{author}",
+        "zenon-result-11:#{author}",
+        "zenon-result-12:#{author}",
+        "zenon-result-13:#{author}",
+        "zenon-result-14:#{author}"
+        ]}
     end
   end
 end
