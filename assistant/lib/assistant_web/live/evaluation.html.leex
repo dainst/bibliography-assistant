@@ -43,7 +43,11 @@
             <%= for result <- Enum.take(results, 20) do %>
 
             <div class="phx-hero card">
-              <%= result %>
+              <%= if String.starts_with?(result, "00") do %>
+                <a href="<%= 'https://zenon.dainst.org/Record/#{result}' %>"><%= result %></a>
+              <% else %>
+                <%= result %>
+              <% end %>
             </div>
 
           <% end %>
