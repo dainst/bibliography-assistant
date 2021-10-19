@@ -1,16 +1,22 @@
 <header>
-  <section class="width">
+  <div class="width">
     <%= if @current_page == "2" do %>
-      <nav role="navigation">
+      <div class="right">
+        Bibliography Assistant
+      </div>
+      <div class="left">
         <a phx-click="back">
           Zurück
         </a>
-      </nav>
+      </div>
+
+    <% else %>
+      <div class="right">
+        Bibliography Assistant
+      </div>
     <% end %>
-    <span class="phx-logo">
-      Bibliography Assistant
-    </span>
-  </section>
+
+  </div>
 </header>
 
 <main role="main">

@@ -3,6 +3,16 @@ body {
     padding: unset;
 }
 
+.left {
+    float: left;
+    padding-top: 18px;
+}
+
+.right {
+    float: right;
+    padding-top: 18px;
+}
+
 #raw-references-form {
 
     textarea {

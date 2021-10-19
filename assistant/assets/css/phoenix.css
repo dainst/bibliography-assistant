@@ -76,7 +76,7 @@ header nav li {
   margin: 0;
   padding: 0;
   display: block;
-  text-align: right;
+  text-align: left;
   white-space: nowrap;
 }
 header nav ul {
