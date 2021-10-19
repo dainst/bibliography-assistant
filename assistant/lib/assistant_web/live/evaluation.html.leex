@@ -1,40 +1,54 @@
-<%= for {{raw, item}, {first_author, num_results}} <- @list do %>
+<div class="both">
+  <div class="inner">
+    <div class="lhs">
+      <div class="list">
+        <%= for {{{raw, item}, {first_author, num_results, results}}, idx} <- Enum.with_index(@list) do %>
 
-  <div class="phx-hero card">
-    <%= raw %>
-    <br>
-    <br>
+          <div class="phx-hero card <%= if idx == @selected_item do 'selected' end %>"
+            phx-click="select" phx-target="<%= @myself %>" phx-value-idx="<%= idx %>">
+            <%= raw %>
+            <br>
+            <br>
 
-    Anystyle Result:
-    <br>
-    <%= for {k,v} <- item do %>
+            Anystyle Result:
+            <br>
+            <%= for {k,v} <- item do %>
 
-      <%= if k == "author" do %>
+              <%= if k == "author" do %>
 
-        <%= for author <- v do %>
+                <%= for author <- v do %>
 
-          <%= if author["family"] do %>
-            Author: <%= author["family"] %>
-          <% end %>
+                  <%= if author["family"] do %>
+                    Author: <%= author["family"] %>
+                  <% end %>
 
+                <% end %>
+              <% end %>
+
+            <% end %>
+          </div>
         <% end %>
-      <% end %>
+      </div>
+    </div>
 
-    <% end %>
+    <div class="rhs">
+      <div class="list">
+        <%= if @selected_item > -1 do %>
+          <% {{raw, item}, {first_author, num_results, results}} = Enum.at(@list, @selected_item) %>
 
-    <br>
-    <br>
-    Zenon Result:
-    <br>
-    <%= if not is_nil(first_author) do %>
-      Number results of zenon search for first author '<%= first_author %>': <%= num_results %>
-    <% else %>
-      None
-    <% end %>
+            <div>
+              Number results of zenon search for first author '<%= first_author %>': <%= num_results %>
+            </div>
 
-    <hr>
-    <br>
-    <br>
-    <br>
+            <%= for result <- Enum.take(results, 20) do %>
+
+            <div class="phx-hero card">
+              <%= result %>
+            </div>
+
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
-<% end %>
+</div>

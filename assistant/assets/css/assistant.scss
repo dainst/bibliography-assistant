@@ -1,7 +1,57 @@
+body {
+    margin: unset;
+    padding: unset;
+}
+
 #raw-references-form {
 
     textarea {
     
         height: 300px;
     }
+}
+
+.both {
+    height: calc(100% - 80px);
+    position: absolute;
+    width: 100%;
+    
+    .inner {
+        height: 100%;
+        width: 66%;
+        max-width: 1200px;
+        margin: auto;
+
+        .lhs::-webkit-scrollbar {
+            display: none;
+        }
+        .lhs {
+            overflow: scroll;
+            scrollbar-width: none;
+            height: 100%;
+            float: left;
+            margin-right: 10px;
+            width: calc(50% - 10px);
+        }
+        .rhs::-webkit-scrollbar {
+            display: none;
+        }
+        .rhs {
+            overflow: scroll;
+            scrollbar-width: none;
+            height: 100%;
+            float: left;
+            margin-left: 10px;
+            width: calc(50% - 10px);
+            
+        }
+        .list {
+            height: 100%;
+        }
+    }
+}
+
+.selected {
+
+    background-color: darkgray;
 }

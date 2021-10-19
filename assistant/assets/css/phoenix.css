@@ -19,10 +19,10 @@ pre{padding: 1em;}
 
 .container{
   margin: 0 auto;
-  max-width: 80.0rem;
   padding: 0 2.0rem;
   position: relative;
-  width: 100%
+  max-width: 100.0rem;
+  width: 100%;
 }
 select {
   width: auto;
@@ -54,10 +54,10 @@ select {
 
 /* Headers */
 header {
+  height: 80px;
   width: 100%;
   background: #fdfdfd;
   border-bottom: 1px solid #eaeaea;
-  margin-bottom: 2rem;
 }
 header section {
   align-items: center;

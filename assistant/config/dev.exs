@@ -1,7 +1,8 @@
 use Mix.Config
 
 config :assistant,
-  anystyle_path: "localhost:4567"
+  anystyle_path: "localhost:4567",
+  zenon_url: "https://zenon.dainst.org"
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
