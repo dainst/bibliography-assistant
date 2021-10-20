@@ -5,7 +5,11 @@ defmodule Assistant.GrobidQueryProcessor do
 
   def process_query raw_references do
 
-    split_references = String.split(raw_references, ["\n", "\r", "\r\n"])
+    split_references =
+      raw_references
+      |> String.split(["\n", "\r", "\r\n"])
+      |> Enum.reject(&(&1 == ""))
+
     grobid_results = GrobidAdapter.ask_grobid split_references
 
     zenon_results =
