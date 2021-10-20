@@ -25,6 +25,13 @@ services:
     ports:
       - "4567:4567"
 
+  grobid:
+      image: "lfoppiano/grobid:0.7.0"
+      networks:
+      - default
+      ports:
+        - "8070:8070"
+
 volumes:
   assistant-config:
 
