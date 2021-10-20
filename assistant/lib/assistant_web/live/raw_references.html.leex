@@ -1,6 +1,6 @@
 <%= f = form_for :raw_references, "#",
     id: "raw-references-form",
-    phx_submit: "save",
+    phx_change: "change",
     phx_target: @myself
   %>
 
@@ -9,6 +9,7 @@
   <p>One item per line</p>
 
   <%= textarea f, :raw_references %>
-
-  <%= submit "Evaluate with Anystyle" %>
 </form>
+
+<button phx-click="eval" phx-value-target="anystyle" phx-target="<%= @myself %>">Evaluate with anystyle</button>
+<button phx-click="eval" phx-value-target="grobid" phx-target="<%= @myself %>">Evaluate with grobid</button>

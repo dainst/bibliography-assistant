@@ -45,7 +45,8 @@ defmodule Assistant.MixProject do
       {:jason, "~> 1.0"},
       {:httpoison, "~> 1.8"},
       {:poison, "~> 3.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:bibtex, "~> 0.0.1", hex: :bibtex_elixir}
     ]
   end
 

@@ -2,10 +2,23 @@ defmodule AssistantWeb.RawReferences do
   use AssistantWeb, :live_component
 
   alias Assistant.AnystyleQueryProcessor
+  alias Assistant.GrobidQueryProcessor
 
-  def handle_event "save", %{ "raw_references" => %{ "raw_references" => raw_references } }, socket do
+  def handle_event "change", %{ "raw_references" => %{ "raw_references" => raw_references } } = params, socket do
+    {:noreply, socket |> assign(:raw_references, raw_references)}
+  end
 
-    send self(), AnystyleQueryProcessor.process_query raw_references
+  def handle_event "eval", %{ "target" => target }, socket do
+
+    raw_references = socket.assigns.raw_references
+
+    result = case target do
+      "grobid" -> {:grobid, GrobidQueryProcessor.process_query(raw_references)}
+      "anystyle" -> {:anystyle, AnystyleQueryProcessor.process_query(raw_references)}
+      _ -> nil
+    end
+
+    send self(), result
     {:noreply, socket}
   end
 end

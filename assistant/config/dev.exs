@@ -2,6 +2,7 @@ use Mix.Config
 
 config :assistant,
   anystyle_path: "localhost:4567",
+  grobid_path: "localhost:8070",
   zenon_url: "https://zenon.dainst.org"
 
 # For development, we disable any cache and enable
