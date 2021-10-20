@@ -42,6 +42,10 @@
 
             <div>
               Number results of zenon search for first author '<%= first_author %>': <%= num_results %>
+              <br>
+              <a href="<%= "https://zenon.dainst.org/api/v1/search?lookfor=author:#{first_author}" %>">
+                <%= "https://zenon.dainst.org/api/v1/search?lookfor=author:#{first_author}" %>
+              </a>
             </div>
 
             <%= for result <- Enum.take(results, 20) do %>
