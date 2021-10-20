@@ -11,7 +11,7 @@
             <br>
             <br>
 
-            <%= if elem(@list, 0) == :anystyle do %>
+            <%= if elem(@list, 0) == "anystyle" do %>
               <h3>Anystyle Result</h3>
               <br>
               <div style="text-align: left">
@@ -21,7 +21,7 @@
               </div>
             <% end %>
 
-            <%= if elem(@list, 0) == :grobid do %>
+            <%= if elem(@list, 0) == "grobid" do %>
               <h3>Grobid Result</h3>
               <br>
               <div style="text-align: left">
@@ -31,7 +31,7 @@
               </div>
             <% end %>
 
-            <%= if elem(@list, 0) == :cermine do %>
+            <%= if elem(@list, 0) == "cermine" do %>
               <h3>Cermine Result</h3>
               <br>
               <div style="text-align: left">

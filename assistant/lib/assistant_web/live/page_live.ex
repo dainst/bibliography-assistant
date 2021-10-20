@@ -1,6 +1,8 @@
 defmodule AssistantWeb.PageLive do
   use AssistantWeb, :live_view
 
+  alias Assistant.Dispatch
+
   @impl true
   def mount _params, _session, socket do
     socket =
@@ -17,11 +19,11 @@ defmodule AssistantWeb.PageLive do
     {:noreply, socket}
   end
 
-  def handle_info params, socket do
+  def handle_info {type, raw_references}, socket do
     socket =
       socket
       |> assign(:current_page, "2")
-      |> assign(:list, params)
+      |> assign(:list, {type, Dispatch.query(type, raw_references)})
     {:noreply, socket}
   end
 end
