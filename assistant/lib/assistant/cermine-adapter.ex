@@ -9,6 +9,9 @@ defmodule Assistant.CermineAdapter do
     headers = [{"Content-Type", "multipart/form-data"}, {"Accept", "application/x-bibtex"}]
     body = {:form, [reference: "#{input_string}"]}
     {:ok, results} = HTTPoison.post "#{url}/parse.do", body, headers
-    List.first Bibtex.Parser.parse results.body
+    body = String.replace results.body, ",\n}", "}"
+    List.first Bibtex.Parser.parse body
   end
+
+  # "@article{Borg,\n\tauthor = {Borg, B.E.},\n\tjournal = {Die antiken Skulpturen in Castle Howard, MAR},\n\tvolume = {51},\n}\n"
 end

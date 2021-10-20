@@ -18,6 +18,6 @@ defmodule Assistant.CermineQueryProcessor do
   end
 
   def to_author item do
-    item.author
+    item[:author]
   end
 end
