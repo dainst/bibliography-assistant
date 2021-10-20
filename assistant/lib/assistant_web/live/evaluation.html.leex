@@ -6,6 +6,7 @@
 
           <div class="phx-hero card <%= if idx == @selected_item do 'selected' end %>"
             phx-click="select" phx-target="<%= @myself %>" phx-value-idx="<%= idx %>">
+            <h3>Original</h3>
             <%= raw %>
             <br>
             <br>
