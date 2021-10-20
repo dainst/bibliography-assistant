@@ -17,8 +17,7 @@ defmodule Assistant.CermineQueryProcessor do
       |> Enum.map(&to_author/1)
       |> Enum.map(&ZenonService.query_zenon/1)
 
-    zipped = Enum.zip split_references, cermine_results
-    zipped = Enum.zip zipped, zenon_results
+    zipped = Enum.zip [split_references, cermine_results, zenon_results]
   end
 
   def to_author item do

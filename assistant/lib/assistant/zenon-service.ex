@@ -3,7 +3,7 @@ defmodule Assistant.ZenonService do
   def query_zenon author do
 
     if is_nil(author) do
-      {nil, 0, []}
+      [nil, 0, []]
     else
       author = if String.contains?(author, ",") do
         String.split(author, ",") |> List.first
@@ -18,16 +18,16 @@ defmodule Assistant.ZenonService do
             results = Poison.decode! results.body
             # IO.inspect results["records"]
             records = Enum.map results["records"], &(&1["id"])
-            {author, results["resultCount"], records}
+            [author, results["resultCount"], records]
           else
             {:error, error} ->
               IO.puts "Zenon Service not reachable"
               IO.inspect error
-              {nil, 0, []}
+              [nil, 0, []]
           end
         else
           IO.puts "Zenon Service not configured"
-          {nil, 14, [
+          [nil, 14, [
             "zenon-result-1:#{author}",
             "zenon-result-2:#{author}",
             "zenon-result-3:#{author}",
@@ -42,10 +42,10 @@ defmodule Assistant.ZenonService do
             "zenon-result-12:#{author}",
             "zenon-result-13:#{author}",
             "zenon-result-14:#{author}"
-            ]}
+            ]]
         end
       else
-        {nil, 0, []}
+        [nil, 0, []]
       end
     end
   end

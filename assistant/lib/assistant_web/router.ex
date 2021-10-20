@@ -21,9 +21,11 @@ defmodule AssistantWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", AssistantWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", AssistantWeb do
+    pipe_through :api
+
+    post "/", ApiController, :evaluate
+  end
 
   # Enables LiveDashboard only for development
   #

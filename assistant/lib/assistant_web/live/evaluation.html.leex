@@ -2,7 +2,7 @@
   <div class="inner width">
     <div class="lhs">
       <div class="list">
-        <%= for {{{raw, item}, {first_author, num_results, results}}, idx} <- Enum.with_index(elem(@list, 1)) do %>
+        <%= for {[raw, item, [first_author, num_results, results]], idx} <- Enum.with_index(elem(@list, 1)) do %>
 
           <div class="phx-hero card <%= if idx == @selected_item do 'selected' end %>"
             phx-click="select" phx-target="<%= @myself %>" phx-value-idx="<%= idx %>">
@@ -48,7 +48,7 @@
     <div class="rhs">
       <div class="list">
         <%= if @selected_item > -1 do %>
-          <% {{raw, item}, {first_author, num_results, results}} = Enum.at(elem(@list, 1), @selected_item) %>
+          <% [raw, item, [first_author, num_results, results]] = Enum.at(elem(@list, 1), @selected_item) %>
 
             <div>
               Number results of zenon search for first author '<%= first_author %>': <%= num_results %>
