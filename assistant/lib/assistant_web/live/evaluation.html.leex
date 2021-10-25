@@ -48,27 +48,20 @@
     <div class="rhs">
       <div class="list">
         <%= if @selected_item > -1 do %>
-          <% [raw, item, [first_author, num_results, results]] = Enum.at(elem(@list, 1), @selected_item) %>
+        <% [raw, item, [first_author, num_results, results]] = Enum.at(elem(@list, 1), @selected_item) %>
 
-            <div>
-              Number results of zenon search for first author '<%= first_author %>': <%= num_results %>
-              <br>
-              <a href="<%= "https://zenon.dainst.org/api/v1/search?lookfor=author:#{first_author}" %>">
-                <%= "https://zenon.dainst.org/api/v1/search?lookfor=author:#{first_author}" %>
-              </a>
-            </div>
+          <div>
+            Number results of zenon search for first author '<%= first_author %>': <%= num_results %>
+            <br>
+            <a href="<%= "https://zenon.dainst.org/api/v1/search?lookfor=author:#{first_author}" %>">
+              <%= "https://zenon.dainst.org/api/v1/search?lookfor=author:#{first_author}" %>
+            </a>
+          </div>
 
-            <%= for result <- Enum.take(results, 20) do %>
-
-            <div class="phx-hero card">
-              <%= if String.starts_with?(result, "00") do %>
-                <a href="<%= 'https://zenon.dainst.org/Record/#{result}' %>"><%= result %></a>
-              <% else %>
-                <%= result %>
-              <% end %>
-            </div>
-
+          <%= for result <- Enum.take(results, 20) do %>
+            <%= live_component @socket, AssistantWeb.ZenonResultComponent, result: result %>
           <% end %>
+
         <% end %>
       </div>
     </div>
