@@ -16,6 +16,12 @@ defmodule Assistant.CermineQueryProcessor do
   end
 
   def to_author item do
-    item[:author]
+    author = item[:author]
+
+    if String.contains?(author, ",") do
+      String.split(author, ",") |> List.first
+    else
+      author
+    end
   end
 end

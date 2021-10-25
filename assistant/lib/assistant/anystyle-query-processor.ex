@@ -21,8 +21,14 @@ defmodule Assistant.AnystyleQueryProcessor do
   end
 
   defp extract_first_author_family_name [author|_] do
-    if author["family"] do author["family"] else author["given"] end
+    author = if author["family"] do author["family"] else author["given"] end
     # Enum.find item, fn {k,v} -> not is_nil(kend
+
+    if not is_nil(author) and String.contains?(author, ",") do
+      String.split(author, ",") |> List.first
+    else
+      author
+    end
   end
   defp extract_first_author_family_name _ do
     nil

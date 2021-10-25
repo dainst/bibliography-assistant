@@ -4,11 +4,20 @@
     <% else %>
     <%= @result["id"] %>
     <% end %>
+    <br>
+    <br>
 
     <%= unless is_nil @result["primaryAuthorsNames"] do %>
         <h3>Primary Authors Names</h3>
         <%= for primary_author <- @result["primaryAuthorsNames"] do %>
             <div><%= primary_author %></div>
         <% end %>
+        <br>
+    <% end %>
+
+    <%= unless is_nil @result["shortTitle"] do %>
+        <h3>Short Title</h3>
+        <%= @result["shortTitle"] %>
+        <br>
     <% end %>
 </div>

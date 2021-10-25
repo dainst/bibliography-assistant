@@ -1,50 +1,46 @@
 defmodule Assistant.ZenonService do
 
+  def query_zenon(author) when is_nil(author) do
+    [nil, 0, []]
+  end
+
   def query_zenon author do
+    if String.match?(author, ~r/^[A-Za-z]*$/) do
 
-    if is_nil(author) do
-      [nil, 0, []]
+      zenon_url = Application.fetch_env!(:assistant, :zenon_url)
+
+      with {:ok, results} <- HTTPoison.get "#{zenon_url}/api/v1/search?lookfor=author:#{author}", %{}, [] do
+        results = Poison.decode! results.body
+        [author, results["resultCount"], results["records"]]
+      else
+        {:error, error} ->
+          IO.puts "Zenon Service not reachable"
+          IO.inspect error
+          [nil, 0, []]
+      end
     else
-      author = if String.contains?(author, ",") do
-        String.split(author, ",") |> List.first
-      else
-        author
-      end
+      [nil, 0, []]
+    end
+  end
 
-      if String.match?(author, ~r/^[A-Za-z]*$/) do
+  def query_with_suffix suffix do
 
-        if zenon_url = Application.fetch_env!(:assistant, :zenon_url) do
-          with {:ok, results} <- HTTPoison.get "#{zenon_url}/api/v1/search?lookfor=author:#{author}", %{}, [] do
-            results = Poison.decode! results.body
-            [author, results["resultCount"], results["records"]]
-          else
-            {:error, error} ->
-              IO.puts "Zenon Service not reachable"
-              IO.inspect error
-              [nil, 0, []]
-          end
-        else
-          IO.puts "Zenon Service not configured"
-          [nil, 14, [
-            "zenon-result-1:#{author}",
-            "zenon-result-2:#{author}",
-            "zenon-result-3:#{author}",
-            "zenon-result-4:#{author}",
-            "zenon-result-5:#{author}",
-            "zenon-result-6:#{author}",
-            "zenon-result-7:#{author}",
-            "zenon-result-8:#{author}",
-            "zenon-result-9:#{author}",
-            "zenon-result-10:#{author}",
-            "zenon-result-11:#{author}",
-            "zenon-result-12:#{author}",
-            "zenon-result-13:#{author}",
-            "zenon-result-14:#{author}"
-            ]]
-        end
-      else
+    zenon_url = Application.fetch_env!(:assistant, :zenon_url)
+    suffix = :http_uri.encode suffix
+
+    with {:ok, results} <- HTTPoison.get "#{zenon_url}/api/v1/search?lookfor=#{suffix}", %{}, [] do
+      results = Poison.decode! results.body
+
+      if is_nil(results["records"]) do
         [nil, 0, []]
+      else
+        [suffix, results["resultCount"], results["records"]]
       end
+    else
+      {:error, error} ->
+        IO.puts "Zenon Service not reachable"
+        IO.inspect error
+        [nil, 0, []]
     end
   end
 end
