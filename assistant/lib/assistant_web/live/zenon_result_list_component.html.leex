@@ -1,0 +1,18 @@
+<div class="list">
+    <%= if @selected_item > -1 do %>
+    <% [raw, item, [first_author, num_results, results]] = Enum.at(@list, @selected_item) %>
+
+        <div>
+        Number results of zenon search for first author '<%= first_author %>': <%= num_results %>
+        <br>
+        <a href="<%= "https://zenon.dainst.org/api/v1/search?lookfor=author:#{first_author}" %>">
+            <%= "https://zenon.dainst.org/api/v1/search?lookfor=author:#{first_author}" %>
+        </a>
+        </div>
+
+        <%= for result <- Enum.take(results, 20) do %>
+        <%= live_component @socket, AssistantWeb.ZenonResultComponent, result: result %>
+        <% end %>
+
+<% end %>
+</div>
