@@ -3,9 +3,8 @@ defmodule Assistant.AnystyleQueryProcessor do
   alias Assistant.ZenonService
   alias Assistant.AnystyleAdapter
 
-  def process_query raw_references do
+  def process_query {raw_references, split_references} do
 
-    split_references = String.split(raw_references, ["\n", "\r", "\r\n"])
     anystyle_results = AnystyleAdapter.ask_anystyle raw_references
 
     zenon_results =

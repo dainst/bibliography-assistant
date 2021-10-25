@@ -3,12 +3,7 @@ defmodule Assistant.CermineQueryProcessor do
   alias Assistant.ZenonService
   alias Assistant.CermineAdapter
 
-  def process_query raw_references do
-
-    split_references =
-      raw_references
-      |> String.split(["\n", "\r", "\r\n"])
-      |> Enum.reject(&(&1 == ""))
+  def process_query {_, split_references} do
 
     cermine_results = CermineAdapter.ask_cermine split_references
 

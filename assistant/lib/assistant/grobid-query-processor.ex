@@ -3,12 +3,7 @@ defmodule Assistant.GrobidQueryProcessor do
   alias Assistant.ZenonService
   alias Assistant.GrobidAdapter
 
-  def process_query raw_references do
-
-    split_references =
-      raw_references
-      |> String.split(["\n", "\r", "\r\n"])
-      |> Enum.reject(&(&1 == ""))
+  def process_query {raw_references, split_references} do
 
     grobid_results = GrobidAdapter.ask_grobid split_references
 
