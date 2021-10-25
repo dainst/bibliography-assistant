@@ -1,0 +1,18 @@
+<div class="list">
+<%= for {[raw, item, [first_author, num_results, results]], idx} <- Enum.with_index(elem(@list, 1)) do %>
+
+    <div class="phx-hero card <%= if idx == @selected_item do 'selected' end %>"
+    phx-click="select" phx-target="<%= @parent %>" phx-value-idx="<%= idx %>">
+    <h3>Original</h3>
+    <%= raw %>
+    <br>
+    <br>
+
+    <%= case elem(@list, 0) do
+        "anystyle" -> live_component @socket, AnystyleResultComponent, item: item
+        "grobid" -> live_component @socket, GrobidResultComponent, item: item
+        "cermine" -> live_component @socket, CermineResultComponent, item: item
+    end %>
+    </div>
+<% end %>
+</div>

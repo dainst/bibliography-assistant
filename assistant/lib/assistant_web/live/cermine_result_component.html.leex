@@ -1,0 +1,7 @@
+<h3>Cermine Result</h3>
+<br>
+<div style="text-align: left">
+<%= for {k,v} <- @item do %>
+    <div><b><%= k %></b>: <%= inspect v %></div>
+<% end %>
+</div>
