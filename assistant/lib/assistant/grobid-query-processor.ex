@@ -39,8 +39,6 @@ defmodule Assistant.GrobidQueryProcessor do
       "author:#{author} and title:#{title}"
     end
 
-    IO.inspect suffix
-
     ZenonService.query_with_suffix suffix
   end
 end
