@@ -1,9 +1,9 @@
 <div class="list">
     <%= if @selected_item > -1 do %>
-    <% [raw, item, [suffix, num_results, results]] = Enum.at(@list, @selected_item) %>
+    <% [raw, item, {suffix, results}] = Enum.at(@list, @selected_item) %>
 
         <div>
-        Number results of zenon search for '<%= suffix %>': <%= num_results %>
+        Number results of zenon search for '<%= suffix %>': <%= length(results) %>
         <br>
         <a href="<%= "https://zenon.dainst.org/api/v1/search?lookfor=#{suffix}" %>">
             <%= "https://zenon.dainst.org/api/v1/search?lookfor=#{suffix}" %>

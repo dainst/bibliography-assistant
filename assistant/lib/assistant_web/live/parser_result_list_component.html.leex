@@ -1,5 +1,5 @@
 <div class="list">
-<%= for {[raw, item, [first_author, num_results, results]], idx} <- Enum.with_index(elem(@list, 1)) do %>
+<%= for {[raw, item, {first_author, results}], idx} <- Enum.with_index(elem(@list, 1)) do %>
 
     <div class="phx-hero card <%= if idx == @selected_item do 'selected' end %>"
     phx-click="select" phx-target="<%= @parent %>" phx-value-idx="<%= idx %>">

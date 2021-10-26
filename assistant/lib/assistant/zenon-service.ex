@@ -1,7 +1,7 @@
 defmodule Assistant.ZenonService do
 
   def query_zenon(author) when is_nil(author) do
-    [nil, 0, []]
+    {nil, []}
   end
 
   def query_zenon author do
@@ -11,15 +11,15 @@ defmodule Assistant.ZenonService do
 
       with {:ok, results} <- HTTPoison.get "#{zenon_url}/api/v1/search?lookfor=author:#{author}", %{}, [] do
         results = Poison.decode! results.body
-        [author, results["resultCount"], results["records"]]
+        {author, results["records"]}
       else
         {:error, error} ->
           IO.puts "Zenon Service not reachable"
           IO.inspect error
-          [nil, 0, []]
+          {nil, []}
       end
     else
-      [nil, 0, []]
+      {nil, []}
     end
   end
 
@@ -32,15 +32,15 @@ defmodule Assistant.ZenonService do
       results = Poison.decode! results.body
 
       if is_nil(results["records"]) do
-        [nil, 0, []]
+        {nil, []}
       else
-        [suffix, results["resultCount"], results["records"]]
+        {suffix, results["records"]}
       end
     else
       {:error, error} ->
         IO.puts "Zenon Service not reachable"
         IO.inspect error
-        [nil, 0, []]
+        {nil, []}
     end
   end
 end
