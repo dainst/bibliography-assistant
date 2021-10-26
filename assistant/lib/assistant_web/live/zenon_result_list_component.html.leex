@@ -3,7 +3,7 @@
     <% [raw, item, {suffix, results}] = Enum.at(@list, @selected_item) %>
 
         <div>
-        Number results of zenon search for '<%= :http_uri.decode(suffix) %>': <%= length(results) %>
+        Number results of zenon search for "<%= :http_uri.decode(suffix) %>": <%= length(results) %>
         <br>
         <a href="<%= "https://zenon.dainst.org/api/v1/search?lookfor=#{suffix}" %>">
             <%= "https://zenon.dainst.org/api/v1/search?lookfor=#{suffix}" %>

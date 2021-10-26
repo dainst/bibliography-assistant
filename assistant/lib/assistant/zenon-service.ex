@@ -1,7 +1,7 @@
 defmodule Assistant.ZenonService do
 
   def query_zenon(author) when is_nil(author) do
-    {nil, []}
+    {"", []}
   end
 
   def query_zenon author do
@@ -16,10 +16,10 @@ defmodule Assistant.ZenonService do
         {:error, error} ->
           IO.puts "Zenon Service not reachable"
           IO.inspect error
-          {nil, []}
+          {"", []}
       end
     else
-      {nil, []}
+      {"", []}
     end
   end
 
@@ -32,7 +32,7 @@ defmodule Assistant.ZenonService do
       results = Poison.decode! results.body
 
       if is_nil(results["records"]) do
-        {nil, []}
+        {"", []}
       else
         {suffix, results["records"]}
       end
@@ -40,7 +40,7 @@ defmodule Assistant.ZenonService do
       {:error, error} ->
         IO.puts "Zenon Service not reachable"
         IO.inspect error
-        {nil, []}
+        {"", []}
     end
   end
 end
