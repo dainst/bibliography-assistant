@@ -3,6 +3,7 @@ defmodule Assistant.GrobidQueryProcessor do
   import String
 
   alias Assistant.GrobidAdapter
+  alias Assistant.QueryProcessorHelper
   alias Assistant.QueryProcessor
 
   def process_query {raw_references, split_references} do
@@ -51,20 +52,6 @@ defmodule Assistant.GrobidQueryProcessor do
         |> List.first
       end
 
-    {simple_name(author), complex_name(author), title}
-  end
-
-  defp complex_name author do
-    case author do
-      {family, given} -> "#{given}.#{family}"
-      _ -> author
-    end
-  end
-
-  defp simple_name author do
-    case author do
-      {family, given} -> family
-      _ -> author
-    end
+    QueryProcessorHelper.convert author, title
   end
 end
