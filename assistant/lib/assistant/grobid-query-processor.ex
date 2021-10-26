@@ -39,13 +39,18 @@ defmodule Assistant.GrobidQueryProcessor do
   end
 
   defp query_zenon_with_author_and_title author, title do
-    suffix = case {author, title} do
-      {author, ""} -> "author:#{author}"
-      {author, nil} -> "author:#{author}"
-      {"", title} -> "title:#{title}"
-      {nil, title} -> "title:#{title}"
-      {author, title} -> "author:#{author} and title:#{title}"
-      _ -> nil
+    suffix = if author == "" or author == nil do
+      case title do
+        nil -> nil
+        title -> "title:#{title}"
+      end
+    else
+      case {author, title} do
+        {author, ""} -> "author:#{author}"
+        {author, nil} -> "author:#{author}"
+        {author, title} -> "author:#{author} and title:#{title}"
+        _ -> nil
+      end
     end
 
     IO.inspect suffix
