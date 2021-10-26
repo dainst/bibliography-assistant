@@ -35,12 +35,19 @@ defmodule Assistant.GrobidQueryProcessor do
         |> List.first
       end
 
-    suffix = if author == "" do
-      "title:#{title}"
-    else
-      "author:#{author} and title:#{title}"
+    suffix = case {author, title} do
+      {author, ""} -> "author:#{author}"
+      {author, nil} -> "author:#{author}"
+      {"", title} -> "title:#{title}"
+      {nil, title} -> "title:#{title}"
+      {author, title} -> "author:#{author} and title:#{title}"
+      _ -> nil
     end
 
-    ZenonService.query_with_suffix suffix
+    if suffix do
+      ZenonService.query_with_suffix suffix
+    else
+      ["", []]
+    end
   end
 end
