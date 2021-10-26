@@ -2,8 +2,8 @@ defmodule Assistant.GrobidQueryProcessor do
 
   import String
 
-  alias Assistant.ZenonService
   alias Assistant.GrobidAdapter
+  alias Assistant.QueryProcessor
 
   def process_query {raw_references, split_references} do
 
@@ -18,47 +18,7 @@ defmodule Assistant.GrobidQueryProcessor do
 
   def query_zenon result do
 
-    {author, title} = extract_author_and_title result
-
-    {_, results} = result = query_zenon_with_author_and_title complex_name(author), title
-    unless Kernel.length(results) == 0 do
-      result
-    else
-      {_, results} = result = query_zenon_with_author_and_title simple_name(author), title
-      unless Kernel.length(results) == 0 do
-        result
-      else
-        {_, results} = result= query_zenon_with_author_and_title complex_name(author), nil
-        unless Kernel.length(results) == 0 do
-          result
-        else
-          query_zenon_with_author_and_title simple_name(author), nil
-        end
-      end
-    end
-  end
-
-  defp query_zenon_with_author_and_title author, title do
-    suffix = if author == "" or author == nil do
-      case title do
-        nil -> nil
-        title -> "title:#{title}"
-      end
-    else
-      case {author, title} do
-        {author, ""} -> "author:#{author}"
-        {author, nil} -> "author:#{author}"
-        {author, title} -> "author:#{author} and title:#{title}"
-        _ -> nil
-      end
-    end
-
-    IO.inspect suffix
-    if suffix do
-      ZenonService.query_with_suffix suffix
-    else
-      {"", []}
-    end
+    QueryProcessor.try_queries result, extract_author_and_title result
   end
 
   defp extract_author_and_title result do
@@ -91,7 +51,7 @@ defmodule Assistant.GrobidQueryProcessor do
         |> List.first
       end
 
-    {author, title}
+    {simple_name(author), complex_name(author), title}
   end
 
   defp complex_name author do
