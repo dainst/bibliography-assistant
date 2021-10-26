@@ -1,7 +1,8 @@
 defmodule Assistant.AnystyleQueryProcessor do
 
-  alias Assistant.ZenonService
   alias Assistant.AnystyleAdapter
+  alias Assistant.QueryProcessorHelper
+  alias Assistant.QueryProcessor
 
   def process_query {raw_references, split_references} do
 
@@ -9,28 +10,26 @@ defmodule Assistant.AnystyleQueryProcessor do
 
     zenon_results =
       anystyle_results
-      |> Enum.map(&to_author/1)
-      |> Enum.map(&extract_first_author_family_name/1)
-      |> Enum.map(&ZenonService.query_zenon/1)
+      |> Enum.map(&query_zenon/1)
 
     Enum.zip [split_references, anystyle_results, zenon_results]
   end
 
-  def to_author item do
-    item["author"]
+  def query_zenon result do
+
+    QueryProcessor.try_queries result, extract_author_and_title result
   end
 
-  defp extract_first_author_family_name [author|_] do
-    author = if author["family"] do author["family"] else author["given"] end
-    # Enum.find item, fn {k,v} -> not is_nil(kend
+  defp extract_author_and_title result do
 
-    if not is_nil(author) and String.contains?(author, ",") do
-      String.split(author, ",") |> List.first
-    else
-      author
+    author = case result["author"] do
+      [%{"family" => family, "given" => given}] -> {family, String.replace(given, ".", "")}
     end
-  end
-  defp extract_first_author_family_name _ do
-    nil
+
+    IO.inspect author
+
+    title = result["title"]
+
+    QueryProcessorHelper.convert author, title
   end
 end
