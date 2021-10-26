@@ -20,36 +20,19 @@ defmodule Assistant.GrobidQueryProcessor do
 
     {author, title} = extract_author_and_title result
 
-    full_author = case author do
-      {family, given} -> "#{given}.#{family}"
-      _ -> author
-    end
-
-    {_, results} = result = query_zenon_with_author_and_title full_author, title
+    {_, results} = result = query_zenon_with_author_and_title complex_name(author), title
     unless Kernel.length(results) == 0 do
       result
     else
-      full_author = case author do
-        {family, given} -> family
-        _ -> author
-      end
-      {_, results} = result = query_zenon_with_author_and_title full_author, title
+      {_, results} = result = query_zenon_with_author_and_title simple_name(author), title
       unless Kernel.length(results) == 0 do
         result
       else
-        full_author = case author do
-          {family, given} -> "#{given}.#{family}"
-          _ -> author
-        end
-        {_, results} = result= query_zenon_with_author_and_title full_author, nil
+        {_, results} = result= query_zenon_with_author_and_title complex_name(author), nil
         unless Kernel.length(results) == 0 do
           result
         else
-          full_author = case author do
-            {family, given} -> family
-            _ -> author
-          end
-          query_zenon_with_author_and_title full_author, nil
+          query_zenon_with_author_and_title simple_name(author), nil
         end
       end
     end
@@ -104,5 +87,19 @@ defmodule Assistant.GrobidQueryProcessor do
       end
 
     {author, title}
+  end
+
+  defp complex_name author do
+    case author do
+      {family, given} -> "#{given}.#{family}"
+      _ -> author
+    end
+  end
+
+  defp simple_name author do
+    case author do
+      {family, given} -> family
+      _ -> author
+    end
   end
 end
