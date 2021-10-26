@@ -1,4 +1,4 @@
-<div class="list">
+<div id="zenon-result-list" class="list" phx-hook="ZenonResultListHook">
     <%= if @selected_item > -1 do %>
     <% [raw, item, {suffix, results}] = Enum.at(@list, @selected_item) %>
 

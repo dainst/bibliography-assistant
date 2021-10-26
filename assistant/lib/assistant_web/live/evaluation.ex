@@ -10,6 +10,10 @@ defmodule AssistantWeb.Evaluation do
 
   def handle_event "select", %{ "idx" => idx }, socket do
     {idx, _} = Integer.parse idx
-    {:noreply, assign(socket, :selected_item, idx)}
+    socket =
+      socket
+      |> assign(:selected_item, idx)
+      |> push_event("select", %{ idx: idx })
+    {:noreply, socket}
   end
 end
