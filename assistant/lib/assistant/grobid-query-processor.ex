@@ -31,6 +31,8 @@ defmodule Assistant.GrobidQueryProcessor do
       unless is_nil(result[:title]) do
         result[:title]
         |> String.replace(~r["], "")
+        |> String.split(":")
+        |> List.first
       end
 
     suffix = if author == "" do
