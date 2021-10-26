@@ -44,6 +44,7 @@ defmodule Assistant.GrobidQueryProcessor do
       _ -> nil
     end
 
+    IO.inspect suffix
     if suffix do
       ZenonService.query_with_suffix suffix
     else

@@ -32,7 +32,7 @@ defmodule Assistant.ZenonService do
       results = Poison.decode! results.body
 
       if is_nil(results["records"]) do
-        {"", []}
+        {suffix, []}
       else
         {suffix, results["records"]}
       end
