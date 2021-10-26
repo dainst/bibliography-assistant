@@ -28,7 +28,7 @@ defmodule Assistant.ZenonService do
     zenon_url = Application.fetch_env!(:assistant, :zenon_url)
     suffix = :http_uri.encode suffix
 
-    with {:ok, results} <- HTTPoison.get "#{zenon_url}/api/v1/search?lookfor=#{suffix}", %{}, [] do
+    with {:ok, results} <- HTTPoison.get "#{zenon_url}/api/v1/search?limit=100&lookfor=#{suffix}", %{}, [] do
       results = Poison.decode! results.body
 
       if is_nil(results["records"]) do

@@ -10,7 +10,7 @@
         </a>
         </div>
 
-        <%= for result <- Enum.take(results, 20) do %>
+        <%= for result <- results do %>
         <%= live_component @socket, AssistantWeb.ZenonResultComponent, result: result %>
         <% end %>
 <% end %>
