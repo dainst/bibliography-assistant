@@ -1,14 +1,18 @@
 <div id="zenon-result-list" class="list" phx-hook="ZenonResultListHook">
     <%= if @selected_item > -1 do %>
-    <% [raw, item, {suffix, results}] = Enum.at(@list, @selected_item) %>
+    <% [raw, item, {{api_suffix, ui_suffix}, results}] = Enum.at(@list, @selected_item) %>
 
         <div>
-        Number results of zenon search for "<%= :http_uri.decode(suffix) %>": <%= length(results) %>
+        Number results of zenon search for "<%= :http_uri.decode(api_suffix) %>": <%= length(results) %>
         <br>
-        <a href="<%= "https://zenon.dainst.org/api/v1/search?lookfor=#{suffix}" %>">
+        <a href="<%= "https://zenon.dainst.org/api/v1/search?lookfor=#{api_suffix}" %>">
             Zenon-API Link
         </a>
         </div>
+
+        <a href="<%= "https://zenon.dainst.org/Search/Results?join=AND&#{ui_suffix}" %>">
+            Zenon-UI Link
+        </a>
 
         <%= for result <- results do %>
         <%= live_component @socket, AssistantWeb.ZenonResultComponent, result: result %>
