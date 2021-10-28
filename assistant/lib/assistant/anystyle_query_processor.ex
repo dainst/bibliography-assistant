@@ -24,7 +24,6 @@ defmodule Assistant.AnystyleQueryProcessor do
 
     author = case result["author"] do
       [%{"family" => family, "given" => given}] -> {family, String.replace(given, ".", "")}
-      [%{"literal" => _}] -> nil
       _ -> nil
     end
     title = result["title"]
