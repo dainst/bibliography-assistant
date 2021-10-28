@@ -48,7 +48,7 @@ defmodule AssistantWeb.PageLive do
     path = "priv/#{socket.id}.bin"
     File.write! path, :erlang.term_to_binary(list)
 
-    csv = (case elem(socket.assigns.list, 0) do
+    csv = (case parser do
       "anystyle" -> &Assistant.AnystyleCsvBuilder.generate/1
       "grobid" -> &Assistant.GrobidCsvBuilder.generate/1
       "cermine" -> &Assistant.CermineCsvBuilder.generate/1
