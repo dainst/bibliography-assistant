@@ -9,11 +9,18 @@ defmodule Assistant.AnystyleCsvBuilder do
     "\"author\",\"title\",\"given\"\n#{entries}"
   end
 
+  def extract_primary_author nil do
+    ""
+  end
+
+  def extract_primary_author "" do
+    ""
+  end
+
   def extract_primary_author entry do
-    if {family, given} = AnystyleHelper.extract_primary_author entry do
-      "#{given}.#{family}"
-    else
-      ""
+    case AnystyleHelper.extract_primary_author entry do
+      {family, given} -> "#{given}.#{family}"
+      _ -> ""
     end
   end
 end
