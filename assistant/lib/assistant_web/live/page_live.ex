@@ -43,10 +43,16 @@ defmodule AssistantWeb.PageLive do
 
   def handle_event "download", _params, socket do
 
-    path = "priv/#{socket.id}.bin"
-    File.write! path, :erlang.term_to_binary(socket.assigns.list)
+    {parser, entries} = list = socket.assigns.list
 
-    csv = to_csv elem(socket.assigns.list, 1)
+    path = "priv/#{socket.id}.bin"
+    File.write! path, :erlang.term_to_binary(list)
+
+    csv = (case elem(socket.assigns.list, 0) do
+      "anystyle" -> &Assistant.AnystyleCsvBuilder.generate/1
+      "grobid" -> &Assistant.GrobidCsvBuilder.generate/1
+      "cermine" -> &Assistant.CermineCsvBuilder.generate/1
+    end).(entries)
 
     File.write! "priv/#{String.replace(socket.id, "phx-", "")}.csv", csv
 
@@ -62,12 +68,5 @@ defmodule AssistantWeb.PageLive do
       |> assign(:current_page, "2")
       |> assign(:list, {type, Dispatch.query(type, raw_references)})
     {:noreply, socket}
-  end
-
-  defp to_csv list do
-    entries = Enum.map list, fn [_,y,_] ->
-      "#{List.first(y["title"])}\n"
-    end
-    "title\n#{entries}"
   end
 end
