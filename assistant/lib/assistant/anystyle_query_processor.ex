@@ -1,5 +1,6 @@
 defmodule Assistant.AnystyleQueryProcessor do
 
+  alias Assistant.AnystyleHelper
   alias Assistant.AnystyleAdapter
   alias Assistant.QueryProcessorHelper
   alias Assistant.QueryProcessor
@@ -22,10 +23,7 @@ defmodule Assistant.AnystyleQueryProcessor do
 
   defp extract_author_and_title result do
 
-    author = case result["author"] do
-      [%{"family" => family, "given" => given}] -> {family, String.replace(given, ".", "")}
-      _ -> nil
-    end
+    author = AnystyleHelper.extract_primary_author result
     title = result["title"]
     QueryProcessorHelper.convert author, title
   end
