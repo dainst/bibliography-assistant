@@ -27,6 +27,11 @@ defmodule AssistantWeb.Router do
     post "/", ApiController, :evaluate
   end
 
+  scope "/download", AssistantWeb do
+
+    get "/:id", DownloadController, :download
+  end
+
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put

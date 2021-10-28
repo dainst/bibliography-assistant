@@ -1,6 +1,13 @@
 <div class="both">
   <div class="inner width">
     <div class="lhs">
+
+      <%= if not @download_link_generated do %>
+        <button phx-click="download">Generate download link</button>
+      <% else %>
+        <a href="/download/<%= String.replace(@socket.id, "phx-", "") %>">Download</a>
+      <% end %>
+
       <%= live_component @socket, ParserResultListComponent, id: "parser-result-list",
           list: @list, selected_item: @selected_item, parent: @myself %>
     </div>
