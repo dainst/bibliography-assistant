@@ -6,7 +6,7 @@
       </div>
       <div class="left">
         <a phx-click="back">
-          Back
+          <%= Assistant.Translator.translate(:back, @lang) %>
         </a>
       </div>
 
@@ -19,7 +19,7 @@
   </div>
 </header>
 
-<main role="main">
+<main role="main" phx-hook="MainHook" id="main">
   <p class="alert alert-info" role="alert"
     phx-click="lv:clear-flash"
     phx-value-key="info"><%= live_flash(@flash, :info) %></p>

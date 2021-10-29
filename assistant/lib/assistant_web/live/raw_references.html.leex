@@ -4,11 +4,13 @@
     phx_target: @myself
   %>
 
-  <h1>Bibliographic references</h1>
+  <h1><%= Translator.translate(:bibliographic_references, @state.lang) %></h1>
 
-  <p>One item per line</p>
+  <p><%= Translator.translate(:one_item_per_line, @state.lang) %></p>
 
   <%= textarea f, :raw_references %>
 </form>
 
-<button phx-click="eval" phx-value-target="anystyle" phx-target="<%= @myself %>">Evaluate with anystyle</button>
+<button phx-click="eval" phx-value-target="anystyle" phx-target="<%= @myself %>">
+  <%= Translator.translate(:evaluate_with_anystyle, @state.lang) %>
+</button>

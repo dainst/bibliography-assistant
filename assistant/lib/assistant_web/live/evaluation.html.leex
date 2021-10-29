@@ -2,19 +2,21 @@
   <div class="inner width">
     <div class="lhs">
 
-      <%= if not @download_link_generated do %>
-        <button phx-click="download">Generate download link</button>
+      <%= if not @state.download_link_generated do %>
+        <button phx-click="download"><%= Translator.translate(:generate_download_link, @state.lang) %></button>
       <% else %>
-        <a href="/download/<%= String.replace(@socket.id, "phx-", "") %>">Download</a>
+        <a href="/download/<%= String.replace(@socket.id, "phx-", "") %>">
+          <%= Translator.translate(:download, @state.lang) %></a>
       <% end %>
 
-      <%= live_component @socket, ParserResultListComponent, id: "parser-result-list",
-          list: @list, selected_item: @selected_item, parent: @myself %>
+      <%= live_component @socket, ParserResultListComponent,
+          id: "parser-result-list",
+          state: @state,
+          parent: @myself %>
     </div>
 
     <div class="rhs">
-      <%= live_component @socket, ZenonResultListComponent,
-          list: elem(@list, 1), selected_item: @selected_item %>
+      <%= live_component @socket, ZenonResultListComponent, state: Map.merge(@state, assigns) %>
     </div>
   </div>
 </div>

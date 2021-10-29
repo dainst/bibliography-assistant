@@ -1,6 +1,8 @@
 defmodule AssistantWeb.RawReferences do
   use AssistantWeb, :live_component
 
+  alias Assistant.Translator
+
   def handle_event "change", %{ "raw_references" =>
       %{ "raw_references" => raw_references } } = params, socket do
 

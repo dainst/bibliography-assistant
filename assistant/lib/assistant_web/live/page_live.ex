@@ -9,6 +9,7 @@ defmodule AssistantWeb.PageLive do
       socket
       |> assign(:current_page, "1")
       |> assign(:selected_item, -1)
+      |> assign(:lang, "en")
       |> assign(:download_link_generated, false)
     {:ok, socket}
   end
@@ -38,6 +39,13 @@ defmodule AssistantWeb.PageLive do
     socket =
       socket
       |> assign(:current_page, "1")
+    {:noreply, socket}
+  end
+
+  def handle_event "select_language", language, socket do
+    socket =
+      socket
+      |> assign(:lang, language)
     {:noreply, socket}
   end
 

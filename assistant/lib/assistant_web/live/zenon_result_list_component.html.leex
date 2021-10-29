@@ -1,6 +1,6 @@
 <div id="zenon-result-list" class="list" phx-hook="ZenonResultListHook">
-    <%= if @selected_item > -1 do %>
-    <% [raw, item, {{api_suffix, ui_suffix}, results}] = Enum.at(@list, @selected_item) %>
+    <%= if @state.selected_item > -1 do %>
+    <% [raw, item, {{api_suffix, ui_suffix}, results}] = Enum.at(elem(@state.list, 1), @state.selected_item) %>
 
         <div>
         Number results of zenon search for "<%= :http_uri.decode(api_suffix) %>": <%= length(results) %>

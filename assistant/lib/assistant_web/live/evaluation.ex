@@ -1,6 +1,7 @@
 defmodule AssistantWeb.Evaluation do
   use AssistantWeb, :live_component
 
+  alias Assistant.Translator
   alias AssistantWeb.ParserResultListComponent
   alias AssistantWeb.ZenonResultListComponent
 

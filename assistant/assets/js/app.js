@@ -18,11 +18,21 @@ import topbar from "topbar"
 import {LiveSocket} from "phoenix_live_view"
 
 const hooks = {}
+hooks.MainHook = {
+    mounted() {
+        if (Array.isArray(navigator.languages) 
+            && navigator.languages.length > 0 
+            && navigator.languages[0].toLowerCase().startsWith('de')) {
+
+                this.pushEvent("select_language", "de")
+        }
+    }
+}
 hooks.ZenonResultListHook = {
     mounted() {
-        this.handleEvent('select', ({idx}) => {
+        this.handleEvent('select', ({idx}) => 
             this.el.querySelector('div:first-of-type').scrollIntoView()
-        })
+        )
     }
 }
 

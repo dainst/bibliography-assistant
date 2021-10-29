@@ -2,12 +2,12 @@
   <section class="phx-hero width" style="margin-top: 20px;">
     <%= live_component @socket,
       AssistantWeb.RawReferences,
+      state: assigns,
       id: "raw-references" %>
   </section>
 <% else %>
   <%= live_component @socket,
     AssistantWeb.Evaluation,
     id: "evaluation",
-    list: @list,
-    download_link_generated: @download_link_generated %>
+    state: assigns %>
 <% end %>
