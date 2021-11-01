@@ -27,7 +27,6 @@ defmodule Assistant.AnystyleQueryProcessor do
     title = if not is_nil(result["title"]) and length(result["title"]) > 0 do
       List.first(result["title"])
     end
-    IO.inspect title
     QueryProcessorHelper.convert author, title
   end
 end

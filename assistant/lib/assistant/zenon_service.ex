@@ -52,6 +52,7 @@ defmodule Assistant.ZenonService do
       end
     end
 
+    IO.inspect elem(suffixes, 0)
     if suffixes != {"", ""} do
       query_with_suffix suffixes
     else
