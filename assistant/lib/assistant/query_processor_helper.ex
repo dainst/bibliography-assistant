@@ -4,7 +4,7 @@ defmodule Assistant.QueryProcessorHelper do
     {simple_name(author), complex_name(author), title}
   end
 
-  defp complex_name author do
+  def complex_name author do
     case author do
       {family, given} -> "#{given}.#{family}"
       _ -> author

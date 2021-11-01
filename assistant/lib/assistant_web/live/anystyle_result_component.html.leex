@@ -2,6 +2,13 @@
 <br>
 <div style="text-align: left">
 <%= for {k,v} <- @item do %>
-    <div><b><%= k %></b>: <%= inspect v %></div>
+    <%= val = AnystyleResultComponent.convert(v)
+        if val != "" do %>
+        <div>
+            <b>
+                <%= AnystyleResultComponent.convert_key(k) %></b>: <%=
+                val %>
+        </div>
+    <% end %>
 <% end %>
 </div>
