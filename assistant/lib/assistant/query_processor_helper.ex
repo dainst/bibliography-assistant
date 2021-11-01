@@ -4,9 +4,9 @@ defmodule Assistant.QueryProcessorHelper do
     {simple_name(author), complex_name(author), title}
   end
 
-  def complex_name author do
+  defp complex_name author do
     case author do
-      {family, given} -> "#{given}.#{family}"
+      {family, given} -> "#{remove_dots(given)}.#{family}"
       _ -> author
     end
   end
@@ -16,5 +16,9 @@ defmodule Assistant.QueryProcessorHelper do
       {family, given} -> family
       _ -> author
     end
+  end
+
+  defp remove_dots str do
+    String.replace(str, ".", "")
   end
 end

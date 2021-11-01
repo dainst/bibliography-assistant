@@ -14,10 +14,10 @@ defmodule AssistantWeb.AnystyleResultComponent do
   end
 
   def convert [%{} = a|_] = param do
-    primary_author = AnystyleHelper.extract_primary_author %{ "author" => param }
+    {family, given} = primary_author = AnystyleHelper.extract_primary_author %{ "author" => param }
 
     if primary_author do
-      QueryProcessorHelper.complex_name primary_author
+      "#{given}#{family}"
     else
       ""
     end
