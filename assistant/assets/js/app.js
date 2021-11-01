@@ -22,9 +22,9 @@ hooks.MainHook = {
     mounted() {
         if (Array.isArray(navigator.languages) 
             && navigator.languages.length > 0 
-            && navigator.languages[0].toLowerCase().startsWith('de')) {
+            && navigator.languages[0].toLowerCase().startsWith('en')) {
 
-                this.pushEvent("select_language", "de")
+                this.pushEvent("select_language", "en")
         }
     }
 }

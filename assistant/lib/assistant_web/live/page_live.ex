@@ -9,7 +9,7 @@ defmodule AssistantWeb.PageLive do
       socket
       |> assign(:current_page, "1")
       |> assign(:selected_item, -1)
-      |> assign(:lang, "en")
+      |> assign(:lang, "de")
       |> assign(:download_link_generated, false)
     {:ok, socket}
   end
