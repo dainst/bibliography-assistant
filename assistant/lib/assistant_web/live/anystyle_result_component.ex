@@ -24,15 +24,9 @@ defmodule AssistantWeb.AnystyleResultComponent do
     end
   end
 
-  def convert([a|_] = param) when is_binary(a) do
-    a
-  end
+  def convert([a|_] = param) when is_binary(a), do: a
 
-  def convert(param) when is_binary(param) do
-    param
-  end
+  def convert(param) when is_binary(param), do: param
 
-  def convert _param do
-    ""
-  end
+  def convert(_param), do: ""
 end
