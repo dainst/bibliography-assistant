@@ -21,9 +21,9 @@ defmodule Assistant.Translator do
       en: "Download",
       de: "Herunterladen"
     },
-    back: %{
-      en: "Back",
-      de: "Zurück"
+    new_search: %{
+      en: "New search",
+      de: "Neue Suche"
     }
   }
 

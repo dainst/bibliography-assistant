@@ -35,7 +35,7 @@ defmodule AssistantWeb.PageLive do
     end
   end
 
-  def handle_event "back", _params, socket do
+  def handle_event "new_search", _params, socket do
     socket =
       socket
       |> assign(:current_page, "1")
