@@ -22,7 +22,7 @@ hooks.MainHook = {
     mounted() {
         if (Array.isArray(navigator.languages) 
             && navigator.languages.length > 0 
-            && navigator.languages[0].toLowerCase().startsWith('en')) {
+            && !navigator.languages[0].toLowerCase().startsWith("de")) {
 
                 this.pushEvent("select_language", "en")
         }
@@ -30,8 +30,8 @@ hooks.MainHook = {
 }
 hooks.ZenonResultListHook = {
     mounted() {
-        this.handleEvent('select', ({idx}) => 
-            this.el.querySelector('div:first-of-type').scrollIntoView()
+        this.handleEvent("select", ({idx}) => 
+            this.el.querySelector("div:first-of-type").scrollIntoView()
         )
     }
 }
