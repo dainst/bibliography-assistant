@@ -1,23 +1,20 @@
 <div class="phx-hero card">
+    <b>Zenon Id</b>:
     <%= if String.starts_with?(@result["id"], "00") do %>
     <a href="<%= 'https://zenon.dainst.org/Record/#{@result["id"]}' %>"><%= @result["id"] %></a>
     <% else %>
     <%= @result["id"] %>
     <% end %>
     <br>
-    <br>
 
-    <%= unless is_nil @result["primaryAuthorsNames"] do %>
-        <h3>Primary Authors Names</h3>
-        <%= for primary_author <- @result["primaryAuthorsNames"] do %>
-            <div><%= primary_author %></div>
-        <% end %>
+    <%= unless is_nil(@result["primaryAuthorsNames"]) or length(@result["primaryAuthorsNames"]) == 0 do %>
+        <b>Primary Author</b>: <%=
+            List.first(@result["primaryAuthorsNames"]) %>
         <br>
     <% end %>
 
     <%= unless is_nil @result["title"] do %>
-        <h3>Title</h3>
-        <%= @result["title"] %>
+        <b>Title</b>: <%= @result["title"] %>
         <br>
     <% end %>
 </div>
