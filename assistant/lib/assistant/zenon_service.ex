@@ -25,7 +25,6 @@ defmodule Assistant.ZenonService do
             "author:#{author} and title:#{title}",
             "lookfor0[]=#{author}&type0[]=Author&lookfor0[]=#{t}&type0[]=AllFields"
           }
-        _ -> {"", ""}
       end
     end
 
