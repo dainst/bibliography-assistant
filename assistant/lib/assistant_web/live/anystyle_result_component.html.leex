@@ -4,7 +4,7 @@
         if val != "" do %>
         <div>
             <b>
-                <%= AnystyleResultComponent.convert_key(k) %></b>: <%=
+                <%= AnystyleResultComponent.convert_key(k, @state.lang) %></b>: <%=
                 val %>
         </div>
     <% end %>

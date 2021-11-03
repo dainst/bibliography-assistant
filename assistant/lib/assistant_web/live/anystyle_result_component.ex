@@ -1,18 +1,15 @@
 defmodule AssistantWeb.AnystyleResultComponent do
   use AssistantWeb, :live_component
 
+  alias Assistant.Translator
   alias Assistant.AnystyleHelper
   alias Assistant.QueryProcessorHelper
   alias AssistantWeb.AnystyleResultComponent
 
   @fields_to_display ["author", "title"]
 
-  def convert_key key do
-    case key do
-      "author" -> "Primary Author"
-      something -> something
-    end
-    |> :string.titlecase
+  def convert_key key, lang do
+    Translator.translate String.to_atom("anystyle_field_#{key}"), lang
   end
 
   def convert [%{} = a|_] = param do

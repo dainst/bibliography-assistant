@@ -10,9 +10,9 @@
         <br>
 
         <%= case elem(@state.list, 0) do
-            "anystyle" -> live_component @socket, AnystyleResultComponent, item: item
-            "grobid" -> live_component @socket, GrobidResultComponent, item: item
-            "cermine" -> live_component @socket, CermineResultComponent, item: item
+            "anystyle" -> live_component @socket, AnystyleResultComponent, item: item, state: @state
+            "grobid" -> live_component @socket, GrobidResultComponent, item: item, state: @state
+            "cermine" -> live_component @socket, CermineResultComponent, item: item, state: @state
         end %>
     </div>
 <% end %>

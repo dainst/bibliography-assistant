@@ -8,13 +8,13 @@
     <br>
 
     <%= unless is_nil(@result["primaryAuthorsNames"]) or length(@result["primaryAuthorsNames"]) == 0 do %>
-        <b>Primary Author</b>: <%=
+        <b><%= Translator.translate(:zenon_result_author, @state.lang) %></b>: <%=
             List.first(@result["primaryAuthorsNames"]) %>
         <br>
     <% end %>
 
     <%= unless is_nil @result["title"] do %>
-        <b>Title</b>: <%= @result["title"] %>
+        <b><%= Translator.translate(:zenon_result_title, @state.lang) %></b>: <%= @result["title"] %>
         <br>
     <% end %>
 </div>

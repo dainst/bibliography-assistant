@@ -28,6 +28,22 @@ defmodule Assistant.Translator do
     zenon_unreachable: %{
       en: "The Zenon connection has been interrupted during the request",
       de: "Die Zenon Verbindung wurde während der Anfrage unterbrochen"
+    },
+    anystyle_field_author: %{
+      en: "Primary Author",
+      de: "Erstgenannte Autorin/Erstgenannter Autor"
+    },
+    anystyle_field_title: %{
+      en: "Title",
+      de: "Titel"
+    },
+    zenon_result_author: %{
+      en: "Primary Author",
+      de: "Erstgenannte Autorin/Erstgenannter Autor"
+    },
+    zenon_result_title: %{
+      en: "Title",
+      de: "Titel"
     }
   }
 

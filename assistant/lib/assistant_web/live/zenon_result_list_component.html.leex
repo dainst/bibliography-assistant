@@ -15,7 +15,9 @@
         </a>
 
         <%= for result <- results do %>
-        <%= live_component @socket, AssistantWeb.ZenonResultComponent, result: result %>
+            <%= live_component @socket, AssistantWeb.ZenonResultComponent,
+                result: result,
+                state: @state %>
         <% end %>
 <% end %>
 </div>
