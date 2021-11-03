@@ -6,17 +6,17 @@ defmodule Assistant.QueryProcessor do
 
     shortened_title = shorten title
 
-    with {_, results} when length(results) == 0 <-
+    with {_, results} when results == []  <-
           query_zenon_with_author_and_title(author_complex, title),
-         {_, results} when length(results) == 0 <-
+         {_, results} when results == [] <-
           query_zenon_with_author_and_title(author_complex, shortened_title),
-         {_, results} when length(results) == 0 <-
+         {_, results} when results == [] <-
           query_zenon_with_author_and_title(author_simple, title),
-         {_, results} when length(results) == 0 <-
+         {_, results} when results == [] <-
           query_zenon_with_author_and_title(author_simple, shortened_title),
-         {_, results} when length(results) == 0 <-
+         {_, results} when results == [] <-
           query_zenon_with_author_and_title(author_complex, nil),
-         {_, results} = result when length(results) == 0 <-
+         {_, results} = result when results == [] <-
           query_zenon_with_author_and_title(author_simple, nil)
     do
       result
