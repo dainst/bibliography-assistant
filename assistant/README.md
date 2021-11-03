@@ -1,12 +1,18 @@
 # Assistant
 
+## Prerequisites
+
+* Elixir
+
+## Run
+
     $ cd assistant
     $ npm i --prefix ./assets
     $ mix deps.get
     $ mix phx.server
     Visit localhost:4000
 
-## Api
+## API
 
     POST localhost:4000/api
     {

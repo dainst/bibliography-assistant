@@ -1,6 +1,10 @@
 # Anystyle Sinatra Wrapper
 
-## Start
+## Prerequisites
+
+* Ruby
+
+## Run
 
     $ bundle install
     $ ruby server.rb

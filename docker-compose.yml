@@ -7,6 +7,14 @@ services:
     build: "./assistant"
     ports:
       - "4000:4000"
+    environment:
+      - IN_CONTAINER=true
+    volumes:
+      - "./assistant/lib:/opt/src/assistant/lib"
+      - "./assistant/config:/opt/src/assistant/config"
+      - "./assistant/_build:/opt/src/assistant/_build"
+      - "./assistant/assets:/opt/src/assistant/assets"
+      - "./assistant/priv:/opt/src/assistant/priv"
 
   anystyle:
     image: "dainst/anystyle-sinatra"
@@ -14,12 +22,12 @@ services:
     ports:
       - "4567:4567"
 
-  grobid:
-    image: "lfoppiano/grobid:0.7.0"
-    ports:
-      - "8070:8070"
-
-  cermine:
-    image: "elifesciences/cermine:1.13"
-    ports:
-      - "8072:8080"
+  # grobid:
+    # image: "lfoppiano/grobid:0.7.0"
+    # ports:
+      # - "8070:8070"
+# 
+  # cermine:
+    # image: "elifesciences/cermine:1.13"
+    # ports:
+      # - "8072:8080"
