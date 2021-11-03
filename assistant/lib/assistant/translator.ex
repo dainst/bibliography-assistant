@@ -10,8 +10,8 @@ defmodule Assistant.Translator do
       de: "Ein Eintrag pro Zeile"
     },
     evaluate_with_anystyle: %{
-      en: "Evaluate with Anystyle",
-      de: "Mit Anystyle auswerten"
+      en: "Evaluate",
+      de: "Auswerten"
     },
     generate_download_link: %{
       en: "Generate download link",
