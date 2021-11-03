@@ -5,6 +5,9 @@ defmodule Assistant.AnystyleQueryProcessor do
   alias Assistant.QueryProcessorHelper
   alias Assistant.QueryProcessor
 
+  @doc """
+  Returns {:error, reason}, that is, the first error of possibly multiple, if any occurs
+  """
   def process_query {raw_references, split_references} do
 
     anystyle_results = AnystyleAdapter.ask_anystyle raw_references
@@ -13,7 +16,12 @@ defmodule Assistant.AnystyleQueryProcessor do
       anystyle_results
       |> Enum.map(&query_zenon/1)
 
-    Enum.zip [split_references, anystyle_results, zenon_results]
+    errors = Enum.filter zenon_results, &(match? {:error, _}, &1)
+
+    case errors do
+      [] -> Enum.zip [split_references, anystyle_results, zenon_results]
+      [error|_] -> error
+    end
   end
 
   def query_zenon result do

@@ -1,6 +1,7 @@
 defmodule AssistantWeb.PageLive do
   use AssistantWeb, :live_view
 
+  alias Assistant.Translator
   alias Assistant.Dispatch
 
   @impl true
@@ -71,10 +72,22 @@ defmodule AssistantWeb.PageLive do
   end
 
   def handle_info {type, raw_references}, socket do
-    socket =
-      socket
-      |> assign(:current_page, "2")
-      |> assign(:list, {type, Dispatch.query(type, raw_references)})
-    {:noreply, socket}
+
+    result = Dispatch.query(type, raw_references)
+
+    case result do
+      {:error, msg} ->
+        msg = Translator.translate(msg, socket.assigns.lang)
+        socket =
+          socket
+          |> put_flash(:error, msg)
+        {:noreply, socket}
+      result ->
+        socket =
+          socket
+          |> assign(:current_page, "2")
+          |> assign(:list, {type, result})
+        {:noreply, socket}
+    end
   end
 end

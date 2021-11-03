@@ -55,7 +55,7 @@ defmodule Assistant.ZenonService do
       {:error, error} ->
         IO.puts "Zenon Service not reachable"
         IO.inspect error
-        {{"", ""}, []}
+        {:error, :zenon_unreachable}
     end
   end
 end
