@@ -5,6 +5,8 @@ defmodule AssistantWeb.AnystyleResultComponent do
   alias Assistant.QueryProcessorHelper
   alias AssistantWeb.AnystyleResultComponent
 
+  @fields_to_display ["author", "title"]
+
   def convert_key key do
     case key do
       "author" -> "Primary Author"
@@ -22,6 +24,10 @@ defmodule AssistantWeb.AnystyleResultComponent do
     else
       ""
     end
+  end
+
+  def get_fields item do
+    Enum.filter item, fn {k, _} -> k in @fields_to_display end
   end
 
   def convert([a|_] = param) when is_binary(a), do: a

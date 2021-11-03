@@ -1,5 +1,5 @@
 <div style="text-align: left">
-<%= for {k,v} <- @item do %>
+<%= for {k,v} <- AnystyleResultComponent.get_fields(@item) do %>
     <%= val = AnystyleResultComponent.convert(v)
         if val != "" do %>
         <div>
