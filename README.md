@@ -19,7 +19,5 @@ the corresponding README.md files in [./assistant](./assistant) and [./anystyle]
 
 ## Deployment
 
-    $ docker-compose build assistant
-    $ docker-compose push assistant
-    $ docker-compose build anystyle
-    $ docker-compose push anystyle
+    $ docker-compose build assistant && docker-compose push assistant
+    $ docker-compose build anystyle && docker-compose push anystyle
