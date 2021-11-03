@@ -15,7 +15,7 @@ Or to see the logs separately, start the containers separately
     $ docker-compose up assistant
 
 For instructions for how to run the components in local environments (`elixir`, `ruby`), see
-the corresponding README.md files in [./assistant](./assistant) and [./anystyle](./anystyle).
+the corresponding README.md files in [./assistant](./assistant#run) and [./anystyle](./anystyle#run).
 
 ## Deployment
 
