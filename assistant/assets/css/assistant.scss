@@ -63,6 +63,21 @@ body {
     }
 }
 
+.main-card {
+    text-align: left;
+    border-bottom: 1px solid #e3e3e3;
+    background: #fafaff;
+    border-radius: 6px;
+    padding: 3em 3em 1em;
+    margin-bottom: 3rem;
+    font-weight: 200;
+    font-size: 120%;
+    font-family: serif;
+  }
+.main-card input {
+    background: #ffffff;
+}
+
 .card {
     text-align: left;
     border-bottom: 1px solid #e3e3e3;
