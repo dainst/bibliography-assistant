@@ -10,9 +10,9 @@ defmodule AssistantWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
+  # pipeline :api do
+    # plug :accepts, ["json"]
+  # end
 
   scope "/", AssistantWeb do
     pipe_through :browser
@@ -22,8 +22,7 @@ defmodule AssistantWeb.Router do
 
   # Other scopes may use custom stacks.
   scope "/api", AssistantWeb do
-    pipe_through :api
-
+    # pipe_through :api
     post "/", ApiController, :evaluate
   end
 

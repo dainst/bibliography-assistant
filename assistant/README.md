@@ -14,8 +14,5 @@
 
 ## API
 
-    POST localhost:4000/api
-    {
-        "parser": "<anystyle|grobid|cermine>",
-        "references": "reference-line-1\nreference-line-2"
-    }
+POST your citations as plain text to `localhost:4000/api` and receive a JSON-result. 
+Line separators within the text are used to identify separate entries.
