@@ -5,12 +5,17 @@ defmodule Assistant.AnystyleQueryProcessor do
   alias Assistant.QueryProcessorHelper
   alias Assistant.QueryProcessor
 
+  @fields_to_take ["author", "title"]
+
   @doc """
   Returns {:error, reason}, that is, the first error of possibly multiple, if any occurs
   """
   def process_query {raw_references, split_references} do
 
-    anystyle_results = AnystyleAdapter.ask_anystyle raw_references
+    anystyle_results =
+      raw_references
+      |> AnystyleAdapter.ask_anystyle
+      |> Enum.map(&take_fields/1)
 
     zenon_results =
       anystyle_results
@@ -26,7 +31,13 @@ defmodule Assistant.AnystyleQueryProcessor do
 
   def query_zenon result do
 
-    QueryProcessor.try_queries result, extract_author_and_title result
+    QueryProcessor.try_queries extract_author_and_title result
+  end
+
+  defp take_fields anystyle_result do
+    anystyle_result
+    |> Enum.filter(fn {k, _} -> k in @fields_to_take end)
+    |> Enum.into(%{})
   end
 
   defp extract_author_and_title result do

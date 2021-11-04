@@ -6,8 +6,6 @@ defmodule AssistantWeb.AnystyleResultComponent do
   alias Assistant.QueryProcessorHelper
   alias AssistantWeb.AnystyleResultComponent
 
-  @fields_to_display ["author", "title"]
-
   def convert_key key, lang do
     Translator.translate String.to_atom("anystyle_field_#{key}"), lang
   end
@@ -21,10 +19,6 @@ defmodule AssistantWeb.AnystyleResultComponent do
     else
       ""
     end
-  end
-
-  def get_fields item do
-    Enum.filter item, fn {k, _} -> k in @fields_to_display end
   end
 
   def convert([a|_] = param) when is_binary(a), do: a

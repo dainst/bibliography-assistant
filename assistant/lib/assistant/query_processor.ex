@@ -2,7 +2,7 @@ defmodule Assistant.QueryProcessor do
 
   import Assistant.ZenonService
 
-  def try_queries result, {author_simple, author_complex, title} do
+  def try_queries {author_simple, author_complex, title} do
 
     shortened_title = shorten title
 
