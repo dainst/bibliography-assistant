@@ -1,6 +1,6 @@
 defmodule Assistant.AnystyleCsvBuilder do
 
-  alias Assistant.AnystyleHelper
+  import Assistant.AnystyleHelper
 
   def generate list do
     entries = Enum.map list, fn [given, entry, _] ->
@@ -14,25 +14,5 @@ defmodule Assistant.AnystyleCsvBuilder do
 
   defp escape entry do
     String.replace entry, "\"", "\"\""
-  end
-
-  def extract_primary_title(entry), do: List.first entry["title"]
-
-  def extract_primary_author(nil), do: ""
-
-  def extract_primary_author(""), do: ""
-
-  def extract_primary_author_given_name entry do
-    case AnystyleHelper.extract_primary_author entry do
-      {family, given} -> given
-      _ -> ""
-    end
-  end
-
-  def extract_primary_author_family_name entry do
-    case AnystyleHelper.extract_primary_author entry do
-      {family, given} -> family
-      _ -> ""
-    end
   end
 end
