@@ -63,7 +63,17 @@ body {
     }
 }
 
+.card {
+    text-align: left;
+    border-bottom: 1px solid #e3e3e3;
+    background: #fafaff;
+    font-family: serif;
+    border-radius: 17px;
+    padding: 20px 20px 20px;
+    margin-bottom: 10px;
+  }
+
 .selected {
 
-    background-color: darkgray;
+    background-color:  #f2f4ff;
 }

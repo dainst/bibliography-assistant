@@ -1,4 +1,4 @@
-<div class="phx-hero card">
+<div class="card">
     <b>Zenon Id</b>:
     <%= if String.starts_with?(@result["id"], "00") do %>
     <a href="<%= 'https://zenon.dainst.org/Record/#{@result["id"]}' %>"><%= @result["id"] %></a>

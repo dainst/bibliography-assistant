@@ -1,23 +1,26 @@
-<header>
-  <div class="width">
-    <%= if @current_page == "2" do %>
-      <div class="right">
-        Bibliography Assistant
-      </div>
-      <div class="left">
-        <a phx-click="new_search">
-          <%= Assistant.Translator.translate(:new_search, @lang) %>
-        </a>
-      </div>
+<%= if @current_page == "2" do %>
+  <header>
+    <div class="width">
 
-    <% else %>
-      <div class="right">
-        Bibliography Assistant
-      </div>
-    <% end %>
-
-  </div>
-</header>
+        <div class="right">
+          <%= if not @download_link_generated do %>
+            <button phx-click="download"><%= Assistant.Translator.translate(:generate_download_link, @lang) %></button>
+          <% else %>
+            <a href="/download/<%= String.replace(@socket.id, "phx-", "") %>">
+              <%= Assistant.Translator.translate(:download, @lang) %></a>
+          <% end %>
+        </div>
+        <div class="left">
+          <a phx-click="new_search">
+            <%= Assistant.Translator.translate(:new_search, @lang) %>
+          </a>
+        </div>
+    </div>
+  </header>
+<% else %>
+  <br>
+  <br>
+<% end %>
 
 <main role="main" phx-hook="MainHook" id="main">
   <p class="alert alert-info" role="alert"
