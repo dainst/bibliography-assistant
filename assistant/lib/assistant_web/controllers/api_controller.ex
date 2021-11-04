@@ -14,12 +14,8 @@ defmodule AssistantWeb.ApiController do
     json conn, %{ results: results }
   end
 
-  defp convert [x,y,z] do
-    %{
-      given: x,
-      "primary-author-given-name": AnystyleHelper.extract_primary_author_given_name(y),
-      "primary-author-family-name": AnystyleHelper.extract_primary_author_family_name(y),
-      title: AnystyleHelper.extract_primary_title(y)
-    }
+  defp convert [original, item, _] do
+    converted = AnystyleHelper.convert_item item
+    Map.merge %{ original: original }, converted
   end
 end

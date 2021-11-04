@@ -4,12 +4,12 @@ defmodule Assistant.AnystyleCsvBuilder do
 
   def generate list do
     entries = Enum.map list, fn [given, entry, _] ->
-      "\"#{extract_primary_author_given_name(entry) |> escape}\"," <>
-      "\"#{extract_primary_author_family_name(entry) |> escape}\"," <>
-      "\"#{extract_primary_title(entry) |> escape}\"," <>
+      "\"#{extract_given_name(entry) |> escape}\"," <>
+      "\"#{extract_family_name(entry) |> escape}\"," <>
+      "\"#{extract_title(entry) |> escape}\"," <>
       "\"#{given |> escape}\"\n"
     end
-    "\"primary-author-given-name\",\"primary-author-family-name\",\"title\",\"given\"\n#{entries}"
+    "\"given-name\",\"family-name\",\"title\",\"original\"\n#{entries}"
   end
 
   defp escape entry do
