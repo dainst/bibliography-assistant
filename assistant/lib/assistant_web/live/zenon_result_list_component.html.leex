@@ -2,17 +2,19 @@
     <%= if @state.selected_item > -1 do %>
     <% [raw, item, {{api_suffix, ui_suffix}, results}] = Enum.at(elem(@state.list, 1), @state.selected_item) %>
 
-        <div>
-        Number results of zenon search for "<%= :http_uri.decode(api_suffix) %>": <%= length(results) %>
-        <br>
-        <a href="<%= "https://zenon.dainst.org/api/v1/search?lookfor=#{api_suffix}" %>">
-            Zenon-API Link
-        </a>
-        </div>
+        <div class="card">
+            <div>
+            Number results of zenon search for "<%= :http_uri.decode(api_suffix) %>": <%= length(results) %>
+            <br>
+            <a href="<%= "https://zenon.dainst.org/api/v1/search?lookfor=#{api_suffix}" %>">
+                Zenon-API Link
+            </a>
+            </div>
 
-        <a href="<%= "https://zenon.dainst.org/Search/Results?join=AND&#{ui_suffix}" %>">
-            Zenon-UI Link
-        </a>
+            <a href="<%= "https://zenon.dainst.org/Search/Results?join=AND&#{ui_suffix}" %>">
+                Zenon-UI Link
+            </a>
+        </div>
 
         <%= for result <- results do %>
             <%= live_component @socket, AssistantWeb.ZenonResultComponent,
