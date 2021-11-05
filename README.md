@@ -15,7 +15,7 @@ For development with Docker, see the following section
 
 #### Prepare
 
-    $ docker-compose run --entrypoint "npm install --prefix ./assets" assistant
+    [1] $ docker-compose run --entrypoint "npm install --prefix ./assets" assistant
 
 #### Start
 
@@ -35,6 +35,8 @@ Or to see the logs separately, start the containers separately
     $ docker-compose run --entrypoint "mix test" assistant
 
 ## Deployment
+
+Make sure, [1] happened. Then
 
     $ docker-compose build assistant && docker-compose push assistant
     $ docker-compose build anystyle && docker-compose push anystyle
