@@ -36,7 +36,7 @@ Or to see the logs separately, start the containers separately
 
 ## Deployment
 
-Make sure, [1] happened. Then
+Make sure, `[1]` happened. Then
 
     $ docker-compose build assistant && docker-compose push assistant
     $ docker-compose build anystyle && docker-compose push anystyle
