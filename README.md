@@ -36,7 +36,7 @@ Or to see the logs separately, start the containers separately
 
 ## Deployment
 
-Make sure, `[1]` or `npm i` inside `assistant/assets` happened, such that `node_modules` are present prior to build the container. Then
+Make sure, either `[1]` or `npm i` (in `assistant/assets`) happened, such that `node_modules` are present prior to build the container. Then
 
     $ docker-compose build assistant && docker-compose push assistant
     $ docker-compose build anystyle && docker-compose push anystyle
