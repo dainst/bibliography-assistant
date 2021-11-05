@@ -21,3 +21,7 @@ the corresponding README.md files in [./assistant](./assistant#run) and [./anyst
 
     $ docker-compose build assistant && docker-compose push assistant
     $ docker-compose build anystyle && docker-compose push anystyle
+
+## Tests
+
+    $ docker-compose run --entrypoint "mix test" assistant

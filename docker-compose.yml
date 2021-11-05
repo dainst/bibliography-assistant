@@ -15,6 +15,7 @@ services:
       - "./assistant/_build:/opt/src/assistant/_build"
       - "./assistant/assets:/opt/src/assistant/assets"
       - "./assistant/priv:/opt/src/assistant/priv"
+      - "./assistant/test:/opt/src/assistant/test"
 
   anystyle:
     image: "dainst/anystyle-sinatra"
