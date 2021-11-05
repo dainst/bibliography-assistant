@@ -1,5 +1,5 @@
 <div>
-  <Phoenix.LiveView.Helpers.form 
+  <.form 
         let={f} 
         id="raw-references-form"
         for={:raw_references} 
@@ -11,7 +11,7 @@
     <p><%= Translator.translate(:one_item_per_line, @state.lang) %></p>
 
     <%= textarea f, :raw_references %>
-  </Phoenix.LiveView.Helpers.form>
+  </.form>
 
   <button phx-click="eval" phx-value-target="anystyle" phx-target={@myself}>
     <%= Translator.translate(:evaluate_with_anystyle, @state.lang) %>
