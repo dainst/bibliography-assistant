@@ -7,17 +7,17 @@ the corresponding README.md files in [./assistant](./assistant) and [./anystyle]
 
 For development with Docker, see the following section
 
-## Getting started with Docker
+### Getting started with Docker
 
-### Prerequisites
+#### Prerequisites
 
 - `Docker` and `docker-compose`
 
-### Prepare
+#### Prepare
 
     $ docker-compose run --entrypoint "npm install --prefix ./assets" assistant
 
-### Start
+#### Start
 
 Run
 
@@ -30,11 +30,11 @@ Or to see the logs separately, start the containers separately
     $ docker-compose up anystyle
     $ docker-compose up assistant
 
-### Deployment
+#### Deployment
 
     $ docker-compose build assistant && docker-compose push assistant
     $ docker-compose build anystyle && docker-compose push anystyle
 
-### Tests
+#### Tests
 
     $ docker-compose run --entrypoint "mix test" assistant
