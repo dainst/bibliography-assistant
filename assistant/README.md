@@ -3,14 +3,22 @@
 ## Prerequisites
 
 * Elixir
+* NPM
 
-## Run
+## Prepare
 
-    $ cd assistant
+Run
+
     $ npm i --prefix ./assets
     $ mix deps.get
+
+## Start
+    
+Run
+
     $ mix phx.server
-    Visit localhost:4000
+    
+Then visit `localhost:4000`
 
 ## API
 
