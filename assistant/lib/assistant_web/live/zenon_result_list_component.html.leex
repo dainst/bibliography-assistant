@@ -1,6 +1,9 @@
 <div id="zenon-result-list" class="list" phx-hook="ZenonResultListHook">
     <%= if @state.selected_item > -1 do %>
-    <% [raw, item, {{api_suffix, ui_suffix}, results}] = Enum.at(elem(@state.list, 1), @state.selected_item) %>
+
+        <div style="height: 11px; width: 100px">
+        </div>
+        <% [raw, item, {{api_suffix, ui_suffix}, results}] = Enum.at(elem(@state.list, 1), @state.selected_item) %>
 
         <div class="card">
             <div>
@@ -21,5 +24,7 @@
                 result: result,
                 state: @state %>
         <% end %>
-<% end %>
+        <div style="height: 11px; width: 100px">
+        </div>
+    <% end %>
 </div>

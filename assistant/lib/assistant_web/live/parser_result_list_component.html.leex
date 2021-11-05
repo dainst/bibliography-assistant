@@ -1,4 +1,6 @@
 <div class="list">
+<div style="height: 11px; width: 100px">
+</div>
 <%= for {[raw, item, {first_author, results}], idx} <- Enum.with_index(elem(@state.list, 1)) do %>
     <div class="card <%= if idx == @state.selected_item do 'selected' end %>"
         phx-click="select"
@@ -16,4 +18,6 @@
         end %>
     </div>
 <% end %>
+<div style="height: 11px; width: 100px">
+</div>
 </div>
