@@ -6,7 +6,7 @@
           <%= if not @download_link_generated do %>
             <button phx-click="download"><%= Assistant.Translator.translate(:generate_download_link, @lang) %></button>
           <% else %>
-            <a href="/download/<%= String.replace(@socket.id, "phx-", "") %>">
+            <a href={"/download/#{String.replace(@socket.id, "phx-", "")}"}>
               <%= Assistant.Translator.translate(:download, @lang) %></a>
           <% end %>
         </div>

@@ -1,0 +1,19 @@
+<div>
+  <Phoenix.LiveView.Helpers.form 
+        let={f} 
+        id="raw-references-form"
+        for={:raw_references} 
+        phx-change="change" 
+        phx-target={@myself}>
+
+    <h1><%= Translator.translate(:bibliographic_references, @state.lang) %></h1>
+
+    <p><%= Translator.translate(:one_item_per_line, @state.lang) %></p>
+
+    <%= textarea f, :raw_references %>
+  </Phoenix.LiveView.Helpers.form>
+
+  <button phx-click="eval" phx-value-target="anystyle" phx-target={@myself}>
+    <%= Translator.translate(:evaluate_with_anystyle, @state.lang) %>
+  </button>
+</div>

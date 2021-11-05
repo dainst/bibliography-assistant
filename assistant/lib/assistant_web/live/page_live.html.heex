@@ -1,13 +1,11 @@
 <%= if @current_page == "1" do %>
   <section class="main-card width" style="margin-top: 20px;">
-    <%= live_component @socket,
-      AssistantWeb.RawReferences,
+    <%= live_component AssistantWeb.RawReferences,
       state: assigns,
       id: "raw-references" %>
   </section>
 <% else %>
-  <%= live_component @socket,
-    AssistantWeb.Evaluation,
-    id: "evaluation",
-    state: assigns %>
+  <%= live_component AssistantWeb.Evaluation,
+    state: assigns,
+    id: "evaluation" %>
 <% end %>

@@ -4,7 +4,7 @@ defmodule AssistantWeb.RawReferences do
   alias Assistant.Translator
 
   def handle_event "change", %{ "raw_references" =>
-      %{ "raw_references" => raw_references } } = params, socket do
+      %{ "raw_references" => raw_references } }, socket do
 
     {:noreply, socket |> assign(:raw_references, raw_references)}
   end

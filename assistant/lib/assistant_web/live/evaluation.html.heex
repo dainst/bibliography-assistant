@@ -1,14 +1,13 @@
 <div class="both">
   <div class="inner width">
     <div class="lhs">
-      <%= live_component @socket, ParserResultListComponent,
-          id: "parser-result-list",
+      <%= live_component AssistantWeb.ParserResultListComponent,
           state: @state,
           parent: @myself %>
     </div>
 
     <div class="rhs">
-      <%= live_component @socket, ZenonResultListComponent, state: @state %>
+      <%= live_component AssistantWeb.ZenonResultListComponent, state: @state %>
     </div>
   </div>
 </div>
