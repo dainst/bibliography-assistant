@@ -30,11 +30,11 @@ Or to see the logs separately, start the containers separately
     $ docker-compose up anystyle
     $ docker-compose up assistant
 
-#### Deployment
+## Tests
+
+    $ docker-compose run --entrypoint "mix test" assistant
+
+## Deployment
 
     $ docker-compose build assistant && docker-compose push assistant
     $ docker-compose build anystyle && docker-compose push anystyle
-
-#### Tests
-
-    $ docker-compose run --entrypoint "mix test" assistant
