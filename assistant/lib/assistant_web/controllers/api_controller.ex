@@ -1,11 +1,10 @@
 defmodule AssistantWeb.ApiController do
   use AssistantWeb, :controller
 
-  alias Plug.Conn
   alias Assistant.AnystyleHelper
   alias Assistant.Dispatch
 
-  def evaluate conn, body do
+  def evaluate conn, _body do
 
     {:ok, references, _} = Plug.Conn.read_body(conn)
 
@@ -17,5 +16,11 @@ defmodule AssistantWeb.ApiController do
   defp convert [original, item, _] do
     converted = AnystyleHelper.convert_item item
     Map.merge %{ original: original }, converted
+  end
+
+  # Just for setting up a controller test
+  def say_hello conn, _body do
+    {:ok, message, _} = Plug.Conn.read_body(conn)
+    json conn, %{ message: message }
   end
 end

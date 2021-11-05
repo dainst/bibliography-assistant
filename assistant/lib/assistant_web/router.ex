@@ -24,6 +24,7 @@ defmodule AssistantWeb.Router do
   scope "/api", AssistantWeb do
     # pipe_through :api
     post "/", ApiController, :evaluate
+    post "/say_hello", ApiController, :say_hello
   end
 
   scope "/download", AssistantWeb do
