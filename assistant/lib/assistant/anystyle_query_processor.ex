@@ -14,19 +14,30 @@ defmodule Assistant.AnystyleQueryProcessor do
 
     with {:ok, results} <- AnystyleAdapter.ask_anystyle(raw_references),
          anystyle_results <- Enum.map(results, &take_fields/1),
-         zenon_results <- Enum.map(anystyle_results, &query_zenon/1),
-         [] <- Enum.filter(zenon_results, &(match? {:error, _}, &1)) do
+         zenon_results <- query_zenon(anystyle_results),
+         nil <- get_error(zenon_results) do
 
       Enum.zip [split_references, anystyle_results, zenon_results]
     else
-      {:error, _reason} = _error -> {:error, :connection_refused}
-      [error|_] -> error
+      error -> error
     end
   end
 
-  def query_zenon result do
+  def query_zenon anystyle_results do
+    anystyle_results
+    |> Enum.reduce_while([], &query_zenon_reducer/2)
+    |> Enum.reverse
+  end
 
-    QueryProcessor.try_queries extract_author_and_title result
+  defp query_zenon_reducer anystyle_result, results do
+    case QueryProcessor.try_queries extract_author_and_title anystyle_result do
+      {:error, _reason} = error -> {:halt, [error|results]}
+      result -> {:cont, [result|results]}
+    end
+  end
+
+  defp get_error zenon_results do
+    Enum.find(zenon_results, &(match? {:error, _}, &1))
   end
 
   defp take_fields anystyle_result do
