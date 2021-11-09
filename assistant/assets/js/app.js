@@ -17,15 +17,20 @@ import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "topbar"
 
+function langIsNotDe() {
+    return Array.isArray(navigator.languages) 
+        && navigator.languages.length > 0 
+        && !navigator.languages[0].toLowerCase().startsWith("de")
+}
+
+const getLang = () => langIsNotDe() ? "en" : "de"
+
 const hooks = {}
 hooks.MainHook = {
     mounted() {
-        if (Array.isArray(navigator.languages) 
-            && navigator.languages.length > 0 
-            && !navigator.languages[0].toLowerCase().startsWith("de")) {
-
-                this.pushEvent("select_language", "en")
-        }
+        this.handleEvent("request_language", _ => {
+            this.pushEvent("select_language", getLang())    
+        })
     }
 }
 hooks.ZenonResultListHook = {

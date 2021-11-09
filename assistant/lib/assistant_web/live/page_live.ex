@@ -20,21 +20,23 @@ defmodule AssistantWeb.PageLive do
 
     path = "priv/#{socket.id}.bin"
 
-    if File.exists?(path) do
+    unless File.exists?(path) do
+      socket
+    else
       list =
         path
         |> File.read!
         |> :erlang.binary_to_term
       File.rm! path
-      socket =
-        socket
-        |> assign(:list, list)
-        |> assign(:current_page, "2")
-        |> assign(:selected_item, -1)
-      {:noreply, socket}
-    else
-      {:noreply, socket}
+      socket
+      |> assign(:list, list)
+      |> assign(:current_page, "2")
+      |> assign(:selected_item, -1)
     end
+    socket =
+      socket
+      |> push_event(:request_language, %{})
+    {:noreply, socket}
   end
 
   @impl true
