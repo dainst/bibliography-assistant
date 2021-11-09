@@ -12,19 +12,14 @@ defmodule Assistant.AnystyleQueryProcessor do
   """
   def process_query {raw_references, split_references} do
 
-    anystyle_results =
-      raw_references
-      |> AnystyleAdapter.ask_anystyle
-      |> Enum.map(&take_fields/1)
+    with {:ok, results} <- AnystyleAdapter.ask_anystyle(raw_references),
+         anystyle_results <- Enum.map(results, &take_fields/1),
+         zenon_results <- Enum.map(anystyle_results, &query_zenon/1),
+         [] <- Enum.filter(zenon_results, &(match? {:error, _}, &1)) do
 
-    zenon_results =
-      anystyle_results
-      |> Enum.map(&query_zenon/1)
-
-    errors = Enum.filter zenon_results, &(match? {:error, _}, &1)
-
-    case errors do
-      [] -> Enum.zip [split_references, anystyle_results, zenon_results]
+      Enum.zip [split_references, anystyle_results, zenon_results]
+    else
+      {:error, _reason} = _error -> {:error, :connection_refused}
       [error|_] -> error
     end
   end

@@ -6,13 +6,12 @@ defmodule AssistantWeb.AssistantLive do
 
   @impl true
   def mount _params, _session, socket do
-    socket =
-      socket
-      |> assign(:current_page, "1")
-      |> assign(:selected_item, -1)
-      |> assign(:lang, "de")
-      |> assign(:download_link_generated, false)
-    {:ok, socket}
+    socket
+    |> assign(:current_page, "1")
+    |> assign(:selected_item, -1)
+    |> assign(:lang, "de")
+    |> assign(:download_link_generated, false)
+    |> return_ok
   end
 
   @impl true
@@ -33,25 +32,22 @@ defmodule AssistantWeb.AssistantLive do
       |> assign(:current_page, "2")
       |> assign(:selected_item, -1)
     end
-    socket =
-      socket
-      |> push_event(:request_language, %{})
-    {:noreply, socket}
+    socket
+    |> push_event(:request_language, %{})
+    |> return_noreply
   end
 
   @impl true
   def handle_event "new_search", _params, socket do
-    socket =
-      socket
-      |> assign(:current_page, "1")
-    {:noreply, socket}
+    socket
+    |> assign(:current_page, "1")
+    |> return_noreply
   end
 
   def handle_event "select_language", language, socket do
-    socket =
-      socket
-      |> assign(:lang, language)
-    {:noreply, socket}
+    socket
+    |> assign(:lang, language)
+    |> return_noreply
   end
 
   def handle_event "download", _params, socket do
@@ -69,10 +65,9 @@ defmodule AssistantWeb.AssistantLive do
 
     File.write! "priv/#{String.replace(socket.id, "phx-", "")}.csv", csv
 
-    socket =
-      socket
-      |> assign(:download_link_generated, true)
-    {:noreply, socket}
+    socket
+    |> assign(:download_link_generated, true)
+    |> return_noreply
   end
 
   @impl true
@@ -82,17 +77,25 @@ defmodule AssistantWeb.AssistantLive do
 
     case result do
       {:error, msg} ->
-        msg = Translator.translate(msg, socket.assigns.lang)
-        socket =
-          socket
-          |> put_flash(:error, msg)
-        {:noreply, socket}
+        socket
+        |> put_flash(:error, translate_error(msg, socket.assigns.lang))
       result ->
-        socket =
-          socket
-          |> assign(:current_page, "2")
-          |> assign(:list, {type, result})
-        {:noreply, socket}
+        socket
+        |> assign(:current_page, "2")
+        |> assign(:list, {type, result})
     end
+    |> return_noreply
+  end
+
+  defp translate_error msg, lang do
+    Translator.translate String.to_atom("error_#{Atom.to_string(msg)}"), lang
+  end
+
+  defp return_noreply socket do
+    {:noreply, socket}
+  end
+
+  defp return_ok socket do
+    {:ok, socket}
   end
 end

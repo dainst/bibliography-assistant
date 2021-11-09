@@ -25,7 +25,11 @@ defmodule Assistant.Translator do
       en: "New search",
       de: "Neue Suche"
     },
-    zenon_unreachable: %{
+    error_connection_refused: %{
+      en: "Parser not reachable",
+      de: "Parser nicht erreichbar"
+    },
+    error_zenon_unreachable: %{
       en: "The Zenon connection has been interrupted during the request",
       de: "Die Zenon Verbindung wurde während der Anfrage unterbrochen"
     },
