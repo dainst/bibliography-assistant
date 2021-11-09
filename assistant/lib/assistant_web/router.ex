@@ -17,7 +17,7 @@ defmodule AssistantWeb.Router do
   scope "/", AssistantWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    live "/", AssistantLive, :index
   end
 
   # Other scopes may use custom stacks.

@@ -1,4 +1,4 @@
-defmodule AssistantWeb.PageLive do
+defmodule AssistantWeb.AssistantLive do
   use AssistantWeb, :live_view
 
   alias Assistant.Translator
