@@ -32,7 +32,7 @@ defmodule Assistant.ZenonService do
     if suffixes != {"", ""} do
       query_with_suffix suffixes
     else
-      {{"", ""}, []}
+      {{"", ""}, 0, []}
     end
   end
 
@@ -48,9 +48,9 @@ defmodule Assistant.ZenonService do
       results = Poison.decode! results.body
 
       if is_nil(results["records"]) do
-        {suffixes, []}
+        {suffixes, {0, []}}
       else
-        {suffixes, results["records"]}
+        {suffixes, {results["resultCount"], results["records"]}}
       end
     else
       {:error, error} ->

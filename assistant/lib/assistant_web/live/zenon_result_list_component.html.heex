@@ -3,11 +3,11 @@
 
         <div style="height: 11px; width: 100px">
         </div>
-        <% [_raw, _item, {{api_suffix, ui_suffix}, results}] = Enum.at(elem(@state.list, 1), @state.selected_item) %>
+        <% [_raw, _item, {{api_suffix, ui_suffix}, {num_total_results, results}}] = Enum.at(elem(@state.list, 1), @state.selected_item) %>
 
         <div class="card">
             <div>
-            Number results of zenon search for {:http_uri.decode(api_suffix}: {length(results)}
+            Total number of results of zenon search for <%= :http_uri.decode api_suffix %>: <%= num_total_results %>
             <br>
             <a href={"https://zenon.dainst.org/api/v1/search?lookfor=#{api_suffix}"}>
                 Zenon-API Link
