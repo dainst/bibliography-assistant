@@ -9,6 +9,7 @@ RUN ["wget", "https://deb.nodesource.com/setup_14.x"]
 RUN ["chmod", "+x", "setup_14.x"]
 RUN ["./setup_14.x"]
 RUN ["apt-get", "install", "-y", "nodejs"]
+RUN ["npm", "i", "--prefix=./assets"]
 
 WORKDIR "/opt/src/assistant"
 RUN ["mix", "local.hex", "--force"]

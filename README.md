@@ -13,10 +13,6 @@ For development with Docker, see the following section
 
 - `Docker` and `docker-compose`
 
-#### Prepare
-
-    [1] $ docker-compose run --entrypoint "npm install --prefix ./assets" assistant
-
 #### Start
 
 Run
@@ -35,8 +31,6 @@ Or to see the logs separately, start the containers separately
     $ docker-compose run --entrypoint "mix test" assistant
 
 ## Deployment
-
-Make sure, either `[1]` or `npm i` (in `assistant/assets`) happened, such that `node_modules` are present prior to building the container. Then
 
     $ docker-compose build assistant && docker-compose push assistant
     $ docker-compose build anystyle && docker-compose push anystyle

@@ -13,7 +13,8 @@ services:
       - "./assistant/lib:/opt/src/assistant/lib"
       - "./assistant/config:/opt/src/assistant/config"
       - "./assistant/_build:/opt/src/assistant/_build"
-      - "./assistant/assets:/opt/src/assistant/assets"
+      - "./assistant/assets/css:/opt/src/assistant/assets/css"
+      - "./assistant/assets/js:/opt/src/assistant/assets/js"
       - "./assistant/priv:/opt/src/assistant/priv"
       - "./assistant/test:/opt/src/assistant/test"
 
