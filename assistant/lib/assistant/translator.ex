@@ -25,6 +25,10 @@ defmodule Assistant.Translator do
       en: "New search",
       de: "Neue Suche"
     },
+    error_no_input: %{
+      en: "No input",
+      de: "Keine Eingabe"
+    },
     error_connection_refused: %{
       en: "Parser not reachable",
       de: "Parser nicht erreichbar"

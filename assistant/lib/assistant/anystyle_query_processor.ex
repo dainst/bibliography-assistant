@@ -12,13 +12,15 @@ defmodule Assistant.AnystyleQueryProcessor do
   """
   def process_query {raw_references, split_references} do
 
-    with {:ok, results} <- AnystyleAdapter.ask_anystyle(raw_references),
+    with raw_references when raw_references != "" <- raw_references,
+         {:ok, results} <- AnystyleAdapter.ask_anystyle(raw_references),
          anystyle_results <- Enum.map(results, &take_fields/1),
          zenon_results <- query_zenon(anystyle_results),
          nil <- get_error(zenon_results) do
 
       Enum.zip [split_references, anystyle_results, zenon_results]
     else
+      "" -> {:error, :no_input}
       error -> error
     end
   end

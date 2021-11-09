@@ -11,7 +11,7 @@ defmodule AssistantWeb.RawReferences do
 
   def handle_event "eval", %{ "target" => target }, socket do
 
-    send self(), {target, socket.assigns.raw_references}
+    send self(), {target, socket.assigns[:raw_references] || ""}
     {:noreply, socket}
   end
 end
