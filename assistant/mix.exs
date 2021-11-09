@@ -20,7 +20,7 @@ defmodule Assistant.MixProject do
   def application do
     [
       mod: {Assistant.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :inets]
     ]
   end
 
