@@ -1,10 +1,6 @@
 defmodule AssistantWeb.Evaluation do
   use AssistantWeb, :live_component
 
-  alias Assistant.Translator
-  alias AssistantWeb.ParserResultListComponent
-  alias AssistantWeb.ZenonResultListComponent
-
   def mount socket do
     {:ok, assign(socket, :selected_item, -1)}
   end

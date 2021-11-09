@@ -12,14 +12,14 @@ defmodule Assistant.AnystyleHelper do
 
   def extract_given_name entry do
     case extract_author entry do
-      {family, given} -> given
+      {_family, given} -> given
       _ -> ""
     end
   end
 
   def extract_family_name entry do
     case extract_author entry do
-      {family, given} -> family
+      {family, _given} -> family
       _ -> ""
     end
   end

@@ -36,12 +36,13 @@ defmodule Assistant.ZenonService do
     end
   end
 
-  defp query_with_suffix {api_suffix, ui_suffix} = suffixes do
+  defp query_with_suffix {api_suffix, ui_suffix} do
 
     zenon_url = Application.fetch_env!(:assistant, :zenon_url)
     suffix = :http_uri.encode api_suffix
 
-    suffixes = {api_suffix, :http_uri.encode(ui_suffix) |> String.replace("%3D", "=") |> String.replace("%26","&")}
+    suffixes = {api_suffix, :http_uri.encode(ui_suffix)
+      |> String.replace("%3D", "=") |> String.replace("%26","&")}
 
     with {:ok, results} <- HTTPoison.get "#{zenon_url}/api/v1/search?limit=100&lookfor=#{suffix}", %{}, [] do
       results = Poison.decode! results.body

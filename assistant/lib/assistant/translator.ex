@@ -37,7 +37,7 @@ defmodule Assistant.Translator do
       en: "Family name",
       de: "Familienname"
     },
-    "anystyle_field_title": %{
+    anystyle_field_title: %{
       en: "Title",
       de: "Titel"
     },

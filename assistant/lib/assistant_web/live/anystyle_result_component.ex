@@ -3,7 +3,6 @@ defmodule AssistantWeb.AnystyleResultComponent do
 
   alias Assistant.Translator
   alias Assistant.AnystyleHelper
-  alias Assistant.QueryProcessorHelper
   alias AssistantWeb.AnystyleResultComponent
 
   def convert_item item do
@@ -14,7 +13,7 @@ defmodule AssistantWeb.AnystyleResultComponent do
     Translator.translate String.to_atom("anystyle_field_#{key}"), lang
   end
 
-  def convert([a|_] = param) when is_binary(a), do: a
+  def convert([a|_]) when is_binary(a), do: a
 
   def convert(param) when is_binary(param), do: param
 

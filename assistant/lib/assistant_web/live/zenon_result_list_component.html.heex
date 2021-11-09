@@ -3,7 +3,7 @@
 
         <div style="height: 11px; width: 100px">
         </div>
-        <% [raw, item, {{api_suffix, ui_suffix}, results}] = Enum.at(elem(@state.list, 1), @state.selected_item) %>
+        <% [_raw, _item, {{api_suffix, ui_suffix}, results}] = Enum.at(elem(@state.list, 1), @state.selected_item) %>
 
         <div class="card">
             <div>
@@ -20,7 +20,7 @@
         </div>
 
         <%= for result <- results do %>
-            <%= live_component @socket, AssistantWeb.ZenonResultComponent,
+            <%= live_component AssistantWeb.ZenonResultComponent,
                 result: result,
                 state: @state %>
         <% end %>

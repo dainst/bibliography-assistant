@@ -15,6 +15,7 @@ defmodule AssistantWeb.PageLive do
     {:ok, socket}
   end
 
+  @impl true
   def handle_params _params, _url, socket do
 
     path = "priv/#{socket.id}.bin"
@@ -36,6 +37,7 @@ defmodule AssistantWeb.PageLive do
     end
   end
 
+  @impl true
   def handle_event "new_search", _params, socket do
     socket =
       socket
@@ -71,6 +73,7 @@ defmodule AssistantWeb.PageLive do
     {:noreply, socket}
   end
 
+  @impl true
   def handle_info {type, raw_references}, socket do
 
     result = Dispatch.query(type, raw_references)

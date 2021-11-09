@@ -13,7 +13,7 @@ defmodule Assistant.QueryProcessorHelper do
 
   defp simple_name author do
     case author do
-      {family, given} -> family
+      {family, _given} -> family
       _ -> author
     end
   end
