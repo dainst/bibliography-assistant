@@ -20,7 +20,7 @@ defmodule Assistant.MixProject do
   def application do
     [
       mod: {Assistant.Application, []},
-      extra_applications: [:logger, :runtime_tools, :inets]
+      extra_applications: [:logger, :runtime_tools, :inets] # :inets is mentioned here so we use :http_uri without creating a warning at the call sites
     ]
   end
 
