@@ -5,20 +5,22 @@
 <%= "2" -> %>
   <header>
     <div class="width">
-
       <div class="right">
-          <%= if not @download_link_generated do %>
-            <button phx-click="download"><%= Assistant.Translator.translate(:generate_download_link, @lang) %></button>
-          <% else %>
-            <a href={"/download/#{String.replace(@socket.id, "phx-", "")}"}>
-              <%= Assistant.Translator.translate(:download, @lang) %></a>
-          <% end %>
-        </div>
-        <div class="left">
-          <a phx-click="new_search">
-            <%= Assistant.Translator.translate(:new_search, @lang) %>
-          </a>
-        </div>
+        <%= if not @download_link_generated do %>
+          <button phx-click="download"><%= Assistant.Translator.translate(:generate_download_link, @lang) %></button>
+        <% else %>
+          <a href={"/download/#{String.replace(@socket.id, "phx-", "")}"}>
+            <%= Assistant.Translator.translate(:download, @lang) %></a>
+        <% end %>
+      </div>
+      <div class="right" style="padding-top: 25px; padding-right: 20px;">
+        <a href={AssistantWeb.AssistantLive.get_zenon_search_link(elem(assigns.list, 1))}>Suchergebnisse in Zenon anzeigen</a>
+      </div>
+      <div class="left">
+        <a phx-click="new_search">
+          <%= Assistant.Translator.translate(:new_search, @lang) %>
+        </a>
+      </div>
     </div>
   </header>
 <% "3" -> %>

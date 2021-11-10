@@ -103,6 +103,19 @@ defmodule AssistantWeb.AssistantLive do
     |> return_noreply
   end
 
+  def get_zenon_search_link list do
+
+    results = Enum.map list, fn [_raw, _item, {{_api_suffix, _ui_suffix}, {_num_total_results, results}}] -> results end
+    results = Enum.filter results, fn results -> length(results) == 1 end
+    results = Enum.map results, fn results -> "\"#{List.first(results)["id"]}\"" end
+
+    results = Enum.join(results, "+OR+")
+    IO.inspect results
+
+
+    "https://zenon.dainst.org/Search/Results?lookfor=#{results}&type=SystemNo"
+  end
+
   defp translate_error msg, lang do
     Translator.translate String.to_atom("error_#{Atom.to_string(msg)}"), lang
   end
