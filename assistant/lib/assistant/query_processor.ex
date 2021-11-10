@@ -11,9 +11,9 @@ defmodule Assistant.QueryProcessor do
          {_, {0, []}} <- query_zenon_with_author_and_title(author_simple, title),
          {_, {0, []}} <- query_zenon_with_author_and_title(author_simple, shortened_title),
          {_, {0, []}} <- query_zenon_with_author_and_title(author_complex, nil),
-         {_, {0, []}} = result <- query_zenon_with_author_and_title(author_simple, nil)
+         {_, {0, []}} = noresult <- query_zenon_with_author_and_title(author_simple, nil)
     do
-      result
+      noresult
     else
       result -> result
     end
