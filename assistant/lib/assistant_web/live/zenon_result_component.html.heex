@@ -1,4 +1,4 @@
-<div class="card">
+<div class={"card #{if assigns[:selected] do 'selected' end}"}>
     <b>Zenon Id</b>:
     <%= if String.starts_with?(@result["id"], "00") do %>
     <a href={'https://zenon.dainst.org/Record/#{@result["id"]}'}><%= @result["id"] %></a>

@@ -20,9 +20,10 @@
         </div>
 
         <%= for result <- results do %>
-            <%= live_component AssistantWeb.ZenonResultComponent,
-                result: result,
-                state: @state %>
+        <%= live_component AssistantWeb.ZenonResultComponent,
+            result: result,
+            selected: num_total_results == 1,
+            state: @state %>
         <% end %>
         <div style="height: 11px; width: 100px">
         </div>
