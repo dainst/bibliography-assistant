@@ -110,8 +110,6 @@ defmodule AssistantWeb.AssistantLive do
     results = Enum.map results, fn results -> "\"#{List.first(results)["id"]}\"" end
 
     results = Enum.join(results, "+OR+")
-    IO.inspect results
-
 
     "https://zenon.dainst.org/Search/Results?lookfor=#{results}&type=SystemNo"
   end
