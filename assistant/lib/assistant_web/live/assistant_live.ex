@@ -78,8 +78,10 @@ defmodule AssistantWeb.AssistantLive do
     |> return_noreply
   end
 
-  def handle_event "go_to_search_details", _, socket do
+  def handle_event "go_to_search_details", %{ "idx" => idx }, socket do
+    {idx, ""} = Integer.parse idx
     socket
+    |> assign(:selected_item, idx)
     |> assign(:current_page, "3")
     |> return_noreply
   end

@@ -1,3 +1,47 @@
-<div>
-  <h2 phx-click="go_to_search_details">Success</h2>
+<div class="both">
+  <div class="inner width">
+    
+    <div class="list table-listing">
+      <div style="height: 11px; width: 100px">
+      </div>
+      <table>
+      <%= for {[raw, item, {{api_suffix, ui_suffix}, {num_total_results, results}}], idx} <- Enum.with_index(elem(@state.list, 1)) do %>
+          <tr phx-click="go_to_search_details"
+              phx-value-idx={idx}>
+            <td style="float: left; width: 50%">
+              <div class="card some">
+                <%= raw %>
+                <br>
+                <br>
+
+                <%= case elem(@state.list, 0) do
+                    "anystyle" -> live_component AnystyleResultComponent, item: item, state: @state
+                    "grobid" -> live_component GrobidResultComponent, item: item, state: @state
+                    "cermine" -> live_component CermineResultComponent, item: item, state: @state
+                end %>
+              </div>
+            </td>
+            <td style="float: left; width: 50%;">
+              <%= case length(results) do %>
+                <% 1 -> %>
+                <%= live_component AssistantWeb.ZenonResultComponent,
+                  result: List.first(results),
+                  state: @state %>
+                <% 0 -> %>
+                  <div class="card">
+                    Keine Suchtreffer
+                  </div>
+                <% _ ->  %>
+                <div class="card">
+                  Mehrere Suchtreffer
+                </div>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+    <div style="height: 11px; width: 100px">
+    </div>
+    </div>
+  </div>
 </div>

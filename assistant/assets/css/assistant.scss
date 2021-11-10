@@ -60,6 +60,20 @@ body {
         .list {
             height: 100%;
         }
+
+        .table-listing::-webkit-scrollbar {
+            display: none;
+        }
+        .table-listing {
+            overflow: scroll;
+            scrollbar-width: none;
+            height: 100%;
+            td, th {
+                border-bottom: unset;
+                padding: unset;
+            }
+        }
+
     }
 }
 
