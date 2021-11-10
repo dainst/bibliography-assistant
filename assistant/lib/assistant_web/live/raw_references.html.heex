@@ -1,10 +1,10 @@
-<div>
+<section class="main-card width" style="margin-top: 20px;">
   <.form 
-        let={f} 
-        id="raw-references-form"
-        for={:raw_references} 
-        phx-change="change" 
-        phx-target={@myself}>
+    let={f} 
+    id="raw-references-form"
+    for={:raw_references} 
+    phx-change="change" 
+    phx-target={@myself}>
 
     <h1><%= Translator.translate(:bibliographic_references, @state.lang) %></h1>
 
@@ -16,4 +16,4 @@
   <button phx-click="eval" phx-value-target="anystyle" phx-target={@myself}>
     <%= Translator.translate(:evaluate_with_anystyle, @state.lang) %>
   </button>
-</div>
+</section>

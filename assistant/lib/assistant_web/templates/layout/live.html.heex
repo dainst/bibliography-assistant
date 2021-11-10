@@ -1,8 +1,12 @@
-<%= if @current_page == "2" do %>
+<%= case @current_page do %>
+<%= "1" -> %>
+  <br>
+  <br>
+<%= "2" -> %>
   <header>
     <div class="width">
 
-        <div class="right">
+      <div class="right">
           <%= if not @download_link_generated do %>
             <button phx-click="download"><%= Assistant.Translator.translate(:generate_download_link, @lang) %></button>
           <% else %>
@@ -17,9 +21,16 @@
         </div>
     </div>
   </header>
-<% else %>
-  <br>
-  <br>
+<% "3" -> %>
+  <header>
+    <div class="width">
+        <div class="left">
+          <a phx-click="back_to_correspondence">
+            <%= Assistant.Translator.translate(:back, @lang) %>
+          </a>
+        </div>
+    </div>
+  </header>
 <% end %>
 
 <main role="main" phx-hook="MainHook" id="main">

@@ -25,6 +25,10 @@ defmodule Assistant.Translator do
       en: "New search",
       de: "Neue Suche"
     },
+    back: %{
+      en: "Back",
+      de: "Zurück"
+    },
     error_no_input: %{
       en: "No input",
       de: "Keine Eingabe"

@@ -4,6 +4,8 @@ defmodule AssistantWeb.AssistantLive do
   alias Assistant.Translator
   alias Assistant.Dispatch
 
+  import AssistantWeb
+
   @impl true
   def mount _params, _session, socket do
     socket
@@ -67,6 +69,18 @@ defmodule AssistantWeb.AssistantLive do
 
     socket
     |> assign(:download_link_generated, true)
+    |> return_noreply
+  end
+
+  def handle_event "back_to_correspondence", _, socket do
+    socket
+    |> assign(:current_page, "2")
+    |> return_noreply
+  end
+
+  def handle_event "go_to_search_details", _, socket do
+    socket
+    |> assign(:current_page, "3")
     |> return_noreply
   end
 
