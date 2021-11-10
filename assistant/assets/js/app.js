@@ -18,35 +18,46 @@ import {LiveSocket} from "phoenix_live_view"
 import topbar from "topbar"
 
 function langIsNotDe() {
-    return Array.isArray(navigator.languages) 
-        && navigator.languages.length > 0 
-        && !navigator.languages[0].toLowerCase().startsWith("de")
+  return Array.isArray(navigator.languages) 
+    && navigator.languages.length > 0 
+    && !navigator.languages[0].toLowerCase().startsWith("de")
 }
 
 const getLang = () => langIsNotDe() ? "en" : "de"
 
 const hooks = {}
 hooks.MainHook = {
-    mounted() {
-        this.handleEvent("request_language", _ => {
-            this.pushEvent("select_language", getLang())    
-        })
-    }
+  mounted() {
+    this.handleEvent("request_language", _ => {
+      this.pushEvent("select_language", getLang())    
+    })
+  }
+}
+hooks.ParserResultListHook = {
+  mounted() {
+    this.handleEvent("select_item", ({ idx: idx}) => {
+      this.el.querySelector(`#parser-result-item-${idx}`).scrollIntoView({
+        behavior: 'auto',
+        block: 'center',
+        inline: 'center'
+    })
+    })
+  }
 }
 hooks.ZenonResultListHook = {
-    mounted() {
-        this.handleEvent("select", ({idx}) => 
-            this.el.querySelector("div:first-of-type").scrollIntoView()
-        )
-    }
+  mounted() {
+    this.handleEvent("select", ({idx}) => 
+      this.el.querySelector("div:first-of-type").scrollIntoView()
+    )
+  }
 }
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {
-    hooks: hooks,
-    params: {
-        _csrf_token: csrfToken
-    }
+  hooks: hooks,
+  params: {
+    _csrf_token: csrfToken
+  }
 })
 
 // Show progress bar on live navigation and form submits

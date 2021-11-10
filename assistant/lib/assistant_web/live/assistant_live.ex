@@ -83,6 +83,7 @@ defmodule AssistantWeb.AssistantLive do
     socket
     |> assign(:selected_item, idx)
     |> assign(:current_page, "3")
+    |> push_event(:select_item, %{ idx: idx })
     |> return_noreply
   end
 
