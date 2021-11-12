@@ -87,6 +87,9 @@ body {
     }
 }
 
+
+
+
 .main-card {
     text-align: left;
     border-bottom: 1px solid #e3e3e3;
@@ -97,7 +100,8 @@ body {
     font-weight: 200;
     font-size: 120%;
     font-family: serif;
-  }
+}
+
 .main-card input {
     background: #ffffff;
 }
@@ -110,7 +114,17 @@ body {
     border-radius: 17px;
     padding: 20px 20px 20px;
     margin-bottom: 10px;
-  }
+}
+
+@keyframes fadeout {
+    0%   {background-color: #f2f4ff}
+    10%   {background-color: darken(#f2f4ff, 5%)}
+    100% {background-color: #fafaff}
+}
+.selected-card {
+    animation-name: fadeout;
+    animation-duration: 1s;
+}
 
 .selected {
 

@@ -79,6 +79,7 @@ defmodule AssistantWeb.AssistantLive do
   def handle_event "back_to_correspondence", _, socket do
     socket
     |> assign(:current_page, "2")
+    |> push_event(:select_item, %{ idx: socket.assigns.selected_item })
     |> return_noreply
   end
 

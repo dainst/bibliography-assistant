@@ -4,15 +4,15 @@
     <div class="list table-listing">
       <div style="height: 11px; width: 100px">
       </div>
-      <table>
+      <table phx-hook="ParserResultListHook" id="parser-result-list">
       <%= for {[raw, 
                 item, 
                 {{api_suffix, ui_suffix}, 
                  {_num_total_zenon_results, zenon_results, selected_zenon_result}}], 
                idx} <- Enum.with_index(@state.list) do %>
-          <tr>
+          <tr id={"parser-result-item-#{idx}"}>
             <td phx-click="go_to_search_details" phx-value-idx={idx}>
-              <div class="card some">
+              <div class={"card some #{if idx == @state.selected_item do 'selected-card' end}"}>
                 <%= raw %>
                 <br>
                 <br>

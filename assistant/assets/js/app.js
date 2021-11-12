@@ -33,6 +33,13 @@ hooks.MainHook = {
     })
   }
 }
+hooks.CorrespondenceListHook = {
+  mounted() {
+    this.handleEvent("select", ({idx}) => 
+      this.el.querySelector("div:first-of-type").scrollIntoView()
+    )
+  }
+}
 hooks.ParserResultListHook = {
   mounted() {
     this.handleEvent("select_item", ({ idx: idx}) => {
