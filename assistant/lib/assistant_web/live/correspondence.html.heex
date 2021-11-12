@@ -5,7 +5,11 @@
       <div style="height: 11px; width: 100px">
       </div>
       <table>
-      <%= for {[raw, item, {{api_suffix, ui_suffix}, {num_total_results, results, _}}], idx} <- Enum.with_index(@state.list) do %>
+      <%= for {[raw, 
+                item, 
+                {{api_suffix, ui_suffix}, 
+                 {_num_total_zenon_results, zenon_results, selected_zenon_result}}], 
+               idx} <- Enum.with_index(@state.list) do %>
           <tr phx-click="go_to_search_details"
               phx-value-idx={idx}>
             <td style="float: left; width: 50%">
@@ -22,19 +26,21 @@
               </div>
             </td>
             <td style="float: left; width: 50%;">
-              <%= case length(results) do %>
-                <% 1 -> %>
+              <%= if selected_zenon_result do %>
                 <%= live_component AssistantWeb.ZenonResultComponent,
-                  result: List.first(results),
-                  state: @state %>
-                <% 0 -> %>
+                    result: selected_zenon_result,
+                    state: @state %>
+              <% else %>
+                <%= case length(zenon_results) do %>
+                  <% 0 -> %>
+                    <div class="card">
+                      Keine Suchtreffer
+                    </div>
+                  <% _ ->  %>
                   <div class="card">
-                    Keine Suchtreffer
+                    Mehrere Suchtreffer
                   </div>
-                <% _ ->  %>
-                <div class="card">
-                  Mehrere Suchtreffer
-                </div>
+                <% end %>
               <% end %>
             </td>
           </tr>
