@@ -10,9 +10,8 @@
                 {{api_suffix, ui_suffix}, 
                  {_num_total_zenon_results, zenon_results, selected_zenon_result}}], 
                idx} <- Enum.with_index(@state.list) do %>
-          <tr phx-click="go_to_search_details"
-              phx-value-idx={idx}>
-            <td>
+          <tr>
+            <td phx-click="go_to_search_details" phx-value-idx={idx}>
               <div class="card some">
                 <%= raw %>
                 <br>

@@ -91,6 +91,14 @@ defmodule AssistantWeb.AssistantLive do
     |> return_noreply
   end
 
+  def handle_event "select", %{ "idx" => idx }, socket do
+    {idx, _} = Integer.parse idx
+    socket
+    |> assign(:selected_item, idx)
+    |> push_event("select", %{ idx: idx })
+    |> return_noreply
+  end
+
   # TODO review if id should be used (uniqueness of results), or rather idx
   def handle_event "select_zenon_item", %{ "id" => id }, socket do
     socket
