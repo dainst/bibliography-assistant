@@ -28,15 +28,16 @@
               <%= if selected_zenon_result do %>
                 <%= live_component AssistantWeb.ZenonResultComponent,
                     result: selected_zenon_result,
+                    selected_card: @state.selected_item == idx,
                     state: @state %>
               <% else %>
                 <%= case length(zenon_results) do %>
                   <% 0 -> %>
-                    <div class="card">
+                    <div class={"card #{if idx == @state.selected_item do 'selected-card' end}"}>
                       Keine Suchtreffer
                     </div>
                   <% _ ->  %>
-                  <div class="card">
+                  <div class={"card #{if idx == @state.selected_item do 'selected-card' end}"}>
                     Mehrere Suchtreffer
                   </div>
                 <% end %>

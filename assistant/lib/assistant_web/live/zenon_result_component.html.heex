@@ -1,4 +1,4 @@
-<div class={"card #{if assigns[:selected] do 'selected' end}"}
+<div class={"card #{if assigns[:selected] do 'selected' end} #{if assigns[:selected_card] do 'selected-card' end}"}
      phx-click="select_zenon_item" 
      phx-value-id={@result["id"]}>
   <b>Zenon Id</b>:

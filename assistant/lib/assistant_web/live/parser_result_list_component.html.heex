@@ -2,6 +2,7 @@
     <div style="height: 11px; width: 100px">
     </div>
     <%= for {[raw, item, {_first_author, _results}], idx} <- Enum.with_index(@state.list) do %>
+      <%= if idx == @state.selected_item do %>
         <div class={"card #{if idx == @state.selected_item do 'selected' end}"}
             id={"parser-result-item-#{idx}"}
             phx-click="select"
@@ -17,6 +18,7 @@
                 "cermine" -> live_component CermineResultComponent, item: item, state: @state
             end %>
         </div>
+      <% end %>
     <% end %>
     <div style="height: 11px; width: 100px">
     </div>
