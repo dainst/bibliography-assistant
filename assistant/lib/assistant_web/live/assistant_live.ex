@@ -91,6 +91,13 @@ defmodule AssistantWeb.AssistantLive do
     |> return_noreply
   end
 
+  # TODO review if id should be used (uniqueness of results), or rather idx
+  def handle_event "select_zenon_item", %{ "id" => id }, socket do
+    socket
+    |> assign(:list, reselect_zenon_items(id, socket.assigns.list, socket.assigns.selected_item))
+    |> return_noreply
+  end
+
   @impl true
   def handle_info {parser, raw_references}, socket do
 
@@ -109,13 +116,27 @@ defmodule AssistantWeb.AssistantLive do
 
   def get_zenon_search_link list do
 
-    results = Enum.map list, fn [_raw, _item, {_suffixes, {_num_total_results, results, _}}] -> results end
+    results = Enum.map list, fn [_raw, _parsed, {_suffixes, {_num_total_results, results, _}}] -> results end
     results = Enum.filter results, fn results -> length(results) == 1 end
     results = Enum.map results, fn results -> "\"#{List.first(results)["id"]}\"" end
 
     results = Enum.join(results, "+OR+")
 
     "https://zenon.dainst.org/Search/Results?lookfor=#{results}&type=SystemNo"
+  end
+
+  defp reselect_zenon_items selected_zenon_id, list, selected_item do # TODO refactor
+
+    list = Enum.with_index list, fn list_item, idx ->
+      if idx != selected_item do
+        list_item
+      else
+        [raw, parsed, {suffixes, {num_total_results, results, _}}] = list_item
+        selected_zenon_item = Enum.find results, &(&1["id"] == selected_zenon_id)
+        [raw, parsed, {suffixes, {num_total_results, results, selected_zenon_item}}]
+      end
+    end
+    list
   end
 
   defp select_zenon_items results do # TODO refactor

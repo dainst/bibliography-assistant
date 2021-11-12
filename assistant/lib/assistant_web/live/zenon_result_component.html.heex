@@ -1,4 +1,6 @@
-<div class={"card #{if assigns[:selected] do 'selected' end}"}>
+<div class={"card #{if assigns[:selected] do 'selected' end}"}
+     phx-click="select_zenon_item" 
+     phx-value-id={@result["id"]}>
   <b>Zenon Id</b>:
   <%= if String.starts_with?(@result["id"], "00") do %>
     <a href={item_url @result["id"]}><%= @result["id"] %></a>
