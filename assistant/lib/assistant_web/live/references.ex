@@ -1,4 +1,4 @@
-defmodule AssistantWeb.RawReferences do
+defmodule AssistantWeb.References do
   use AssistantWeb, :live_component
 
   alias Assistant.Translator

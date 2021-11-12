@@ -1,13 +1,13 @@
 <div class="both">
   <div class="inner width">
     <div class="lhs">
-      <%= live_component AssistantWeb.ParserResultListComponent,
+      <%= live_component ParserResultListComponent,
           state: @state,
           parent: @myself %>
     </div>
 
     <div class="rhs">
-      <%= live_component AssistantWeb.ZenonResultListComponent, state: @state %>
+      <%= live_component ZenonResultListComponent, state: @state %>
     </div>
   </div>
 </div>

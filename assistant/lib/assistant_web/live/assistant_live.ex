@@ -3,8 +3,12 @@ defmodule AssistantWeb.AssistantLive do
 
   alias Assistant.Translator
   alias Assistant.Dispatch
+  alias AssistantWeb.References
+  alias AssistantWeb.Correspondence
+  alias AssistantWeb.SearchDetails
 
-  import AssistantWeb
+
+  import AssistantWeb # TODO necessary?
 
   @impl true
   def mount _params, _session, socket do
