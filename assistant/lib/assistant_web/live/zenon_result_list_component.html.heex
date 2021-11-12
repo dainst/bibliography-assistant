@@ -3,7 +3,7 @@
 
         <div style="height: 11px; width: 100px">
         </div>
-        <% [_raw, _item, {{api_suffix, ui_suffix}, {num_total_results, results}}] = Enum.at(elem(@state.list, 1), @state.selected_item) %>
+        <% [_raw, _item, {{api_suffix, ui_suffix}, {num_total_results, results}}] = Enum.at(@state.list, @state.selected_item) %>
 
         <div class="card">
             <div>

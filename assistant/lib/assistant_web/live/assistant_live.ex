@@ -92,18 +92,17 @@ defmodule AssistantWeb.AssistantLive do
   end
 
   @impl true
-  def handle_info {type, raw_references}, socket do
+  def handle_info {parser, raw_references}, socket do
 
-    result = Dispatch.query(type, raw_references)
+    result = Dispatch.query(parser, raw_references)
 
     case result do
-      {:error, msg} ->
-        socket
-        |> put_flash(:error, translate_error(msg, socket.assigns.lang))
+      {:error, msg} -> handle_error msg, socket
       result ->
         socket
         |> assign(:current_page, "2")
-        |> assign(:list, {type, result})
+        |> assign(:parser, parser)
+        |> assign(:list, result)
     end
     |> return_noreply
   end
@@ -117,6 +116,10 @@ defmodule AssistantWeb.AssistantLive do
     results = Enum.join(results, "+OR+")
 
     "https://zenon.dainst.org/Search/Results?lookfor=#{results}&type=SystemNo"
+  end
+
+  defp handle_error msg, socket do
+    put_flash socket, :error, translate_error(msg, socket.assigns.lang)
   end
 
   defp translate_error msg, lang do
