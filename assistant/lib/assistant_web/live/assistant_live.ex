@@ -94,7 +94,7 @@ defmodule AssistantWeb.AssistantLive do
   @impl true
   def handle_info {parser, raw_references}, socket do
 
-    result = Dispatch.query(parser, raw_references)
+    result = Dispatch.query parser, raw_references
 
     case result do
       {:error, msg} -> handle_error msg, socket
@@ -102,20 +102,32 @@ defmodule AssistantWeb.AssistantLive do
         socket
         |> assign(:current_page, "2")
         |> assign(:parser, parser)
-        |> assign(:list, result)
+        |> assign(:list, select_zenon_items(result))
     end
     |> return_noreply
   end
 
   def get_zenon_search_link list do
 
-    results = Enum.map list, fn [_raw, _item, {{_api_suffix, _ui_suffix}, {_num_total_results, results}}] -> results end
+    results = Enum.map list, fn [_raw, _item, {_suffixes, {_num_total_results, results, _}}] -> results end
     results = Enum.filter results, fn results -> length(results) == 1 end
     results = Enum.map results, fn results -> "\"#{List.first(results)["id"]}\"" end
 
     results = Enum.join(results, "+OR+")
 
     "https://zenon.dainst.org/Search/Results?lookfor=#{results}&type=SystemNo"
+  end
+
+  defp select_zenon_items results do # TODO refactor
+    Enum.map results, fn result ->
+      [raw, item, {suffixes, {num_total_results, zenon_results}}] = result
+      zenon_data = {
+        num_total_results,
+        zenon_results,
+        if length(zenon_results) == 1 do List.first(zenon_results) end
+      }
+      [raw, item, {suffixes, zenon_data}]
+    end
   end
 
   defp handle_error msg, socket do

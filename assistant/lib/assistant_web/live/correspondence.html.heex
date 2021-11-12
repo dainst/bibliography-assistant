@@ -5,7 +5,7 @@
       <div style="height: 11px; width: 100px">
       </div>
       <table>
-      <%= for {[raw, item, {{api_suffix, ui_suffix}, {num_total_results, results}}], idx} <- Enum.with_index(@state.list) do %>
+      <%= for {[raw, item, {{api_suffix, ui_suffix}, {num_total_results, results, _}}], idx} <- Enum.with_index(@state.list) do %>
           <tr phx-click="go_to_search_details"
               phx-value-idx={idx}>
             <td style="float: left; width: 50%">
