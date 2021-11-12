@@ -72,6 +72,16 @@ body {
                 border-bottom: unset;
                 padding: unset;
             }
+            td {
+                float: left;
+                width: calc(50% - 10px);
+            }
+            tr td:first-child {
+                margin-right: 10px;
+            }
+            tr td:nth-child(2) {
+                margin-left: 10px;
+            }
         }
 
     }

@@ -12,7 +12,7 @@
                idx} <- Enum.with_index(@state.list) do %>
           <tr phx-click="go_to_search_details"
               phx-value-idx={idx}>
-            <td style="float: left; width: 50%">
+            <td>
               <div class="card some">
                 <%= raw %>
                 <br>
@@ -25,7 +25,7 @@
                 end %>
               </div>
             </td>
-            <td style="float: left; width: 50%;">
+            <td>
               <%= if selected_zenon_result do %>
                 <%= live_component AssistantWeb.ZenonResultComponent,
                     result: selected_zenon_result,
