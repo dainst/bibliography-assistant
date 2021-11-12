@@ -1,20 +1,20 @@
 <div class={"card #{if assigns[:selected] do 'selected' end}"}>
-    <b>Zenon Id</b>:
-    <%= if String.starts_with?(@result["id"], "00") do %>
-    <a href={'https://zenon.dainst.org/Record/#{@result["id"]}'}><%= @result["id"] %></a>
-    <% else %>
+  <b>Zenon Id</b>:
+  <%= if String.starts_with?(@result["id"], "00") do %>
+    <a href={item_url @result["id"]}><%= @result["id"] %></a>
+  <% else %>
     <%= @result["id"] %>
-    <% end %>
+  <% end %>
+  <br>
+
+  <%= unless is_nil(@result["primaryAuthorsNames"]) or length(@result["primaryAuthorsNames"]) == 0 do %>
+    <b><%= Translator.translate(:zenon_result_author, @state.lang) %></b>: <%=
+      List.first(@result["primaryAuthorsNames"]) %>
     <br>
+  <% end %>
 
-    <%= unless is_nil(@result["primaryAuthorsNames"]) or length(@result["primaryAuthorsNames"]) == 0 do %>
-        <b><%= Translator.translate(:zenon_result_author, @state.lang) %></b>: <%=
-            List.first(@result["primaryAuthorsNames"]) %>
-        <br>
-    <% end %>
-
-    <%= unless is_nil @result["title"] do %>
-        <b><%= Translator.translate(:zenon_result_title, @state.lang) %></b>: <%= @result["title"] %>
-        <br>
-    <% end %>
+  <%= unless is_nil @result["title"] do %>
+    <b><%= Translator.translate(:zenon_result_title, @state.lang) %></b>: <%= @result["title"] %>
+    <br>
+  <% end %>
 </div>
