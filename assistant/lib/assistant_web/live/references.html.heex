@@ -13,7 +13,12 @@
     <%= textarea f, :raw_references %>
   </.form>
 
-  <button phx-click="eval" phx-value-target="anystyle" phx-target={@myself}>
-    <%= Translator.translate(:evaluate_with_anystyle, @state.lang) %>
-  </button>
+  <%= unless @state.show_spinner do %>
+    <button phx-click="eval" phx-value-target="anystyle" phx-target={@myself}>
+      <%= Translator.translate(:evaluate_with_anystyle, @state.lang) %>
+    </button>
+  <% else %>
+    <div class="spinner">
+    </div>
+  <% end %>
 </section>

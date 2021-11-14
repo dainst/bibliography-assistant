@@ -7,8 +7,10 @@ defmodule AssistantWeb.AssistantLive do
   alias AssistantWeb.Correspondence
   alias AssistantWeb.SearchDetails
 
-
   import AssistantWeb # TODO necessary?
+
+  @zenon_url "https://zenon.dainst.org"
+
 
   @impl true
   def mount _params, _session, socket do
@@ -16,6 +18,7 @@ defmodule AssistantWeb.AssistantLive do
     |> assign(:current_page, "1")
     |> assign(:selected_item, -1)
     |> assign(:lang, "de")
+    |> assign(:show_spinner, false)
     |> assign(:download_link_generated, false)
     |> return_ok
   end
@@ -39,6 +42,7 @@ defmodule AssistantWeb.AssistantLive do
       |> assign(:selected_item, -1)
     end
     socket
+    |> assign(:show_spinner, false)
     |> push_event(:request_language, %{})
     |> return_noreply
   end
@@ -47,6 +51,7 @@ defmodule AssistantWeb.AssistantLive do
   def handle_event "new_search", _params, socket do
     socket
     |> assign(:current_page, "1")
+    |> assign(:show_spinner, false)
     |> return_noreply
   end
 
@@ -108,22 +113,38 @@ defmodule AssistantWeb.AssistantLive do
   end
 
   @impl true
-  def handle_info {parser, raw_references}, socket do
-
-    result = Dispatch.query parser, raw_references
-
-    case result do
-      {:error, msg} -> handle_error msg, socket
-      result ->
-        socket
-        |> assign(:current_page, "2")
-        |> assign(:parser, parser)
-        |> assign(:list, select_zenon_items(result))
-    end
+  def handle_info {:error, msg}, socket do
+    socket
+    |> handle_error(msg)
     |> return_noreply
   end
 
-  def get_zenon_search_link list do
+  def handle_info {:DOWN, _, :process, _, :normal}, socket do
+    socket
+    |> return_noreply
+  end
+
+  def handle_info {_, [_|_] = result}, socket do
+    socket
+    |> assign(:current_page, "2")
+    |> assign(:list, select_zenon_items(result))
+    |> return_noreply
+  end
+
+  def handle_info({parser, raw_references}, socket) when is_binary(parser) do
+
+    Task.async fn ->
+      result = Dispatch.query parser, raw_references
+      send self(), result
+    end
+
+    socket
+    |> assign(:parser, parser)
+    |> assign(:show_spinner, true)
+    |> return_noreply
+  end
+
+  def get_zenon_search_link list do # TODO refactor
 
     results = Enum.map list, fn [_raw, _parsed, {_suffixes, {_num_total_results, results, _}}] -> results end
     results = Enum.filter results, fn results -> length(results) == 1 end
@@ -131,7 +152,7 @@ defmodule AssistantWeb.AssistantLive do
 
     results = Enum.join(results, "+OR+")
 
-    "https://zenon.dainst.org/Search/Results?lookfor=#{results}&type=SystemNo"
+    "#{@zenon_url}/Search/Results?lookfor=#{results}&type=SystemNo"
   end
 
   defp reselect_zenon_items selected_zenon_id, list, selected_item do # TODO refactor
@@ -160,7 +181,7 @@ defmodule AssistantWeb.AssistantLive do
     end
   end
 
-  defp handle_error msg, socket do
+  defp handle_error socket, msg do
     put_flash socket, :error, translate_error(msg, socket.assigns.lang)
   end
 
