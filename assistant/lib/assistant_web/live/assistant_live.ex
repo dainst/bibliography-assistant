@@ -113,9 +113,10 @@ defmodule AssistantWeb.AssistantLive do
   end
 
   @impl true
-  def handle_info {:error, msg}, socket do
+  def handle_info {_, {:error, msg}}, socket do
     socket
     |> handle_error(msg)
+    |> assign(:show_spinner, false)
     |> return_noreply
   end
 
