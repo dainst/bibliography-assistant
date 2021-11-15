@@ -26,11 +26,22 @@
 <% "3" -> %>
   <header>
     <div class="width">
-        <div class="left">
-          <a phx-click="back_to_correspondence">
-            <%= Assistant.Translator.translate(:back, @lang) %>
-          </a>
-        </div>
+      <div class="left">
+        <a phx-click="back_to_correspondence">
+          <%= Assistant.Translator.translate(:back, @lang) %>
+        </a>
+      </div>
+      <% [_raw, 
+            _item, 
+            {{api_suffix, ui_suffix}, 
+            {num_total_zenon_results, zenon_results, selected_zenon_result}}] 
+          = Enum.at(@list, @selected_item) %>
+      <div class="right" style="padding-top: 25px; padding-right: 20px;">
+        <a href={AssistantWeb.ZenonResultListComponent.api_link api_suffix}>Zenon-API Link</a>
+      </div>
+      <div class="right" style="padding-top: 25px; margin-right: 20px;">
+        <a href={AssistantWeb.ZenonResultListComponent.ui_link ui_suffix}>Zenon-UI Link</a>
+      </div>
     </div>
   </header>
 <% end %>
