@@ -14,14 +14,17 @@
             <td>
               <div class={"card some #{if idx == @state.selected_item do 'selected-card' end}"}>
                 <%= raw %>
-                <br>
-                <br>
 
-                <%= case @state.parser do
-                    "anystyle" -> live_component AnystyleResultComponent, item: item, state: @state
-                    "grobid" -> live_component GrobidResultComponent, item: item, state: @state
-                    "cermine" -> live_component CermineResultComponent, item: item, state: @state
-                end %>
+                <%= if @state.show_details do %>
+                  <br>
+                  <br>
+
+                  <%= case @state.parser do
+                      "anystyle" -> live_component AnystyleResultComponent, item: item, state: @state
+                      "grobid" -> live_component GrobidResultComponent, item: item, state: @state
+                      "cermine" -> live_component CermineResultComponent, item: item, state: @state
+                  end %>
+                <% end %>
               </div>
             </td>
             <td phx-click="go_to_search_details" phx-value-idx={idx}>

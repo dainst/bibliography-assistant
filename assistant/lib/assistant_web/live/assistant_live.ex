@@ -18,6 +18,7 @@ defmodule AssistantWeb.AssistantLive do
     |> assign(:current_page, "1")
     |> assign(:selected_item, -1)
     |> assign(:lang, "de")
+    |> assign(:show_details, false)
     |> assign(:show_spinner, false)
     |> assign(:download_link_generated, false)
     |> return_ok
@@ -38,6 +39,7 @@ defmodule AssistantWeb.AssistantLive do
       File.rm! path
       socket
       |> assign(:list, list)
+      |> assign(:show_details, false)
       |> assign(:parser, parser)
       |> assign(:current_page, "2")
       |> assign(:selected_item, -1)
@@ -53,6 +55,12 @@ defmodule AssistantWeb.AssistantLive do
     socket
     |> assign(:current_page, "1")
     |> assign(:show_spinner, false)
+    |> return_noreply
+  end
+
+  def handle_event "toggle_details", _params, socket do
+    socket
+    |> assign(:show_details, !socket.assigns.show_details)
     |> return_noreply
   end
 

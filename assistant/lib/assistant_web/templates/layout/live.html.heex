@@ -19,6 +19,10 @@
       <div class="right" style="padding-top: 25px; padding-right: 20px;">
         <a href={AssistantWeb.AssistantLive.get_zenon_search_link(assigns.list)}>Suchergebnisse in Zenon anzeigen</a>
       </div>
+      <div class="right" style="padding-top: 25px; padding-right: 20px;"
+        phx-click="toggle_details">
+        <%= if @show_details do "Details ausblenden" else "Details anzeigen" end %>
+      </div>
       <div class="left">
         <a phx-click="new_search">
           <%= Assistant.Translator.translate(:new_search, @lang) %>
