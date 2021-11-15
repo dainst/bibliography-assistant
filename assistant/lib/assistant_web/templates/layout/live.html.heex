@@ -5,14 +5,17 @@
 <%= "2" -> %>
   <header>
     <div class="width">
-      <div class="right">
-        <%= if not @download_link_generated do %>
+      <%= if not @download_link_generated do %>
+        <div class="right">
           <button phx-click="download"><%= Assistant.Translator.translate(:generate_download_link, @lang) %></button>
-        <% else %>
+        </div>
+      <% else %>
+        <div class="right" style="padding-top: 25px; margin-left: 142px;">
           <a href={"/download/#{String.replace(@socket.id, "phx-", "")}"}>
-            <%= Assistant.Translator.translate(:download, @lang) %></a>
-        <% end %>
-      </div>
+            <%= Assistant.Translator.translate(:download, @lang) %>
+          </a>
+        </div>
+      <% end %>
       <div class="right" style="padding-top: 25px; padding-right: 20px;">
         <a href={AssistantWeb.AssistantLive.get_zenon_search_link(assigns.list)}>Suchergebnisse in Zenon anzeigen</a>
       </div>

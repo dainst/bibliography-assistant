@@ -31,13 +31,14 @@ defmodule AssistantWeb.AssistantLive do
     unless File.exists?(path) do
       socket
     else
-      list =
+      {parser, list} =
         path
         |> File.read!
         |> :erlang.binary_to_term
       File.rm! path
       socket
       |> assign(:list, list)
+      |> assign(:parser, parser)
       |> assign(:current_page, "2")
       |> assign(:selected_item, -1)
     end
@@ -63,16 +64,17 @@ defmodule AssistantWeb.AssistantLive do
 
   def handle_event "download", _params, socket do
 
-    {parser, entries} = list = socket.assigns.list
+    list = socket.assigns.list
+    parser = socket.assigns.parser
 
     path = "priv/#{socket.id}.bin"
-    File.write! path, :erlang.term_to_binary(list)
+    File.write! path, :erlang.term_to_binary({parser, list})
 
     csv = (case parser do
       "anystyle" -> &Assistant.AnystyleCsvBuilder.generate/1
       "grobid" -> &Assistant.GrobidCsvBuilder.generate/1
       "cermine" -> &Assistant.CermineCsvBuilder.generate/1
-    end).(entries)
+    end).(list)
 
     File.write! "priv/#{String.replace(socket.id, "phx-", "")}.csv", csv
 

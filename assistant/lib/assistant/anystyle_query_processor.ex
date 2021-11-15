@@ -5,8 +5,6 @@ defmodule Assistant.AnystyleQueryProcessor do
   alias Assistant.QueryProcessorHelper
   alias Assistant.QueryProcessor
 
-  @fields_to_take ["author", "title"]
-
   @doc """
   Returns {:error, reason}, that is, the first error of possibly multiple, if any occurs
   """
@@ -44,7 +42,6 @@ defmodule Assistant.AnystyleQueryProcessor do
 
   defp take_fields anystyle_result do
     anystyle_result
-    |> Enum.filter(fn {k, _} -> k in @fields_to_take end)
     |> Enum.into(%{})
   end
 
