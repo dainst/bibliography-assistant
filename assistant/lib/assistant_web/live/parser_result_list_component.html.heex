@@ -5,7 +5,7 @@
       <%= if idx == @state.selected_item do %>
         <div class={"card #{if idx == @state.selected_item do 'selected' end}"}
             id={"parser-result-item-#{idx}"}
-            phx-click="select"
+            phx-click="back_to_correspondence"
             phx-value-idx={idx}>
 
             <%= raw %>
