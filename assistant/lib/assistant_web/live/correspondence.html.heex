@@ -11,7 +11,7 @@
                  {_num_total_zenon_results, zenon_results, selected_zenon_result}}], 
                idx} <- Enum.with_index(@state.list) do %>
           <tr id={"parser-result-item-#{idx}"}>
-            <td phx-click="go_to_search_details" phx-value-idx={idx}>
+            <td>
               <div class={"card some #{if idx == @state.selected_item do 'selected-card' end}"}>
                 <%= raw %>
                 <br>
@@ -24,21 +24,22 @@
                 end %>
               </div>
             </td>
-            <td>
+            <td phx-click="go_to_search_details" phx-value-idx={idx}>
               <%= if selected_zenon_result do %>
                 <%= live_component AssistantWeb.ZenonResultComponent,
                     result: selected_zenon_result,
                     selected_card: @state.selected_item == idx,
+                    no_click: true,
                     state: @state %>
               <% else %>
                 <%= case length(zenon_results) do %>
                   <% 0 -> %>
                     <div class={"card #{if idx == @state.selected_item do 'selected-card' end}"}>
-                      Keine Suchtreffer
+                      <%= Translator.translate :no_search_results, @state.lang %>
                     </div>
                   <% _ ->  %>
                   <div class={"card #{if idx == @state.selected_item do 'selected-card' end}"}>
-                    Mehrere Suchtreffer
+                    <%= Translator.translate :select_from_search_results, @state.lang %>
                   </div>
                 <% end %>
               <% end %>

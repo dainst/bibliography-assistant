@@ -1,5 +1,5 @@
 <div class={"card #{if assigns[:selected] do 'selected' end} #{if assigns[:selected_card] do 'selected-card' end}"}
-     phx-click="select_zenon_item" 
+     phx-click={unless assigns[:no_click] do "select_zenon_item" end}
      phx-value-id={@result["id"]}>
   <b>Zenon Id</b>:
   <%= if String.starts_with?(@result["id"], "00") do %>

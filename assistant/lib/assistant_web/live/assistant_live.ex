@@ -156,14 +156,17 @@ defmodule AssistantWeb.AssistantLive do
     "#{@zenon_url}/Search/Results?lookfor=#{results}&type=SystemNo"
   end
 
-  defp reselect_zenon_items selected_zenon_id, list, selected_item do # TODO refactor
+  defp reselect_zenon_items selected_zenon_id, list, selected_item do # TODO refactor and test, possibly extract
 
     list = Enum.with_index list, fn list_item, idx ->
       if idx != selected_item do
         list_item
       else
-        [raw, parsed, {suffixes, {num_total_results, results, _}}] = list_item
-        selected_zenon_item = Enum.find results, &(&1["id"] == selected_zenon_id)
+        [raw, parsed, {suffixes, {num_total_results, results, previously_selected_zenon_item}}] = list_item
+
+        selected_zenon_item = unless previously_selected_zenon_item["id"] == selected_zenon_id do
+          Enum.find results, &(&1["id"] == selected_zenon_id)
+        end
         [raw, parsed, {suffixes, {num_total_results, results, selected_zenon_item}}]
       end
     end

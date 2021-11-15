@@ -60,6 +60,14 @@ defmodule Assistant.Translator do
     zenon_result_title: %{
       en: "Title",
       de: "Titel"
+    },
+    no_search_results: %{
+      en: "No search results",
+      de: "Keine Suchtreffer"
+    },
+    select_from_search_results: %{
+      en: "Select search result",
+      de: "Suchtreffer auswählen"
     }
   }
 

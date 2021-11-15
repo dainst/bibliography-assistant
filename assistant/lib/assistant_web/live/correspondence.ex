@@ -1,6 +1,7 @@
 defmodule AssistantWeb.Correspondence do
   use AssistantWeb, :live_component
 
+  alias Assistant.Translator
   alias AssistantWeb.AnystyleResultComponent
   alias AssistantWeb.GrobidResultComponent
   alias AssistantWeb.CermineResultComponent
