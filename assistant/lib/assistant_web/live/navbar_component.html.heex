@@ -1,0 +1,45 @@
+<%= case @state.current_page do %>
+<%= "1" -> %>
+  <br>
+  <br>
+<%= "2" -> %>
+  <header>
+    <div class="width">
+      <%= if not @state.download_link_generated do %>
+        <div class="right">
+          <button phx-click="download"><%= Translator.translate(:generate_download_link, @state.lang) %></button>
+        </div>
+      <% else %>
+        <div class="right" style="padding-top: 25px; margin-left: 142px;">
+          <a href={"/download/#{String.replace(@socket.id, "phx-", "")}"}>
+            <%= Translator.translate(:download, @state.lang) %>
+          </a>
+        </div>
+      <% end %>
+      <div class="right" style="padding-top: 25px; padding-right: 20px;">
+        <a href={get_zenon_search_link(@state.list)} target="_blank">Suchergebnisse in Zenon anzeigen</a>
+      </div>
+      <div class="right" style="padding-top: 25px; padding-right: 20px;"
+        phx-click="toggle_details">
+        <%= if @state.show_details do "Details ausblenden" else "Details anzeigen" end %>
+      </div>
+      <div class="left">
+        <a phx-click="new_search">
+          <%= Translator.translate(:new_search, @state.lang) %>
+        </a>
+      </div>
+    </div>
+  </header>
+<% "3" -> %>
+  <header>
+    <div class="width">
+      <% {api_suffix, ui_suffix} = get_suffixes @state %>
+      <div class="right" style="padding-top: 25px; padding-right: 20px;">
+        <a href={ZenonResultListComponent.api_link api_suffix} target="_blank">Zenon-API Link</a>
+      </div>
+      <div class="right" style="padding-top: 25px; margin-right: 20px;">
+        <a href={ZenonResultListComponent.ui_link ui_suffix} target="_blank">Zenon-UI Link</a>
+      </div>
+    </div>
+  </header>
+<% end %>

@@ -9,9 +9,6 @@ defmodule AssistantWeb.AssistantLive do
 
   import AssistantWeb # TODO necessary?
 
-  @zenon_url "https://zenon.dainst.org"
-
-
   @impl true
   def mount _params, _session, socket do
     socket
@@ -153,17 +150,6 @@ defmodule AssistantWeb.AssistantLive do
     |> assign(:parser, parser)
     |> assign(:show_spinner, true)
     |> return_noreply
-  end
-
-  def get_zenon_search_link list do # TODO refactor
-
-    results = Enum.map list, fn [_raw, _parsed, {_suffixes, {_num_total_results, results, _}}] -> results end
-    results = Enum.filter results, fn results -> length(results) == 1 end
-    results = Enum.map results, fn results -> "\"#{List.first(results)["id"]}\"" end
-
-    results = Enum.join(results, "+OR+")
-
-    "#{@zenon_url}/Search/Results?lookfor=#{results}&type=SystemNo"
   end
 
   defp reselect_zenon_items selected_zenon_id, list, selected_item do # TODO refactor and test, possibly extract
