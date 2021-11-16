@@ -6,7 +6,7 @@ defmodule Assistant.AnystyleCsvBuilder do
     entries = Enum.map list, fn [given, entry, _] ->
       "\"#{extract_given_name(entry) |> escape}\"," <>
       "\"#{extract_family_name(entry) |> escape}\"," <>
-      "\"#{extract_title(entry) |> escape}\"," <>
+      "\"#{extract_first(entry, "title") |> escape}\"," <>
       "\"#{extract_first(entry, "date") |> escape}\"," <>
       "\"#{extract_first(entry, "doi") |> escape}\"," <>
       "\"#{extract_type(entry) |> escape}\"," <>

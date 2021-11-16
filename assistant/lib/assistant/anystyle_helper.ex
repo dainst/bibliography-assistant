@@ -8,8 +8,6 @@ defmodule Assistant.AnystyleHelper do
     }
   end
 
-  def extract_title(entry), do: List.first entry["title"]
-
   def extract_type entry do
     case entry["type"] do
       nil -> ""
