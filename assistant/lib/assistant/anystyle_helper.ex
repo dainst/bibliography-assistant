@@ -10,13 +10,6 @@ defmodule Assistant.AnystyleHelper do
 
   def extract_title(entry), do: List.first entry["title"]
 
-  def extract_date entry do
-    case entry["date"] do
-      [date|_] -> date
-      _ -> ""
-    end
-  end
-
   def extract_type entry do
     case entry["type"] do
       nil -> ""
@@ -24,30 +17,9 @@ defmodule Assistant.AnystyleHelper do
     end
   end
 
-  def extract_container_title entry do
-    case entry["container-title"] do
-      [container_title|_] -> container_title
-      _ -> ""
-    end
-  end
-
-  def extract_volume entry do
-    case entry["volume"] do
-      [volume|_] -> volume
-      _ -> ""
-    end
-  end
-
-  def extract_pages entry do
-    case entry["pages"] do
-      [pages|_] -> pages
-      _ -> ""
-    end
-  end
-
-  def extract_doi entry do
-    case entry["doi"] do
-      [date|_] -> date
+  def extract_first entry, key do
+    case entry[key] do
+      [first|_] -> first
       _ -> ""
     end
   end

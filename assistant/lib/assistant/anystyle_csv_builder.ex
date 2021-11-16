@@ -7,12 +7,12 @@ defmodule Assistant.AnystyleCsvBuilder do
       "\"#{extract_given_name(entry) |> escape}\"," <>
       "\"#{extract_family_name(entry) |> escape}\"," <>
       "\"#{extract_title(entry) |> escape}\"," <>
-      "\"#{extract_date(entry) |> escape}\"," <>
-      "\"#{extract_doi(entry) |> escape}\"," <>
+      "\"#{extract_first(entry, "date") |> escape}\"," <>
+      "\"#{extract_first(entry, "doi") |> escape}\"," <>
       "\"#{extract_type(entry) |> escape}\"," <>
-      "\"#{extract_container_title(entry) |> escape}\"," <>
-      "\"#{extract_volume(entry) |> escape}\"," <>
-      "\"#{extract_pages(entry) |> escape}\"," <>
+      "\"#{extract_first(entry, "container-title") |> escape}\"," <>
+      "\"#{extract_first(entry, "volume") |> escape}\"," <>
+      "\"#{extract_first(entry, "pages") |> escape}\"," <>
       "\"#{given |> escape}\"\n"
     end
     "\"given-name\",\"family-name\",\"title\",\"date\",\"doi\",\"type\",\"container-title\",\"volume\",\"pages\",\"original\"\n#{entries}"
