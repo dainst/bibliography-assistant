@@ -17,7 +17,7 @@
         </div>
       <% end %>
       <div class="right" style="padding-top: 25px; padding-right: 20px;">
-        <a href={AssistantWeb.AssistantLive.get_zenon_search_link(assigns.list)}>Suchergebnisse in Zenon anzeigen</a>
+        <a href={AssistantWeb.AssistantLive.get_zenon_search_link(assigns.list)} target="_blank">Suchergebnisse in Zenon anzeigen</a>
       </div>
       <div class="right" style="padding-top: 25px; padding-right: 20px;"
         phx-click="toggle_details">
@@ -39,10 +39,10 @@
             {num_total_zenon_results, zenon_results, selected_zenon_result}}] 
           = Enum.at(@list, @selected_item) %>
       <div class="right" style="padding-top: 25px; padding-right: 20px;">
-        <a href={AssistantWeb.ZenonResultListComponent.api_link api_suffix}>Zenon-API Link</a>
+        <a href={AssistantWeb.ZenonResultListComponent.api_link api_suffix} target="_blank">Zenon-API Link</a>
       </div>
       <div class="right" style="padding-top: 25px; margin-right: 20px;">
-        <a href={AssistantWeb.ZenonResultListComponent.ui_link ui_suffix}>Zenon-UI Link</a>
+        <a href={AssistantWeb.ZenonResultListComponent.ui_link ui_suffix} target="_blank">Zenon-UI Link</a>
       </div>
     </div>
   </header>

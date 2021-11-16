@@ -3,7 +3,7 @@
      phx-value-id={@result["id"]}>
   <b>Zenon Id</b>:
   <%= if String.starts_with?(@result["id"], "00") do %>
-    <a href={item_url @result["id"]}><%= @result["id"] %></a>
+    <a href={item_url @result["id"]} target="_blank"><%= @result["id"] %></a>
   <% else %>
     <%= @result["id"] %>
   <% end %>
