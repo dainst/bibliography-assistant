@@ -13,9 +13,12 @@ defmodule AssistantWeb.ApiController do
     json conn, %{ results: results }
   end
 
-  defp convert [original, item, _] do
+  defp convert [original, item, {{ui_suffix, api_suffix}, {num_records, records}}] do
     converted = AnystyleHelper.convert_item item
-    Map.merge %{ original: original }, converted
+    Map.merge %{ original: original,
+                 autoselected_zenon_item_id: (if num_records == 1 do List.first(records)["id"] end),
+                 ui_search_suffix: ui_suffix,
+                 api_search_suffix: api_suffix }, converted
   end
 
   # Just for setting up a controller test
