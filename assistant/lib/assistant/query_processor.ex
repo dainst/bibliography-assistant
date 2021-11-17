@@ -19,6 +19,10 @@ defmodule Assistant.QueryProcessor do
     end
   end
 
+  defp shorten nil do
+    ""
+  end
+
   defp shorten str do
     str
     |> String.split(~r/[:.,]/)
