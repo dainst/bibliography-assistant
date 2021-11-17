@@ -1,7 +1,16 @@
 defmodule Assistant.ZenonService do
 
+  def query_zenon_with_author_and_title nil, _ do
+    {:error, :illegal_argument_author_must_not_be_nil}
+  end
+
+  def query_zenon_with_author_and_title _, nil do
+    {:error, :illegal_argument_title_must_not_be_nil}
+  end
+
   def query_zenon_with_author_and_title author, title do
-    suffixes = if author == "" or author == nil do
+
+    suffixes = if author == "" do
       case title do
         nil -> {"", ""}
         title -> {
@@ -12,10 +21,6 @@ defmodule Assistant.ZenonService do
     else
       case {author, title} do
         {author, ""} -> {
-          "author:#{author}",
-          "lookfor0[]=#{author}&type0[]=Author"
-        }
-        {author, nil} -> {
           "author:#{author}",
           "lookfor0[]=#{author}&type0[]=Author"
         }

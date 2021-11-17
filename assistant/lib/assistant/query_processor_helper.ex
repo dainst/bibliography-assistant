@@ -1,7 +1,7 @@
 defmodule Assistant.QueryProcessorHelper do
 
   def convert author, title do
-    {simple_name(author), complex_name(author), title}
+    {simple_name(author) || "", complex_name(author) || "", title || ""}
   end
 
   defp complex_name author do
