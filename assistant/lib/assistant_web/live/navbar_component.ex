@@ -7,18 +7,23 @@ defmodule AssistantWeb.NavbarComponent do
   @zenon_url "https://zenon.dainst.org"
 
   def get_zenon_search_link list do # TODO refactor
+    results = get_zenon_results list
+    results = Enum.join(results, "+OR+")
+    "#{@zenon_url}/Search/Results?lookfor=#{results}&type=SystemNo"
+  end
 
+  def has_zenon_results list do
+    0 < length get_zenon_results list
+  end
+
+  def get_zenon_results list do
     results = Enum.map list,
       fn [_raw, _parsed, {_suffixes, {_num_total_results, _results, selected_result}}] ->
         selected_result
       end
 
     results = Enum.filter results, fn result -> not is_nil(result) end
-    results = Enum.map results, fn result -> "\"#{result["id"]}\"" end
-
-    results = Enum.join(results, "+OR+")
-
-    "#{@zenon_url}/Search/Results?lookfor=#{results}&type=SystemNo"
+    Enum.map results, fn result -> "\"#{result["id"]}\"" end
   end
 
   def get_suffixes state do

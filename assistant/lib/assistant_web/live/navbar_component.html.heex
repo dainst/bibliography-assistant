@@ -17,7 +17,11 @@
         </div>
       <% end %>
       <div class="right" style="padding-top: 25px; padding-right: 20px;">
-        <a href={get_zenon_search_link(@state.list)} target="_blank"><%= Translator.translate :show_results_in_zenon, @state.lang %></a>
+        <%= if has_zenon_results @state.list do %>
+          <a href={get_zenon_search_link(@state.list)} target="_blank"><%= Translator.translate :show_results_in_zenon, @state.lang %></a>
+        <% else %>
+          <a style="color: lightgray"><%= Translator.translate :show_results_in_zenon, @state.lang %></a>
+        <% end %>
       </div>
       <div class="right" style="padding-top: 25px; padding-right: 20px;"
         phx-click="toggle_details">
