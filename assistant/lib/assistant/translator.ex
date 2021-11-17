@@ -64,6 +64,14 @@ defmodule Assistant.Translator do
     select_from_search_results: %{
       en: "Select search result",
       de: "Suchtreffer auswählen"
+    },
+    number_of_results_of_search_for: %{
+      en: "Total number of results of zenon search for",
+      de: "Gesamtanzahl der Ergebnisse zur Zenon-Suche nach"
+    },
+    show_results_in_zenon: %{
+      de: "Suchergebnisse in Zenon anzeigen",
+      en: "Show search results in Zenon"
     }
   }
 

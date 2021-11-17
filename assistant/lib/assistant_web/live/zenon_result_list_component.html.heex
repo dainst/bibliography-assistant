@@ -10,7 +10,8 @@
           = Enum.at(@state.list, @state.selected_item) %>
 
         <div class="card">
-          Total number of results of zenon search for <%= :http_uri.decode api_suffix %>: <%= num_total_zenon_results %>
+          <%= Translator.translate :number_of_results_of_search_for, @state.lang %>
+          <b>"<%= :http_uri.decode api_suffix %></b>": <%= num_total_zenon_results %>
         </div>
 
         <%= for zenon_result <- zenon_results do %>

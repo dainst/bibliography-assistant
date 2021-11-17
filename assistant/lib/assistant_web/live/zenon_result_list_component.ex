@@ -1,6 +1,7 @@
 defmodule AssistantWeb.ZenonResultListComponent do
   use AssistantWeb, :live_component
 
+  alias Assistant.Translator
   alias AssistantWeb.ZenonResultComponent
 
   @zenon_url "https://zenon.dainst.org"
