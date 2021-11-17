@@ -4,7 +4,7 @@ defmodule Assistant.AnystyleHelper do
     %{
       "given-name": extract_given_name(item),
       "family-name": extract_family_name(item),
-      title: extract_title(item)
+      title: extract_first(item, "title")
     }
   end
 
