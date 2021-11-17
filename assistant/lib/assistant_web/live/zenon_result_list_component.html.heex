@@ -11,7 +11,9 @@
 
         <div class="card">
           <%= Translator.translate :number_of_results_of_search_for, @state.lang %>
-          <b>"<%= :http_uri.decode api_suffix %></b>": <%= num_total_zenon_results %>
+          <b>
+            <a href={ui_link ui_suffix} target="_blank">
+            "<%= :http_uri.decode api_suffix %></a></b>": <%= num_total_zenon_results %>
         </div>
 
         <%= for zenon_result <- zenon_results do %>
