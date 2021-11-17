@@ -8,9 +8,13 @@ defmodule AssistantWeb.NavbarComponent do
 
   def get_zenon_search_link list do # TODO refactor
 
-    results = Enum.map list, fn [_raw, _parsed, {_suffixes, {_num_total_results, results, _}}] -> results end
-    results = Enum.filter results, fn results -> length(results) == 1 end
-    results = Enum.map results, fn results -> "\"#{List.first(results)["id"]}\"" end
+    results = Enum.map list,
+      fn [_raw, _parsed, {_suffixes, {_num_total_results, _results, selected_result}}] ->
+        selected_result
+      end
+
+    results = Enum.filter results, fn result -> not is_nil(result) end
+    results = Enum.map results, fn result -> "\"#{result["id"]}\"" end
 
     results = Enum.join(results, "+OR+")
 
