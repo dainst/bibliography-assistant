@@ -4,7 +4,13 @@ defmodule Assistant.AnystyleHelper do
     %{
       "given-name": extract_given_name(item),
       "family-name": extract_family_name(item),
-      title: extract_first(item, "title")
+      title: extract_first(item, "title"),
+      date: extract_first(item, "date"),
+      doi: extract_first(item, "doi"),
+      type: extract_type(item),
+      "container-title": extract_first(item, "container-title"),
+      "volume": extract_first(item, "volume"),
+      "pages": extract_first(item, "pages")
     }
   end
 

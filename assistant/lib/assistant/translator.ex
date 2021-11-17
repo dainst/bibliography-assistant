@@ -49,6 +49,30 @@ defmodule Assistant.Translator do
       en: "Title",
       de: "Titel"
     },
+    anystyle_field_date: %{
+      en: "Date",
+      de: "Datum"
+    },
+    anystyle_field_doi: %{
+      en: "DOI",
+      en: "DOI"
+    },
+    anystyle_field_type: %{
+      en: "Type",
+      de: "Typ"
+    },
+    "anystyle_field_container-title": %{
+      en: "Container title",
+      de: "Titel der Publikation"
+    },
+    "anystyle_field_volume": %{
+      en: "Volume",
+      de: "Band"
+    },
+    "anystyle_field_pages": %{
+      en: "Pages",
+      de: "Seiten"
+    },
     zenon_result_author: %{
       en: "Primary Author",
       de: "Erstgenannte Autorin/Erstgenannter Autor"
