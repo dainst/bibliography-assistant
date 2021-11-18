@@ -55,7 +55,7 @@ defmodule Assistant.Translator do
     },
     anystyle_field_doi: %{
       en: "DOI",
-      en: "DOI"
+      de: "DOI"
     },
     anystyle_field_type: %{
       en: "Type",
