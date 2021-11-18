@@ -14,9 +14,10 @@ defmodule Assistant.AnystyleCsvBuilder do
       "\"#{extract_first(entry, "volume") |> escape}\"," <>
       "\"#{extract_first(entry, "pages") |> escape}\"," <>
       "\"#{extract_zenon_id(zenon)}\"," <>
+      "\"#{extract_zenon_url(zenon)}\"," <>
       "\"#{given |> escape}\"\n"
     end
-    "\"given-name\",\"family-name\",\"title\",\"date\",\"doi\",\"type\",\"container-title\",\"volume\",\"pages\",\"zenon-id\",\"original\"\n#{entries}"
+    "\"given-name\",\"family-name\",\"title\",\"date\",\"doi\",\"type\",\"container-title\",\"volume\",\"pages\",\"zenon-id\",\"zenon-url\",\"original\"\n#{entries}"
   end
 
   defp extract_zenon_id({
@@ -27,6 +28,15 @@ defmodule Assistant.AnystyleCsvBuilder do
   end
 
   defp extract_zenon_id(_), do: ""
+
+  defp extract_zenon_url({
+    {suffix_ui, suffix_api},
+    {_, _, %{ "id" => id } = selected_item}}) when not is_nil(selected_item) do
+
+    "https://zenon.dainst.org/Record/#{id}"
+  end
+
+  defp extract_zenon_url(_), do: ""
 
   defp escape entry do
     String.replace entry, "\"", "\"\""
