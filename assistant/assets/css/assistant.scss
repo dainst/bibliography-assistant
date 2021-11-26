@@ -58,11 +58,8 @@ body {
             margin-right: 10px;
             width: calc(50% - 10px);
         }
-        .rhs::-webkit-scrollbar {
-            display: none;
-        }
         .rhs {
-            overflow: scroll;
+            overflow-y: auto;
             scrollbar-width: none;
             height: 100%;
             float: left;
@@ -74,11 +71,8 @@ body {
             height: 100%;
         }
 
-        .table-listing::-webkit-scrollbar {
-            display: none;
-        }
         .table-listing {
-            overflow: scroll;
+            overflow-y: auto;
             scrollbar-width: none;
             height: 100%;
             td, th {
