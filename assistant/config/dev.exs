@@ -2,8 +2,7 @@ use Mix.Config
 
 config :assistant,
   anystyle_path: (if System.get_env("IN_CONTAINER") == "true" do "anystyle:4567" else "localhost:4567" end),
-  grobid_path: "localhost:8070",
-  # cermine_path: "localhost:8072",
+  grobid_path: (if System.get_env("IN_CONTAINER") == "true" do "grobid:8070" else "localhost:8070" end),
   zenon_url: "https://zenon.dainst.org"
 
 # For development, we disable any cache and enable

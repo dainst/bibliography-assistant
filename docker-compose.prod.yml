@@ -39,13 +39,6 @@ services:
       ports:
         - "8070:8070"
 
-  cermine:
-    image: "elifesciences/cermine:1.13"
-    networks:
-      - default
-    ports:
-      - "8072:8080"
-
 volumes:
   assistant-config:
 

@@ -78,7 +78,6 @@ defmodule AssistantWeb.AssistantLive do
     csv = (case parser do
       "anystyle" -> &Assistant.AnystyleCsvBuilder.generate/1
       "grobid" -> &Assistant.GrobidCsvBuilder.generate/1
-      "cermine" -> &Assistant.CermineCsvBuilder.generate/1
     end).(list)
 
     File.write! "priv/#{String.replace(socket.id, "phx-", "")}.csv", csv

@@ -13,9 +13,6 @@ defmodule Assistant.Dispatch do
   def query "grobid", raw_references do
     do_query raw_references, &GrobidQueryProcessor.process_query/1
   end
-  def query "cermine", raw_references do
-    do_query raw_references, &CermineQueryProcessor.process_query/1
-  end
 
   defp do_query raw_references, process_query do
     result =
