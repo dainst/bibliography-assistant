@@ -12,7 +12,7 @@ defmodule AssistantWeb.AssistantLive do
   @impl true
   def mount _params, _session, socket do
     socket
-    |> assign(:current_page, "1")
+    |> assign(:current_page, "references-page")
     |> assign(:selected_item, -1)
     |> assign(:lang, "de")
     |> assign(:show_details, false)
@@ -38,7 +38,7 @@ defmodule AssistantWeb.AssistantLive do
       |> assign(:list, list)
       |> assign(:show_details, false)
       |> assign(:parser, parser)
-      |> assign(:current_page, "2")
+      |> assign(:current_page, "correspondence-page")
       |> assign(:selected_item, -1)
     end
     socket
@@ -50,7 +50,7 @@ defmodule AssistantWeb.AssistantLive do
   @impl true
   def handle_event "new_search", _params, socket do
     socket
-    |> assign(:current_page, "1")
+    |> assign(:current_page, "references-page")
     |> assign(:show_spinner, false)
     |> return_noreply
   end
@@ -89,7 +89,7 @@ defmodule AssistantWeb.AssistantLive do
 
   def handle_event "back_to_correspondence", _, socket do
     socket
-    |> assign(:current_page, "2")
+    |> assign(:current_page, "correspondence-page")
     |> push_event(:select_item, %{ idx: socket.assigns.selected_item })
     |> return_noreply
   end
@@ -98,7 +98,7 @@ defmodule AssistantWeb.AssistantLive do
     {idx, ""} = Integer.parse idx
     socket
     |> assign(:selected_item, idx)
-    |> assign(:current_page, "3")
+    |> assign(:current_page, "search-details-page")
     |> push_event(:select_item, %{ idx: idx })
     |> return_noreply
   end
@@ -133,7 +133,7 @@ defmodule AssistantWeb.AssistantLive do
 
   def handle_info {_, [_|_] = result}, socket do
     socket
-    |> assign(:current_page, "2")
+    |> assign(:current_page, "correspondence-page")
     |> assign(:list, select_zenon_items(result))
     |> return_noreply
   end

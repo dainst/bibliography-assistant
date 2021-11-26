@@ -1,13 +1,13 @@
 <%= case @current_page do %>
-<% "1" -> %>
+<% "references-page" -> %>
   <%= live_component References,
     state: assigns,
     id: "references" %>
-<%= "2" -> %>
+<%= "correspondence-page" -> %>
   <%= live_component Correspondence,
     state: assigns,
     id: "correspondence" %>
-<%= "3" -> %>
+<%= "search-details-page" -> %>
   <%= live_component SearchDetails,
     state: assigns,
     id: "search-details" %>

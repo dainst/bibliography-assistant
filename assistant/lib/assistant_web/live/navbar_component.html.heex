@@ -1,8 +1,8 @@
 <%= case @state.current_page do %>
-<%= "1" -> %>
+<%= "references-page" -> %>
   <br>
   <br>
-<%= "2" -> %>
+<%= "correspondence-page" -> %>
   <header>
     <div class="width">
       <%= if not @state.download_link_generated do %>
@@ -34,7 +34,7 @@
       </div>
     </div>
   </header>
-<% "3" -> %>
+<% "search-details-page" -> %>
   <header>
     <div class="width">
     </div>
