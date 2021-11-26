@@ -1,7 +1,12 @@
-<h3>Grobid Result</h3>
-<br>
 <div style="text-align: left">
-<%= for {k,v} <- @item do %>
-    <div><b><%= k %></b>: <%= inspect v %></div>
+<%= for {k,v} <- convert_item @item do %>
+    <%= val = convert(v)
+        if val != "" do %>
+        <div>
+            <b>
+                <%= convert_key(k, @state.lang) %></b>: <%=
+                val %>
+        </div>
+    <% end %>
 <% end %>
 </div>

@@ -170,6 +170,7 @@ defmodule AssistantWeb.AssistantLive do
   end
 
   defp select_zenon_items results do # TODO refactor
+
     Enum.map results, fn result ->
       [raw, item, {suffixes, {num_total_results, zenon_results}}] = result
       zenon_data = {

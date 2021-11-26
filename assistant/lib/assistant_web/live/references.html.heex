@@ -1,4 +1,10 @@
-<section class="main-card width" style="margin-top: 20px;">
+<section 
+  class="main-card width" 
+  style="margin-top: 20px;" 
+  phx-window-keydown="keydown" 
+  phx-window-keyup="keyup" 
+  phx-target={@myself}>
+
   <.form 
     let={f} 
     id="raw-references-form"
@@ -17,6 +23,11 @@
     <button phx-click="eval" phx-value-target="anystyle" phx-target={@myself}>
       <%= Translator.translate(:evaluate_with_anystyle, @state.lang) %>
     </button>
+    <%= if @control_pressed and @shift_pressed do %>
+      <button phx-click="eval" phx-value-target="grobid" phx-target={@myself}>
+        <%= Translator.translate(:evaluate_with_grobid, @state.lang) %>
+      </button>
+    <% end %>
   <% else %>
     <div class="spinner">
     </div>

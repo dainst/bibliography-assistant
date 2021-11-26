@@ -13,6 +13,10 @@ defmodule Assistant.Translator do
       en: "Evaluate",
       de: "Auswerten"
     },
+    evaluate_with_grobid: %{
+      en: "Evaluate with GROBID",
+      de: "Auswerten mit GROBID"
+    },
     generate_download_link: %{
       en: "Generate download link",
       de: "Download Link erzeugen"
@@ -72,6 +76,34 @@ defmodule Assistant.Translator do
     "anystyle_field_pages": %{
       en: "Pages",
       de: "Seiten"
+    },
+    "grobid_field_author": %{
+      en: "Primary Author",
+      de: "Erstgenannte Autorin/Erstgenannter Autor"
+    },
+    "grobid_field_volume": %{
+      en: "Volume",
+      de: "Band"
+    },
+    "grobid_field_pages": %{
+      en: "Pages",
+      de: "Seiten"
+    },
+    "grobid_field_entry_type": %{
+      en: "Type",
+      de: "Typ"
+    },
+    "grobid_field_journal": %{
+      en: "Journal",
+      de: "Journal"
+    },
+    "grobid_field_doi": %{
+      en: "DOI",
+      de: "DOI"
+    },
+    "grobid_field_title": %{
+      en: "Title",
+      de: "Titel"
     },
     zenon_result_author: %{
       en: "Primary Author",

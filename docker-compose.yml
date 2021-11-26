@@ -24,10 +24,10 @@ services:
     ports:
       - "4567:4567"
 
-  # grobid:
-    # image: "lfoppiano/grobid:0.7.0"
-    # ports:
-      # - "8070:8070"
+  grobid:
+    image: "lfoppiano/grobid:0.7.0"
+    ports:
+      - "8070:8070"
 # 
   # cermine:
     # image: "elifesciences/cermine:1.13"
