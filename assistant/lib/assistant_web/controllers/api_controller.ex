@@ -2,22 +2,36 @@ defmodule AssistantWeb.ApiController do
   use AssistantWeb, :controller
 
   alias Assistant.AnystyleHelper
+  alias Assistant.GrobidHelper
   alias Assistant.Dispatch
 
-  def evaluate conn, _body do
+  def evaluate conn, params do
+
+    parser = if Map.has_key? params, "parser" do
+      params["parser"]
+    else
+      "anystyle"
+    end
 
     {:ok, references, _} = Plug.Conn.read_body(conn)
 
-    results = Dispatch.query "anystyle", references
-    results = Enum.map(results, &convert/1)
+    results = Dispatch.query parser, references
+    results = Enum.map(results, convert(parser))
     json conn, %{ results: results }
   end
 
-  defp convert [original, item, {{_ui_suffix, api_suffix}, {num_records, records}}] do
-    converted = AnystyleHelper.convert_item item
-    Map.merge %{ original: original,
-                 autoselected_zenon_item_id: (if num_records == 1 do List.first(records)["id"] end),
-                 search_suffix: api_suffix }, converted
+  defp convert parser do
+    fn [original, item, {{_ui_suffix, api_suffix}, {num_records, records}}] ->
+      converted = case parser do
+        "anystyle" -> AnystyleHelper.convert_item item
+        "grobid" -> GrobidHelper.convert_item item
+      end
+      Map.merge %{
+        original: original,
+        autoselected_zenon_item_id: (if num_records == 1 do List.first(records)["id"] end),
+        search_suffix: api_suffix
+      }, converted
+    end
   end
 
   # Just for setting up a controller test
