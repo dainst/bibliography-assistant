@@ -146,6 +146,7 @@ defmodule AssistantWeb.AssistantLive do
     end
 
     socket
+    |> clear_flash
     |> assign(:parser, parser)
     |> assign(:show_spinner, true)
     |> return_noreply
