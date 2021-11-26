@@ -1,4 +1,4 @@
-defmodule Assistant.GrobidAdapter do
+defmodule Assistant.Grobid.Adapter do
 
   # curl -X POST -d "citations=Förtsch 2001:
   # R. Försch, Kunstverwendung und Kunstlegitimation im archaischen und

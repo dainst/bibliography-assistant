@@ -1,6 +1,6 @@
-defmodule Assistant.AnystyleCsvBuilder do
+defmodule Assistant.Anystyle.CsvBuilder do
 
-  import Assistant.AnystyleHelper
+  import Assistant.Anystyle.Helper
 
   def generate list do
     entries = Enum.map list, fn [given, entry, zenon] ->

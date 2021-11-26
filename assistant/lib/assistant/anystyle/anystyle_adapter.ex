@@ -1,4 +1,4 @@
-defmodule Assistant.AnystyleAdapter do
+defmodule Assistant.Anystyle.Adapter do
 
   def ask_anystyle input_string do
 

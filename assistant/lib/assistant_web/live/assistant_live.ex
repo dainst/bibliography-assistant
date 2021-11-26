@@ -76,8 +76,8 @@ defmodule AssistantWeb.AssistantLive do
     File.write! path, :erlang.term_to_binary({parser, list})
 
     csv = (case parser do
-      "anystyle" -> &Assistant.AnystyleCsvBuilder.generate/1
-      "grobid" -> &Assistant.GrobidCsvBuilder.generate/1
+      "anystyle" -> &Assistant.Anystyle.CsvBuilder.generate/1
+      "grobid" -> &Assistant.Grobid.CsvBuilder.generate/1
     end).(list)
 
     File.write! "priv/#{String.replace(socket.id, "phx-", "")}.csv", csv

@@ -1,7 +1,7 @@
-defmodule Assistant.AnystyleQueryProcessor do
+defmodule Assistant.Anystyle.QueryProcessor do
 
-  alias Assistant.AnystyleHelper
-  alias Assistant.AnystyleAdapter
+  alias Assistant.Anystyle.Helper
+  alias Assistant.Anystyle.Adapter, as: AnystyleAdapter
   alias Assistant.QueryProcessorHelper
   alias Assistant.QueryProcessor
 
@@ -47,7 +47,7 @@ defmodule Assistant.AnystyleQueryProcessor do
 
   defp extract_author_and_title result do
 
-    author = AnystyleHelper.extract_author result
+    author = Anystyle.Helper.extract_author result
     title = if not is_nil(result["title"]) and length(result["title"]) > 0 do
       List.first(result["title"])
     end

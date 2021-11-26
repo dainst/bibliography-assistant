@@ -1,4 +1,4 @@
-defmodule Assistant.AnystyleHelper do
+defmodule Assistant.Anystyle.Helper do
 
   def convert_item item do
     %{

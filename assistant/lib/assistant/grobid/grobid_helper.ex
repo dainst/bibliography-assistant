@@ -1,4 +1,4 @@
-defmodule Assistant.GrobidHelper do
+defmodule Assistant.Grobid.Helper do
 
   def convert_item item do
     item

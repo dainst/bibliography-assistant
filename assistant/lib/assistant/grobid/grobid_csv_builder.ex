@@ -1,4 +1,4 @@
-defmodule Assistant.GrobidCsvBuilder do
+defmodule Assistant.Grobid.CsvBuilder do
 
   def generate _list do
     ""

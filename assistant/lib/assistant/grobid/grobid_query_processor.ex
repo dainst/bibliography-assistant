@@ -1,8 +1,8 @@
-defmodule Assistant.GrobidQueryProcessor do
+defmodule Assistant.Grobid.QueryProcessor do
 
   import String
 
-  alias Assistant.GrobidAdapter
+  alias Assistant.Grobid.Adapter, as: GrobidAdapter
   alias Assistant.QueryProcessorHelper
   alias Assistant.QueryProcessor
 

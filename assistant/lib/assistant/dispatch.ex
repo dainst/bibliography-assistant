@@ -1,8 +1,7 @@
 defmodule Assistant.Dispatch do
 
-  alias Assistant.GrobidQueryProcessor
-  alias Assistant.CermineQueryProcessor
-  alias Assistant.AnystyleQueryProcessor
+  alias Assistant.Anystyle.QueryProcessor, as: AnystyleQueryProcessor
+  alias Assistant.Grobid.QueryProcessor, as: GrobidQueryProcessor
 
   @doc """
   Returns {:error, reason} if an error occured
