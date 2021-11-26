@@ -105,6 +105,18 @@ defmodule Assistant.Translator do
       en: "Title",
       de: "Titel"
     },
+    "grobid_field_address": %{
+      en: "Address",
+      de: "Adresse"
+    },
+    "grobid_field_year": %{
+      en: "Year",
+      de: "Jahr"
+    },
+    "grobid_field_booktitle": %{
+      en: "Book title",
+      de: "Buchtitel"
+    },
     zenon_result_author: %{
       en: "Primary Author",
       de: "Erstgenannte Autorin/Erstgenannter Autor"
