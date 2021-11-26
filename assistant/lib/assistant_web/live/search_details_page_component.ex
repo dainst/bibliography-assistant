@@ -1,4 +1,4 @@
-defmodule AssistantWeb.SearchDetails do
+defmodule AssistantWeb.SearchDetailsPageComponent do
   use AssistantWeb, :live_component
 
   alias AssistantWeb.ParserResultListComponent

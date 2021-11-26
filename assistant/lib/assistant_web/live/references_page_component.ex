@@ -1,4 +1,4 @@
-defmodule AssistantWeb.References do
+defmodule AssistantWeb.ReferencesPageComponent do
   use AssistantWeb, :live_component
 
   alias Assistant.Translator

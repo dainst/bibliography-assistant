@@ -3,9 +3,9 @@ defmodule AssistantWeb.AssistantLive do
 
   alias Assistant.Translator
   alias Assistant.Dispatch
-  alias AssistantWeb.References
-  alias AssistantWeb.Correspondence
-  alias AssistantWeb.SearchDetails
+  alias AssistantWeb.ReferencesPageComponent
+  alias AssistantWeb.CorrespondencePageComponent
+  alias AssistantWeb.SearchDetailsPageComponent
 
   import AssistantWeb # TODO necessary?
 
