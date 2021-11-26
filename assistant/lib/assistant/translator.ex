@@ -113,6 +113,10 @@ defmodule Assistant.Translator do
       en: "Year",
       de: "Jahr"
     },
+    "grobid_field_editor": %{
+      en: "Editor/in",
+      de: "Editor"
+    },
     "grobid_field_booktitle": %{
       en: "Book title",
       de: "Buchtitel"
