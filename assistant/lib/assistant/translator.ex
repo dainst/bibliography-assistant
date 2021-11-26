@@ -9,9 +9,13 @@ defmodule Assistant.Translator do
       en: "One item per line",
       de: "Ein Eintrag pro Zeile"
     },
-    evaluate_with_anystyle: %{
+    evaluate: %{
       en: "Evaluate",
       de: "Auswerten"
+    },
+    evaluate_with_anystyle: %{
+      en: "Evaluate with Anystyle",
+      de: "Auswerten mit Anystyle"
     },
     evaluate_with_grobid: %{
       en: "Evaluate with GROBID",

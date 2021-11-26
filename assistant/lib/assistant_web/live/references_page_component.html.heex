@@ -21,7 +21,11 @@
 
   <%= unless @state.show_spinner do %>
     <button phx-click="eval" phx-value-target="anystyle" phx-target={@myself}>
-      <%= Translator.translate(:evaluate_with_anystyle, @state.lang) %>
+      <%= unless @control_pressed and @shift_pressed do %>
+        <%= Translator.translate(:evaluate, @state.lang) %>
+      <% else %>
+        <%= Translator.translate(:evaluate_with_anystyle, @state.lang) %>
+      <% end %>
     </button>
     <%= if @control_pressed and @shift_pressed do %>
       <button phx-click="eval" phx-value-target="grobid" phx-target={@myself}>
