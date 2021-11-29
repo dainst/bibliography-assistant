@@ -1,10 +1,10 @@
 <div style="text-align: left">
-<%= for {k,v} <- AnystyleResultComponent.convert_item @item do %>
-    <%= val = AnystyleResultComponent.convert(v)
+<%= for {k,v} <- convert_item @item do %>
+    <%= val = convert(v)
         if val != "" do %>
         <div>
             <b>
-                <%= AnystyleResultComponent.convert_key(k, @state.lang) %></b>: <%=
+                <%= convert_key(k, @state.lang) %></b>: <%=
                 val %>
         </div>
     <% end %>

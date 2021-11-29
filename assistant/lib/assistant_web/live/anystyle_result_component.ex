@@ -2,11 +2,10 @@ defmodule AssistantWeb.AnystyleResultComponent do
   use AssistantWeb, :live_component
 
   alias Assistant.Translator
-  alias Assistant.AnystyleHelper
-  alias AssistantWeb.AnystyleResultComponent
+  alias Assistant.Anystyle.Helper
 
   def convert_item item do
-    AnystyleHelper.convert_item item
+    Helper.convert_item item
   end
 
   def convert_key key, lang do
