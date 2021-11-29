@@ -5,7 +5,8 @@ defmodule Assistant.Grobid.CsvBuilder do
 
   def generate list do
     entries = Enum.map list, fn [given, entry, zenon] ->
-      "\"#{extract(entry, :author) |> escape}\"," <>
+      "\"#{extract_given_name(entry) |> escape}\"," <>
+      "\"#{extract_family_name(entry) |> escape}\"," <>
       "\"#{extract(entry, :title) |> escape}\"," <>
       "\"#{extract(entry, :year) |> escape}\"," <>
       "\"#{extract(entry, :address) |> escape}\"," <>
@@ -20,6 +21,6 @@ defmodule Assistant.Grobid.CsvBuilder do
       "\"#{extract_zenon_url(zenon)}\"," <>
       "\"#{given |> escape}\"\n"
     end
-    "\"author\",\"title\",\"year\",\"address\",\"entry-type\",\"journal\",\"pages\",\"volume\",\"editor\",\"booktitle\",\"doi\",\"zenon-id\",\"zenon-url\",\"original\"\n#{entries}"
+    "\"given-name\",\"family-name\",\"title\",\"year\",\"address\",\"entry-type\",\"journal\",\"pages\",\"volume\",\"editor\",\"booktitle\",\"doi\",\"zenon-id\",\"zenon-url\",\"original\"\n#{entries}"
   end
 end

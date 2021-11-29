@@ -81,10 +81,6 @@ defmodule Assistant.Translator do
       en: "Pages",
       de: "Seiten"
     },
-    grobid_field_author: %{
-      en: "Primary Author",
-      de: "Erstgenannte Autorin/Erstgenannter Autor"
-    },
     grobid_field_volume: %{
       en: "Volume",
       de: "Band"
@@ -104,6 +100,14 @@ defmodule Assistant.Translator do
     grobid_field_doi: %{
       en: "DOI",
       de: "DOI"
+    },
+    "grobid_field_given-name": %{
+      en: "Given name",
+      de: "Vorname"
+    },
+    "grobid_field_family-name": %{
+      en: "Family name",
+      de: "Familienname"
     },
     grobid_field_title: %{
       en: "Title",

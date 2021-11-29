@@ -1,10 +1,13 @@
 defmodule AssistantWeb.GrobidResultComponent do
   use AssistantWeb, :live_component
 
+  alias Assistant.Grobid.Helper
   alias Assistant.Translator
 
   def convert_item item do
-    Map.delete item, :citekey
+    item
+    |> Map.delete(:citekey)
+    |> Helper.convert_item
   end
 
   def convert_key key, lang do
