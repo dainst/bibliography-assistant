@@ -3,23 +3,18 @@ defmodule Assistant.Grobid.QueryProcessor do
   import String
 
   alias Assistant.Grobid.Adapter, as: GrobidAdapter
-  alias Assistant.QueryProcessorHelper
-  alias Assistant.QueryProcessor
+  alias Assistant.ZenonQueryProcessor
 
   def process_query {_raw_references, split_references} do
 
-    grobid_results = GrobidAdapter.ask_grobid split_references
+    with {:ok, grobid_results} <- GrobidAdapter.ask_grobid(split_references),
+        zenon_results <- ZenonQueryProcessor.query_zenon(&extract_author_and_title/1, grobid_results),
+        nil <- ZenonQueryProcessor.get_zenon_error(zenon_results) do
 
-    zenon_results =
-      grobid_results
-      |> Enum.map(&query_zenon/1)
-
-    Enum.zip [split_references, grobid_results, zenon_results]
-  end
-
-  def query_zenon result do
-
-    QueryProcessor.try_queries extract_author_and_title result
+      Enum.zip [split_references, grobid_results, zenon_results]
+    else
+      error -> error
+    end
   end
 
   defp extract_author_and_title result do
@@ -52,6 +47,6 @@ defmodule Assistant.Grobid.QueryProcessor do
         |> List.first
       end
 
-    QueryProcessorHelper.convert author, title
+    {author, title}
   end
 end
