@@ -4,13 +4,13 @@ services:
 
   assistant:
     image: "dainst/bibliography-assistant"
-    ports:
-      - "4300:4000"
     volumes:
       - "assistant-config:/opt/src/assistant/config"
     networks:
       - web
       - default
+    ports:
+      - "4300:4000"
     deploy:
       labels:
         - "traefik.docker.network=web"
@@ -20,17 +20,10 @@ services:
 
   anystyle:
     image: "dainst/anystyle-sinatra"
+    networks:
+      - default
     ports:
       - "4567:4567"
-    networks:
-      - web
-      - default
-    deploy:
-      labels:
-        - "traefik.docker.network=web"
-        - "traefik.enable=true"
-        - "traefik.frontend.rule=Host:parser.bibliography-assistant.idai.world"
-        - "traefik.port=4567"
 
   grobid:
       image: "lfoppiano/grobid:0.7.0"
