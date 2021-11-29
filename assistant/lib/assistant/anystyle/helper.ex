@@ -9,8 +9,8 @@ defmodule Assistant.Anystyle.Helper do
       doi: extract_first(item, "doi"),
       type: extract_type(item),
       "container-title": extract_first(item, "container-title"),
-      "volume": extract_first(item, "volume"),
-      "pages": extract_first(item, "pages")
+      volume: extract_first(item, "volume"),
+      pages: extract_first(item, "pages")
     }
   end
 

@@ -3,5 +3,4 @@ defmodule AssistantWeb.ParserResultListComponent do
 
   alias AssistantWeb.AnystyleResultComponent
   alias AssistantWeb.GrobidResultComponent
-  alias AssistantWeb.CermineResultComponent
 end

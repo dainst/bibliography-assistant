@@ -1,7 +1,7 @@
 defmodule Assistant.CsvBuilderHelper do
 
   def extract_zenon_id({
-    {suffix_ui, suffix_api},
+    {_suffix_ui, _suffix_api},
     {_, _, %{ "id" => id } = selected_item}}) when not is_nil(selected_item) do
 
     "ZID-#{id}"
@@ -10,7 +10,7 @@ defmodule Assistant.CsvBuilderHelper do
   def extract_zenon_id(_), do: ""
 
   def extract_zenon_url({
-    {suffix_ui, suffix_api},
+    {_suffix_ui, _suffix_api},
     {_, _, %{ "id" => id } = selected_item}}) when not is_nil(selected_item) do
 
     "https://zenon.dainst.org/Record/#{id}"

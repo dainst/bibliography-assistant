@@ -2,7 +2,6 @@ defmodule AssistantWeb.NavbarComponent do
   use AssistantWeb, :live_component
 
   alias Assistant.Translator
-  alias AssistantWeb.ZenonResultListComponent
 
   @zenon_url "https://zenon.dainst.org"
 

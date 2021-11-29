@@ -7,8 +7,6 @@ defmodule AssistantWeb.AssistantLive do
   alias AssistantWeb.CorrespondencePageComponent
   alias AssistantWeb.SearchDetailsPageComponent
 
-  import AssistantWeb # TODO necessary?
-
   @impl true
   def mount _params, _session, socket do
     socket

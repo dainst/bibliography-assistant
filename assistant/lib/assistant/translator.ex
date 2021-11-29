@@ -73,55 +73,55 @@ defmodule Assistant.Translator do
       en: "Container title",
       de: "Titel der Publikation"
     },
-    "anystyle_field_volume": %{
+    anystyle_field_volume: %{
       en: "Volume",
       de: "Band"
     },
-    "anystyle_field_pages": %{
+    anystyle_field_pages: %{
       en: "Pages",
       de: "Seiten"
     },
-    "grobid_field_author": %{
+    grobid_field_author: %{
       en: "Primary Author",
       de: "Erstgenannte Autorin/Erstgenannter Autor"
     },
-    "grobid_field_volume": %{
+    grobid_field_volume: %{
       en: "Volume",
       de: "Band"
     },
-    "grobid_field_pages": %{
+    grobid_field_pages: %{
       en: "Pages",
       de: "Seiten"
     },
-    "grobid_field_entry_type": %{
+    grobid_field_entry_type: %{
       en: "Type",
       de: "Typ"
     },
-    "grobid_field_journal": %{
+    grobid_field_journal: %{
       en: "Journal",
       de: "Journal"
     },
-    "grobid_field_doi": %{
+    grobid_field_doi: %{
       en: "DOI",
       de: "DOI"
     },
-    "grobid_field_title": %{
+    grobid_field_title: %{
       en: "Title",
       de: "Titel"
     },
-    "grobid_field_address": %{
+    grobid_field_address: %{
       en: "Address",
       de: "Adresse"
     },
-    "grobid_field_year": %{
+    grobid_field_year: %{
       en: "Year",
       de: "Jahr"
     },
-    "grobid_field_editor": %{
+    grobid_field_editor: %{
       en: "Editor/in",
       de: "Editor"
     },
-    "grobid_field_booktitle": %{
+    grobid_field_booktitle: %{
       en: "Book title",
       de: "Buchtitel"
     },

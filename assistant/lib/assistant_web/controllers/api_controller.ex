@@ -1,8 +1,8 @@
 defmodule AssistantWeb.ApiController do
   use AssistantWeb, :controller
 
-  alias Assistant.AnystyleHelper
-  alias Assistant.GrobidHelper
+  alias Assistant.Anystyle.Helper, as: AnystyleHelper
+  alias Assistant.Grobid.Helper, as: GrobidHelper
   alias Assistant.Dispatch
 
   def evaluate conn, params do
