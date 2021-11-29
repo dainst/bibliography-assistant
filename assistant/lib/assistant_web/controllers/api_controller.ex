@@ -25,6 +25,7 @@ defmodule AssistantWeb.ApiController do
 
       %{
         original: original,
+        parser: parser,
         autoselected_zenon_item_id: (if num_records == 1 do List.first(records)["id"] end),
         search_suffix: api_suffix,
         parser_result: parser_result,
