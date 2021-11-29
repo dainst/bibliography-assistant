@@ -47,7 +47,7 @@ defmodule Assistant.Anystyle.QueryProcessor do
 
   defp extract_author_and_title result do
 
-    author = Anystyle.Helper.extract_author result
+    author = Helper.extract_author result
     title = if not is_nil(result["title"]) and length(result["title"]) > 0 do
       List.first(result["title"])
     end
