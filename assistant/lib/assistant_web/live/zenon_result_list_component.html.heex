@@ -1,7 +1,7 @@
 <div id="zenon-result-list" class="list" phx-hook="ZenonResultListHook">
     <%= if @state.selected_item > -1 do %>
 
-        <div style="height: 11px; width: 100px">
+        <div class="separator">
         </div>
         <% [_raw, 
             _item, 
@@ -22,7 +22,7 @@
             selected: zenon_result == selected_zenon_result,
             state: @state %>
         <% end %>
-        <div style="height: 11px; width: 100px">
+        <div class="separator">
         </div>
     <% end %>
 </div>

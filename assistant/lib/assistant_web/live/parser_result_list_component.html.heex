@@ -1,5 +1,5 @@
 <div class="list" phx-hook="ParserResultListHook" id="parser-result-list">
-    <div style="height: 11px; width: 100px">
+    <div class="separator">
     </div>
     <%= for {[raw, {_item, converted_item}, {_first_author, _results}], idx} <- Enum.with_index(@state.list) do %>
       <%= if idx == @state.selected_item do %>
@@ -19,6 +19,6 @@
         </div>
       <% end %>
     <% end %>
-    <div style="height: 11px; width: 100px">
+    <div class="separator">
     </div>
 </div>
