@@ -20,14 +20,16 @@ defmodule AssistantWeb.ApiController do
 
   defp convert parser do
     fn [original,
-        {_parser_result, converted_parser_result},
+        {parser_result, converted_parser_result},
         {{_ui_suffix, api_suffix}, {num_records, records}}] ->
 
-      Map.merge %{
+      %{
         original: original,
         autoselected_zenon_item_id: (if num_records == 1 do List.first(records)["id"] end),
-        search_suffix: api_suffix
-      }, converted_parser_result
+        search_suffix: api_suffix,
+        parser_result: parser_result,
+        processed_parser_result: converted_parser_result
+      }
     end
   end
 
