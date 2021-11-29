@@ -4,19 +4,20 @@ defmodule Assistant.Grobid.CsvBuilder do
   import Assistant.Grobid.Helper
 
   def generate list do
-    entries = Enum.map list, fn [given, entry, zenon] ->
-      "\"#{extract_given_name(entry) |> escape}\"," <>
-      "\"#{extract_family_name(entry) |> escape}\"," <>
-      "\"#{extract(entry, :title) |> escape}\"," <>
-      "\"#{extract(entry, :year) |> escape}\"," <>
-      "\"#{extract(entry, :address) |> escape}\"," <>
-      "\"#{extract(entry, :entry_type) |> escape}\"," <>
-      "\"#{extract(entry, :journal) |> escape}\"," <>
-      "\"#{extract(entry, :pages) |> escape}\"," <>
-      "\"#{extract(entry, :volume) |> escape}\"," <>
-      "\"#{extract(entry, :editor) |> escape}\"," <>
-      "\"#{extract(entry, :booktitle) |> escape}\"," <>
-      "\"#{extract(entry, :doi) |> escape}\"," <>
+    entries = Enum.map list, fn [given, {_, entry}, zenon] ->
+      IO.inspect entry
+      "\"#{entry[:"given-name"] |> escape}\"," <>
+      "\"#{entry[:"family-name"] |> escape}\"," <>
+      "\"#{entry[:title] |> escape}\"," <>
+      "\"#{entry[:year] |> escape}\"," <>
+      "\"#{entry[:address] |> escape}\"," <>
+      "\"#{entry[:entry_type] |> escape}\"," <>
+      "\"#{entry[:journal] |> escape}\"," <>
+      "\"#{entry[:pages] |> escape}\"," <>
+      "\"#{entry[:volume] |> escape}\"," <>
+      "\"#{entry[:editor] |> escape}\"," <>
+      "\"#{entry[:booktitle] |> escape}\"," <>
+      "\"#{entry[:doi] |> escape}\"," <>
       "\"#{extract_zenon_id(zenon)}\"," <>
       "\"#{extract_zenon_url(zenon)}\"," <>
       "\"#{given |> escape}\"\n"

@@ -6,7 +6,7 @@
       </div>
       <table phx-hook="ParserResultListHook" id="parser-result-list">
       <%= for {[raw, 
-                item, 
+                {_item, converted_item}, 
                 {{_api_suffix, _ui_suffix}, 
                  {_num_total_zenon_results, zenon_results, selected_zenon_result}}], 
                idx} <- Enum.with_index(@state.list) do %>
@@ -20,8 +20,8 @@
                   <br>
 
                   <%= case @state.parser do
-                      "anystyle" -> live_component AnystyleResultComponent, item: item, state: @state
-                      "grobid" -> live_component GrobidResultComponent, item: item, state: @state
+                      "anystyle" -> live_component AnystyleResultComponent, item: converted_item, state: @state
+                      "grobid" -> live_component GrobidResultComponent, item: converted_item, state: @state
                   end %>
                 <% end %>
               </div>

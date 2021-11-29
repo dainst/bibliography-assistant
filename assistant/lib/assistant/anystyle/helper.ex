@@ -28,21 +28,22 @@ defmodule Assistant.Anystyle.Helper do
     end
   end
 
-  def extract_given_name item do
+  defp extract_given_name item do
     case extract_author item do
       {_family, given} -> given
       _ -> ""
     end
   end
 
-  def extract_family_name item do
+  defp extract_family_name item do
     case extract_author item do
       {family, _given} -> family
       _ -> ""
     end
   end
 
-  def extract_author_and_title item do
+  # TODO remove?
+  defp extract_author_and_title item do
 
     author = extract_author item
     title = extract_title item

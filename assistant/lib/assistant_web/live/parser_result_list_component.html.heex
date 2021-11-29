@@ -1,7 +1,7 @@
 <div class="list" phx-hook="ParserResultListHook" id="parser-result-list">
     <div style="height: 11px; width: 100px">
     </div>
-    <%= for {[raw, item, {_first_author, _results}], idx} <- Enum.with_index(@state.list) do %>
+    <%= for {[raw, {_item, converted_item}, {_first_author, _results}], idx} <- Enum.with_index(@state.list) do %>
       <%= if idx == @state.selected_item do %>
         <div class={"card #{if idx == @state.selected_item do 'selected' end}"}
             id={"parser-result-item-#{idx}"}
@@ -13,8 +13,8 @@
             <br>
 
             <%= case @state.parser do
-                "anystyle" -> live_component AnystyleResultComponent, item: item, state: @state
-                "grobid" -> live_component GrobidResultComponent, item: item, state: @state
+                "anystyle" -> live_component AnystyleResultComponent, item: converted_item, state: @state
+                "grobid" -> live_component GrobidResultComponent, item: converted_item, state: @state
             end %>
         </div>
       <% end %>

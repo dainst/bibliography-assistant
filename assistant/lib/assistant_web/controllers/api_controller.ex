@@ -1,8 +1,6 @@
 defmodule AssistantWeb.ApiController do
   use AssistantWeb, :controller
 
-  alias Assistant.Anystyle.Helper, as: AnystyleHelper
-  alias Assistant.Grobid.Helper, as: GrobidHelper
   alias Assistant.Dispatch
 
   def evaluate conn, params do
@@ -21,16 +19,15 @@ defmodule AssistantWeb.ApiController do
   end
 
   defp convert parser do
-    fn [original, item, {{_ui_suffix, api_suffix}, {num_records, records}}] ->
-      converted = case parser do
-        "anystyle" -> AnystyleHelper.convert_item item
-        "grobid" -> GrobidHelper.convert_item item
-      end
+    fn [original,
+        {_parser_result, converted_parser_result},
+        {{_ui_suffix, api_suffix}, {num_records, records}}] ->
+
       Map.merge %{
         original: original,
         autoselected_zenon_item_id: (if num_records == 1 do List.first(records)["id"] end),
         search_suffix: api_suffix
-      }, converted
+      }, converted_parser_result
     end
   end
 

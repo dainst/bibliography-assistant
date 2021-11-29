@@ -4,16 +4,16 @@ defmodule Assistant.Anystyle.CsvBuilder do
   import Assistant.Anystyle.Helper
 
   def generate list do
-    entries = Enum.map list, fn [given, entry, zenon] ->
-      "\"#{extract_given_name(entry) |> escape}\"," <>
-      "\"#{extract_family_name(entry) |> escape}\"," <>
-      "\"#{extract_first(entry, "title") |> escape}\"," <>
-      "\"#{extract_first(entry, "date") |> escape}\"," <>
-      "\"#{extract_first(entry, "doi") |> escape}\"," <>
-      "\"#{extract_type(entry) |> escape}\"," <>
-      "\"#{extract_first(entry, "container-title") |> escape}\"," <>
-      "\"#{extract_first(entry, "volume") |> escape}\"," <>
-      "\"#{extract_first(entry, "pages") |> escape}\"," <>
+    entries = Enum.map list, fn [given, {_, entry}, zenon] ->
+      "\"#{entry[:"given-name"] |> escape}\"," <>
+      "\"#{entry[:"family-name"] |> escape}\"," <>
+      "\"#{entry[:title] |> escape}\"," <>
+      "\"#{entry[:date] |> escape}\"," <>
+      "\"#{entry[:doi] |> escape}\"," <>
+      "\"#{entry[:type] |> escape}\"," <>
+      "\"#{entry[:"container-title"] |> escape}\"," <>
+      "\"#{entry[:volume] |> escape}\"," <>
+      "\"#{entry[:pages] |> escape}\"," <>
       "\"#{extract_zenon_id(zenon)}\"," <>
       "\"#{extract_zenon_url(zenon)}\"," <>
       "\"#{given |> escape}\"\n"

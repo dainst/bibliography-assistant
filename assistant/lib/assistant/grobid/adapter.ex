@@ -6,9 +6,14 @@ defmodule Assistant.Grobid.Adapter do
 
   # TODO maybe do one instead multiple queries
 
+  alias Assistant.Grobid.Helper
+
   def ask_grobid input_strings do
     results = Enum.map input_strings, &query/1
     unless Enum.find results, &(&1 == {:error, :connection_refused}) do
+
+      results = Enum.map results, fn item -> {item, Helper.convert_item item} end
+
       {:ok, results}
     else
       {:error, :connection_refused}

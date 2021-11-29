@@ -4,10 +4,6 @@ defmodule AssistantWeb.AnystyleResultComponent do
   alias Assistant.Translator
   alias Assistant.Anystyle.Helper
 
-  def convert_item item do
-    Helper.convert_item item
-  end
-
   def convert_key key, lang do
     Translator.translate String.to_atom("anystyle_field_#{key}"), lang
   end

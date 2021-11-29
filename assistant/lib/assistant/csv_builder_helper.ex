@@ -18,6 +18,8 @@ defmodule Assistant.CsvBuilderHelper do
 
   def extract_zenon_url(_), do: ""
 
+  def escape(nil), do: ""
+
   def escape entry do
     String.replace entry, "\"", "\"\""
   end

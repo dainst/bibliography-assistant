@@ -2,18 +2,16 @@ defmodule Assistant.ZenonQueryProcessor do
 
   import Assistant.ZenonService
 
-  def query_zenon extract_author_and_title, parser_results do
+  def query_zenon parser_results do
     parser_results
-    |> Enum.reduce_while([], query_zenon_reducer(extract_author_and_title))
+    |> Enum.reduce_while([], &query_zenon_reducer/2)
     |> Enum.reverse
   end
 
-  defp query_zenon_reducer extract_author_and_title do
-    fn parser_result, results ->
-      case try_queries convert extract_author_and_title.(parser_result) do
-        {:error, _reason} = error -> {:halt, [error|results]}
-        result -> {:cont, [result|results]}
-      end
+  defp query_zenon_reducer {_parser_result, converted_parser_result}, results do
+    case try_queries convert extract_author_and_title converted_parser_result do
+      {:error, _reason} = error -> {:halt, [error|results]}
+      result -> {:cont, [result|results]}
     end
   end
 
@@ -50,6 +48,10 @@ defmodule Assistant.ZenonQueryProcessor do
 
   defp convert {author, title} do
     {simple_name(author) || "", complex_name(author) || "", title || ""}
+  end
+
+  defp extract_author_and_title item do
+    {{item[:"family-name"], item[:"given-name"]}, item[:title]}
   end
 
   defp complex_name author do
