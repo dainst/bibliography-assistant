@@ -21,7 +21,7 @@ defmodule Assistant.Grobid.Helper do
   end
 
   # TODO remove duplication (with Anystyle.Helper)
-  def extract_given_name entry do
+  defp extract_given_name entry do
     case extract_author entry do
       {_family, given} -> given
       _ -> ""
@@ -29,7 +29,7 @@ defmodule Assistant.Grobid.Helper do
   end
 
   # TODO remove duplication (with Anystyle.Helper)
-  def extract_family_name entry do
+  defp extract_family_name entry do
     case extract_author entry do
       {family, _given} -> family
       _ -> ""
