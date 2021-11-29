@@ -5,9 +5,7 @@ defmodule AssistantWeb.GrobidResultComponent do
   alias Assistant.Translator
 
   def convert_item item do
-    item
-    |> Map.delete(:citekey)
-    |> Helper.convert_item
+    Helper.convert_item item
   end
 
   def convert_key key, lang do
