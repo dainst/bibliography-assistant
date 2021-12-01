@@ -118,19 +118,23 @@ body {
     background: #ffffff;
 }
 
+$normal-card-color: #fafaff;
+$empty-card-color: navajowhite;
+$selection-color: #bcc6ff;
+
 .card {
     text-align: left;
     border-bottom: 1px solid #e3e3e3;
-    background: #fafaff;
+    background: $normal-card-color;
     font-family: serif;
     border-radius: 17px;
     padding: 20px 20px 20px;
     margin-bottom: 10px;
 }
 
-$normal-card-color: #fafaff;
-$empty-card-color: navajowhite;
-$selection-color: #bcc6ff;
+.clickable-card {
+    cursor: pointer;
+}
 
 .selected-card {
     background-color: $selection-color;

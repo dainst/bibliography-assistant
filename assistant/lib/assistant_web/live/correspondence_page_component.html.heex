@@ -36,11 +36,11 @@
               <% else %>
                 <%= case length(zenon_results) do %>
                   <% 0 -> %>
-                    <div class={"card empty-card #{if idx == @state.selected_item do 'selected-empty-card-anim' end}"}>
+                    <div class={"card clickable-card empty-card #{if idx == @state.selected_item do 'selected-empty-card-anim' end}"}>
                       <%= Translator.translate :no_search_results, @state.lang %>
                     </div>
                   <% _ ->  %>
-                  <div class={"card empty-card #{if idx == @state.selected_item do 'selected-empty-card-anim' end}"}>
+                  <div class={"card clickable-card empty-card #{if idx == @state.selected_item do 'selected-empty-card-anim' end}"}>
                     <%= Translator.translate :select_from_search_results, @state.lang %>
                   </div>
                 <% end %>
