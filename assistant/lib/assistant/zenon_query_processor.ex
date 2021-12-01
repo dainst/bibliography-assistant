@@ -7,7 +7,7 @@ defmodule Assistant.ZenonQueryProcessor do
   end
 
   defp query_zenon_reducer {_parser_result, converted_parser_result}, results do
-    case try_queries convert extract_author_and_title converted_parser_result do
+    case try_queries prepare_queries convert extract_author_and_title converted_parser_result do
       {:error, _reason} = error -> {:halt, [error|results]}
       result -> {:cont, [result|results]}
     end
@@ -17,16 +17,15 @@ defmodule Assistant.ZenonQueryProcessor do
     Enum.find(zenon_results, &(match? {:error, _}, &1))
   end
 
-  defp try_queries {author_simple, author_complex, title} do
+  defp try_queries suffixes do
 
-    shortened_title = shorten title
-
-    with {_, {0, []}} <- query_zenon_with_author_and_title(author_complex, title),
-         {_, {0, []}} <- query_zenon_with_author_and_title(author_complex, shortened_title),
-         {_, {0, []}} <- query_zenon_with_author_and_title(author_simple, title),
-         {_, {0, []}} <- query_zenon_with_author_and_title(author_simple, shortened_title),
-         {_, {0, []}} <- query_zenon_with_author_and_title(author_complex, ""),
-         {_, {0, []}} = noresult <- query_zenon_with_author_and_title(author_simple, "")
+    # TODO improve with reduce_while
+    with {_, {0, []}} <- query_zenon_with_author_and_title(Enum.at(suffixes, 0)),
+         {_, {0, []}} <- query_zenon_with_author_and_title(Enum.at(suffixes, 1)),
+         {_, {0, []}} <- query_zenon_with_author_and_title(Enum.at(suffixes, 2)),
+         {_, {0, []}} <- query_zenon_with_author_and_title(Enum.at(suffixes, 3)),
+         {_, {0, []}} <- query_zenon_with_author_and_title(Enum.at(suffixes, 4)),
+         {_, {0, []}} = noresult <- query_zenon_with_author_and_title(Enum.at(suffixes, 5))
     do
       noresult
     else
@@ -34,13 +33,23 @@ defmodule Assistant.ZenonQueryProcessor do
     end
   end
 
+  defp prepare_queries {author_simple, author_complex, title} do
+    shortened_title = shorten title
+    [
+      extract_query_suffixes(author_complex, title),
+      extract_query_suffixes(author_complex, shortened_title),
+      extract_query_suffixes(author_simple, title),
+      extract_query_suffixes(author_simple, shortened_title),
+      extract_query_suffixes(author_complex, ""),
+      extract_query_suffixes(author_simple, "")
+    ]
+  end
+
   defp query_zenon_with_author_and_title _, nil do     # TODO necessary? we can make sure it isn't nil
     {:error, :illegal_argument_title_must_not_be_nil}
   end
 
-  defp query_zenon_with_author_and_title author, title do
-
-    suffixes = extract_query_suffixes author, title
+  defp query_zenon_with_author_and_title suffixes do
 
     IO.inspect elem(suffixes, 0)
     if suffixes != {"", ""} do
