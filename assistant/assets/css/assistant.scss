@@ -128,9 +128,11 @@ body {
     margin-bottom: 10px;
 }
 
+$selection-color: #bcc6ff;
+
 @keyframes fadeout {
-    0%   {background-color: #f2f4ff}
-    10%   {background-color: darken(#f2f4ff, 5%)}
+    0%   {background-color: $selection-color}
+    10%   {background-color: darken($selection-color, 5%)}
     100% {background-color: #fafaff}
 }
 .selected-card {
@@ -140,5 +142,5 @@ body {
 
 .selected {
 
-    background-color:  #f2f4ff;
+    background-color: $selection-color;
 }
