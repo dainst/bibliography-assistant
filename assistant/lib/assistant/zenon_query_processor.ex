@@ -2,12 +2,20 @@ defmodule Assistant.ZenonQueryProcessor do
 
   def query_zenon parser_results do
     parser_results
+    |> Enum.map(&prepare_queries_for_parser_result/1)
     |> Enum.reduce_while([], &query_zenon_reducer/2)
     |> Enum.reverse
   end
 
-  defp query_zenon_reducer {_parser_result, converted_parser_result}, results do
-    case try_queries prepare_queries convert extract_author_and_title converted_parser_result do
+  defp prepare_queries_for_parser_result {_parser_result, converted_parser_result} do
+    converted_parser_result
+    |> extract_author_and_title
+    |> convert
+    |> prepare_queries
+  end
+
+  defp query_zenon_reducer queries_for_parser_result, results do
+    case try_queries queries_for_parser_result do
       {:error, _reason} = error -> {:halt, [error|results]}
       result -> {:cont, [result|results]}
     end
@@ -19,17 +27,11 @@ defmodule Assistant.ZenonQueryProcessor do
 
   defp try_queries suffixes do
 
-    # TODO improve with reduce_while
-    with {_, {0, []}} <- query_zenon_with_author_and_title(Enum.at(suffixes, 0)),
-         {_, {0, []}} <- query_zenon_with_author_and_title(Enum.at(suffixes, 1)),
-         {_, {0, []}} <- query_zenon_with_author_and_title(Enum.at(suffixes, 2)),
-         {_, {0, []}} <- query_zenon_with_author_and_title(Enum.at(suffixes, 3)),
-         {_, {0, []}} <- query_zenon_with_author_and_title(Enum.at(suffixes, 4)),
-         {_, {0, []}} = noresult <- query_zenon_with_author_and_title(Enum.at(suffixes, 5))
-    do
-      noresult
-    else
-      result -> result
+    Enum.reduce_while suffixes, {{"", ""}, {0, []}}, fn suffix, suffixes ->
+      case query_zenon_with_author_and_title suffix do
+        {_, {0, []}} -> {:cont, suffixes}
+        result -> {:halt, result}
+      end
     end
   end
 
@@ -45,17 +47,13 @@ defmodule Assistant.ZenonQueryProcessor do
     ]
   end
 
-  defp query_zenon_with_author_and_title _, nil do     # TODO necessary? we can make sure it isn't nil
-    {:error, :illegal_argument_title_must_not_be_nil}
-  end
-
   defp query_zenon_with_author_and_title suffixes do
 
     IO.inspect elem(suffixes, 0)
     if suffixes != {"", ""} do
       query_with_suffix suffixes
     else
-      {{"", ""}, 0, []}
+      {{"", ""}, {0, []}} # TODO necessary?
     end
   end
 
