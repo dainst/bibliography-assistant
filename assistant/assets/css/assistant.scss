@@ -128,19 +128,33 @@ body {
     margin-bottom: 10px;
 }
 
+$normal-card-color: #fafaff;
+$empty-card-color: navajowhite;
 $selection-color: #bcc6ff;
+
+.selected-card {
+    background-color: $selection-color;
+}
+.empty-card {
+    background-color: $empty-card-color;
+}
 
 @keyframes fadeout {
     0%   {background-color: $selection-color}
-    10%   {background-color: darken($selection-color, 5%)}
-    100% {background-color: #fafaff}
+    10%  {background-color: darken($selection-color, 5%)}
+    100% {background-color: $normal-card-color}
 }
-.selected-card {
+.selected-card-anim {
     animation-name: fadeout;
     animation-duration: 1s;
 }
 
-.selected {
-
-    background-color: $selection-color;
+@keyframes fadeout-empty {
+    0%   {background-color: $selection-color}
+    10%  {background-color: darken($selection-color, 5%)}
+    100% {background-color: $empty-card-color}
+}
+.selected-empty-card-anim {
+    animation-name: fadeout-empty;
+    animation-duration: 1s;
 }

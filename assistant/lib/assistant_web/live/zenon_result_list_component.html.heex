@@ -19,7 +19,7 @@
         <%= for zenon_result <- zenon_results do %>
         <%= live_component ZenonResultComponent,
             result: zenon_result,
-            selected: zenon_result == selected_zenon_result,
+            selected_card: zenon_result == selected_zenon_result,
             state: @state %>
         <% end %>
         <div class="separator">
