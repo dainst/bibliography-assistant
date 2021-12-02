@@ -33,6 +33,14 @@ defmodule Assistant.Translator do
       en: "New search",
       de: "Neue Suche"
     },
+    show_details: %{
+      en: "Show details",
+      de: "Details anzeigen"
+    },
+    hide_details: %{
+      en: "Hide details",
+      de: "Details ausblenden"
+    },
     error_no_input: %{
       en: "No input",
       de: "Keine Eingabe"

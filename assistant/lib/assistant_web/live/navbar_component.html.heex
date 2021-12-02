@@ -26,7 +26,12 @@
       <div class="right" 
            style="padding-top: 25px; padding-right: 20px; cursor: pointer"
         phx-click="toggle_details">
-        <%= if @state.show_details do "Details ausblenden" else "Details anzeigen" end %>
+        <%= if @state.show_details do 
+            Translator.translate(:hide_details, @state.lang) 
+          else 
+            Translator.translate(:show_details, @state.lang) 
+          end 
+        %>
       </div>
       <div class="left"
            style="cursor: pointer">
