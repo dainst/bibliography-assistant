@@ -7,6 +7,21 @@ defmodule Assistant.ZenonQueryProcessor do
     |> Enum.map(&ZenonQueryHelper.prepare_queries_for_parser_result/1)
     |> Enum.reduce_while([], &query_zenon_reducer/2)
     |> Enum.reverse
+    |> Enum.map(&sort_rezensionen_for_result/1)
+  end
+
+  defp sort_rezensionen_for_result {suffixes, {num_results, results}} do
+    {suffixes, {num_results, sort_rezensionen(results)}}
+  end
+
+  defp sort_rezensionen zenon_results do
+    matches = Enum.filter zenon_results, &is_rezension/1
+    non_matches = Enum.filter zenon_results, &(!is_rezension &1)
+    non_matches ++ matches
+  end
+
+  defp is_rezension zenon_result do
+    Map.has_key?(zenon_result, "title") and String.match?(zenon_result["title"], ~r/^\[Rez\..*\]/)
   end
 
   defp query_zenon_reducer queries_for_parser_result, results do
