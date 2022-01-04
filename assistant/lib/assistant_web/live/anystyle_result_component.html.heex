@@ -1,12 +1,12 @@
 <div style="text-align: left">
-<%= for {k,v} <- @item do %>
+  <%= for {k,v} <- sort @item do %>
     <%= val = convert(v)
-        if val != "" do %>
-        <div>
-            <b>
-                <%= convert_key(k, @state.lang) %></b>: <%=
-                val %>
-        </div>
+      if val != "" do %>
+      <div>
+        <b>
+          <%= convert_key(k, @state.lang) %>
+        </b>: <%= val %>
+      </div>
     <% end %>
-<% end %>
+  <% end %>
 </div>
