@@ -3,7 +3,7 @@ defmodule Assistant.Grobid.Adapter do
   alias Assistant.Grobid.Helper
 
   def ask_grobid input_strings do
-    # grobid seems support sending multiple citations at once, so one could adjust the code here to handle it that way
+    # grobid seems to support sending multiple citations at once, so one could adjust the code here to handle it that way
     results = Enum.map input_strings, &query/1
     unless Enum.find results, &(&1 == {:error, :connection_refused}) do
       results = Enum.map results, fn item -> {item, Helper.convert_item item} end
