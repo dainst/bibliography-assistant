@@ -65,6 +65,7 @@ defmodule Assistant.ZenonQueryHelper do
   defp complex_name author do
     case author do
       {"", ""} -> ""
+      {family, ""} -> family
       {family, given} -> "#{remove_dots(given)}.#{family}"
       _ -> ""
     end
