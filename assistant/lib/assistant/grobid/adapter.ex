@@ -1,10 +1,6 @@
 defmodule Assistant.Grobid.Adapter do
 
-  # curl -X POST -d "citations=Förtsch 2001:
-  # R. Försch, Kunstverwendung und Kunstlegitimation im archaischen und
-  # frühklassischen Sparta (Mainz am Rhein 2001)." localhost:8070/api/processCitation
 
-  # TODO maybe do one instead multiple queries
 
   alias Assistant.Grobid.Helper
 
@@ -12,6 +8,7 @@ defmodule Assistant.Grobid.Adapter do
     results = Enum.map input_strings, &query/1
     unless Enum.find results, &(&1 == {:error, :connection_refused}) do
 
+      # TODO instead doing multiple queries, do just one query, since grobid supports this
       results = Enum.map results, fn item -> {item, Helper.convert_item item} end
 
       {:ok, results}

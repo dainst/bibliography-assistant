@@ -151,7 +151,7 @@ defmodule AssistantWeb.AssistantLive do
     |> return_noreply
   end
 
-  defp reselect_zenon_items selected_zenon_id, list, selected_item do # TODO refactor and test, possibly extract
+  defp reselect_zenon_items selected_zenon_id, list, selected_item do
 
     list = Enum.with_index list, fn list_item, idx ->
       if idx != selected_item do
@@ -168,7 +168,7 @@ defmodule AssistantWeb.AssistantLive do
     list
   end
 
-  defp select_zenon_items results do # TODO refactor
+  defp select_zenon_items results do
 
     Enum.map results, fn result ->
       [raw, item, {suffixes, {num_total_results, zenon_results}}] = result

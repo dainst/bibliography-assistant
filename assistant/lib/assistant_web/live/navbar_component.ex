@@ -5,7 +5,7 @@ defmodule AssistantWeb.NavbarComponent do
 
   @zenon_url "https://zenon.dainst.org"
 
-  def get_zenon_search_link list do # TODO refactor
+  def get_zenon_search_link list do
     results = get_zenon_results list
     results = Enum.join(results, "+OR+")
     "#{@zenon_url}/Search/Results?lookfor=#{results}&type=SystemNo"

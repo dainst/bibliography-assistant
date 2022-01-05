@@ -51,7 +51,7 @@ defmodule Assistant.ZenonQueryProcessor do
     if suffixes != {"", ""} do
       query_with_suffix suffixes
     else
-      {{"", ""}, {0, []}} # TODO necessary?
+      {{"", ""}, {0, []}}
     end
   end
 

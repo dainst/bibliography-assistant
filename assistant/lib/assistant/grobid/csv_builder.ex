@@ -1,11 +1,9 @@
 defmodule Assistant.Grobid.CsvBuilder do
 
   import Assistant.CsvBuilderHelper
-  import Assistant.Grobid.Helper
 
   def generate list do
     entries = Enum.map list, fn [given, {_, entry}, zenon] ->
-      IO.inspect entry
       "\"#{entry[:"given-name"] |> escape}\"," <>
       "\"#{entry[:"family-name"] |> escape}\"," <>
       "\"#{entry[:title] |> escape}\"," <>
