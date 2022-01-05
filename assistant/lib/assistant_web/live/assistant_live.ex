@@ -110,7 +110,6 @@ defmodule AssistantWeb.AssistantLive do
     |> return_noreply
   end
 
-  # TODO review if id should be used (uniqueness of results), or rather idx
   def handle_event "select_zenon_item", %{ "id" => id }, socket do
     socket
     |> assign(:list, reselect_zenon_items(id, socket.assigns.list, socket.assigns.selected_item))
