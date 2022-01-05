@@ -1,9 +1,11 @@
 defmodule Assistant.Anystyle.Helper do
 
+  import Assistant.ParserHelper
+
   def convert_item item do
     %{
-      "given-name": (elem (extract_author item), 1) || "",
-      "family-name": (elem (extract_author item), 0) || "",
+      "given-name": (get_second extract_author item),
+      "family-name": (get_first extract_author item),
       title: extract_first(item, "title"),
       date: extract_first(item, "date"),
       doi: extract_first(item, "doi"),

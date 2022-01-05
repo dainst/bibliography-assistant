@@ -1,12 +1,13 @@
 defmodule Assistant.Grobid.Helper do
 
   import String
+  import Assistant.ParserHelper
 
   def convert_item item do
     item
     |> Map.merge(%{
-      "given-name": (elem (extract_author item), 1) || "",
-      "family-name": (elem (extract_author item), 0) || ""
+      "given-name": (get_second extract_author item),
+      "family-name": (get_first extract_author item)
     })
     |> Map.delete(:citekey)
     |> Map.delete(:author)
@@ -26,13 +27,15 @@ defmodule Assistant.Grobid.Helper do
       [family, given] = split author, ","
       {family, given}
     else
-      author
-      |> replace(~r/[-–,]/, " ")
-      |> replace(~r/\s[A-Za-z]\s/, "")
-      |> replace(~r/^[A-Za-z]\s/, "")
-      |> replace(~r/\s[A-Za-z]$/, "")
-      |> split("\s")
-      |> List.first
+      family =
+        author
+        |> replace(~r/[-–,]/, " ")
+        |> replace(~r/\s[A-Za-z]\s/, "")
+        |> replace(~r/^[A-Za-z]\s/, "")
+        |> replace(~r/\s[A-Za-z]$/, "")
+        |> split("\s")
+        |> List.first
+      {family, ""}
     end
   end
 end
