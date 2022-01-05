@@ -12,7 +12,7 @@
         <div class="card">
           <%= Translator.translate :number_of_results_of_search_for, @state.lang %>
           <b>
-            <a href={ui_link ui_suffix} target="_blank">
+            <a href={ui_link ui_suffix} target="_blank" rel="noreferrer noopener">
             "<%= :http_uri.decode api_suffix %></a></b>": <%= num_total_zenon_results %>
         </div>
 

@@ -1,7 +1,5 @@
 defmodule Assistant.Grobid.Adapter do
 
-
-
   alias Assistant.Grobid.Helper
 
   def ask_grobid input_strings do
