@@ -67,18 +67,9 @@ defmodule AssistantWeb.AssistantLive do
 
   def handle_event "download", _params, socket do
 
-    list = socket.assigns.list
-    parser = socket.assigns.parser
-
-    path = "priv/#{socket.id}.bin"
-    File.write! path, :erlang.term_to_binary({parser, list})
-
-    csv = (case parser do
-      "anystyle" -> &Assistant.Anystyle.CsvBuilder.generate/1
-      "grobid" -> &Assistant.Grobid.CsvBuilder.generate/1
-    end).(list)
-
-    File.write! "priv/#{String.replace(socket.id, "phx-", "")}.csv", csv
+    delete_older_support_files "bin"
+    delete_older_support_files "csv"
+    generate_suport_files socket.assigns.parser, socket.assigns.list, socket.id
 
     socket
     |> assign(:download_link_generated, true)
@@ -148,6 +139,29 @@ defmodule AssistantWeb.AssistantLive do
     |> assign(:parser, parser)
     |> assign(:show_spinner, true)
     |> return_noreply
+  end
+
+  defp generate_suport_files parser, list, socket_id do
+    path = "priv/#{socket_id}.bin"
+    File.write! path, :erlang.term_to_binary({parser, list})
+
+    csv = (case parser do
+      "anystyle" -> &Assistant.Anystyle.CsvBuilder.generate/1
+      "grobid" -> &Assistant.Grobid.CsvBuilder.generate/1
+    end).(list)
+
+    File.write! "priv/#{String.replace(socket_id, "phx-", "")}.csv", csv
+  end
+
+  defp delete_older_support_files extension do
+    Path.wildcard("priv/*.#{extension}")
+    |> Enum.map(fn file ->
+      {:ok, %{ mtime: {file_date, _file_time}}} = File.stat file
+
+      if 1 < Date.diff (Date.from_erl! :erlang.date), (Date.from_erl! file_date) do
+        File.rm! file
+      end
+    end)
   end
 
   defp reselect_zenon_items selected_zenon_id, list, selected_item do
