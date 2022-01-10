@@ -7,7 +7,7 @@
     <div class="width">
       <%= if not @state.download_link_generated do %>
         <div class="right">
-          <button phx-click="download"><%= Translator.translate(:generate_download_link, @state.lang) %></button>
+          <button phx-click="request_download_link"><%= Translator.translate(:generate_download_link, @state.lang) %></button>
         </div>
       <% else %>
         <div class="right" style="padding-top: 25px; margin-left: 142px;">

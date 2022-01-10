@@ -65,11 +65,9 @@ defmodule AssistantWeb.AssistantLive do
     |> return_noreply
   end
 
-  def handle_event "download", _params, socket do
+  def handle_event "request_download_link", _params, socket do
 
-    delete_older_support_files "bin"
-    delete_older_support_files "csv"
-    generate_suport_files socket.assigns.parser, socket.assigns.list, socket.id
+    prepare_csv_download socket
 
     socket
     |> assign(:download_link_generated, true)
@@ -139,6 +137,12 @@ defmodule AssistantWeb.AssistantLive do
     |> assign(:parser, parser)
     |> assign(:show_spinner, true)
     |> return_noreply
+  end
+
+  defp prepare_csv_download socket do
+    delete_older_support_files "bin"
+    delete_older_support_files "csv"
+    generate_suport_files socket.assigns.parser, socket.assigns.list, socket.id
   end
 
   defp generate_suport_files parser, list, socket_id do
