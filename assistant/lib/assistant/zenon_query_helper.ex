@@ -14,6 +14,8 @@ defmodule Assistant.ZenonQueryHelper do
       extract_query_suffixes(author_complex, shortened_title),
       extract_query_suffixes(author_simple, title),
       extract_query_suffixes(author_simple, shortened_title),
+      extract_query_suffixes("", title),
+      extract_query_suffixes("", shortened_title),
       extract_query_suffixes(author_complex, ""),
       extract_query_suffixes(author_simple, "")
     ]
@@ -50,7 +52,7 @@ defmodule Assistant.ZenonQueryHelper do
 
   defp shorten str do
     str
-    |> String.split(~r/[:.,]/)
+    |> String.split(~r/[:.,\(]/)
     |> List.first
   end
 
