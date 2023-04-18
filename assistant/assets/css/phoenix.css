@@ -86,3 +86,20 @@ header nav a {
     margin: 2rem 1rem;
   }
 }
+
+footer {
+  position: fixed;
+  background: #fdfdfd;
+  border-top: 1px solid #eaeaea;
+  height: 4vh;
+  width: 100%;
+  overflow: hidden;
+  left: 0;
+  bottom: 0;
+  font-size: 0.9em;
+}
+
+footer a {
+  float: right;
+  padding: 0 1vw;
+}
