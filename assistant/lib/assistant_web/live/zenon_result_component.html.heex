@@ -1,7 +1,7 @@
 <div class={"card clickable-card #{if assigns[:selected_card] do 'selected-card' end} #{if assigns[:selected_card_anim] do 'selected-card-anim' end}"}
      phx-click={unless assigns[:no_click] do "select_zenon_item" end}
      phx-value-id={@result["id"]}>
-  <b>Zenon Id</b>:
+  <b>Zenon-ID</b>:
   <%= if String.starts_with?(@result["id"], "00") do %>
     <a href={item_url @result["id"]} target="_blank" rel="noreferrer noopener"><%= @result["id"] %></a>
   <% else %>
@@ -17,6 +17,11 @@
 
   <%= unless is_nil @result["title"] do %>
     <b><%= Translator.translate(:zenon_result_title, @state.lang) %></b>: <%= @result["title"] %>
+    <br>
+  <% end %>
+
+  <%= unless is_nil @result["publicationDates"] do %>
+    <b>Jahr</b>: <%= @result["publicationDates"] %>
     <br>
   <% end %>
 </div>
