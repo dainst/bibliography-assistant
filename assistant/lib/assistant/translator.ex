@@ -145,6 +145,10 @@ defmodule Assistant.Translator do
       en: "Title",
       de: "Titel"
     },
+    zenon_result_year: %{
+      en: "Year",
+      de: "Jahr"
+    },
     no_search_results: %{
       en: "No search results",
       de: "Keine Suchtreffer"

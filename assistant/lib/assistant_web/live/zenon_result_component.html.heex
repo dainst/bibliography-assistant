@@ -21,7 +21,7 @@
   <% end %>
 
   <%= unless is_nil @result["publicationDates"] do %>
-    <b>Jahr</b>: <%= @result["publicationDates"] %>
+    <b><%= Translator.translate(:zenon_result_year, @state.lang) %></b>: <%= @result["publicationDates"] %>
     <br>
   <% end %>
 </div>
