@@ -18,8 +18,8 @@ import {LiveSocket} from "phoenix_live_view"
 import topbar from "topbar"
 
 function langIsNotDe() {
-  return Array.isArray(navigator.languages) 
-    && navigator.languages.length > 0 
+  return Array.isArray(navigator.languages)
+    && navigator.languages.length > 0
     && !navigator.languages[0].toLowerCase().startsWith("de")
 }
 
@@ -29,13 +29,13 @@ const hooks = {}
 hooks.MainHook = {
   mounted() {
     this.handleEvent("request_language", _ => {
-      this.pushEvent("select_language", getLang())    
+      this.pushEvent("select_language", getLang())
     })
   }
 }
 hooks.CorrespondenceListHook = {
   mounted() {
-    this.handleEvent("select", ({idx}) => 
+    this.handleEvent("select", ({idx}) =>
       this.el.querySelector("div:first-of-type").scrollIntoView()
     )
   }
@@ -53,7 +53,7 @@ hooks.ParserResultListHook = {
 }
 hooks.ZenonResultListHook = {
   mounted() {
-    this.handleEvent("select", ({idx}) => 
+    this.handleEvent("select", ({idx}) =>
       this.el.querySelector("div:first-of-type").scrollIntoView()
     )
   }
@@ -80,4 +80,5 @@ liveSocket.connect()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
+
 

@@ -4,7 +4,7 @@ body {
 }
 
 .separator {
-    height: 11px; 
+    height: 11px;
     width: 100px;
 }
 
@@ -34,8 +34,13 @@ body {
 #raw-references-form {
 
     textarea {
-    
+
         height: 300px;
+        background: antiquewhite;
+    }
+
+    textarea::placeholder {
+
     }
 }
 
@@ -47,9 +52,9 @@ body {
 
 .both {
     height: calc(100% - 80px);
-    position: absolute;
     width: 100%;
-    
+    background: #e8e9ea;
+
     .inner {
         height: 100%;
         .lhs::-webkit-scrollbar {
@@ -70,7 +75,7 @@ body {
             float: left;
             margin-left: 10px;
             width: calc(50% - 10px);
-            
+
         }
         .list {
             height: 100%;
@@ -119,7 +124,8 @@ body {
 }
 
 $normal-card-color: #fafaff;
-$empty-card-color: navajowhite;
+$empty-card-color: #fff9ef;
+$select-result-card-color: navajowhite;
 $selection-color: #bcc6ff;
 
 .card {
@@ -139,8 +145,13 @@ $selection-color: #bcc6ff;
 .selected-card {
     background-color: $selection-color;
 }
+
 .empty-card {
     background-color: $empty-card-color;
+}
+
+.select-result-card {
+    background-color: $select-result-card-color;
 }
 
 @keyframes fadeout {
