@@ -38,14 +38,14 @@ defmodule Assistant.ZenonQueryProcessor do
   defp try_queries suffixes do
 
     Enum.reduce_while suffixes, {{"", ""}, {0, []}}, fn suffix, suffixes ->
-      case query_zenon_with_author_and_title suffix do
+      case query_zenon_with_parser_values suffix do
         {_, {0, []}} -> {:cont, suffixes}
         result -> {:halt, result}
       end
     end
   end
 
-  defp query_zenon_with_author_and_title suffixes do
+  defp query_zenon_with_parser_values suffixes do
 
     IO.inspect elem(suffixes, 0)
     if suffixes != {"", ""} do
@@ -57,11 +57,68 @@ defmodule Assistant.ZenonQueryProcessor do
 
   defp query_with_suffix {api_suffix, ui_suffix} do
 
+    # output:
+    IO.inspect "ui-suffix:"
+    # IO.inspect ui_suffix
+    IO.inspect "api-suffix:"
+    IO.inspect api_suffix
+
     zenon_url = Application.fetch_env!(:assistant, :zenon_url)
-    query_url = "#{zenon_url}/api/v1/search?limit=100&lookfor=#{:http_uri.encode api_suffix}"
+    query_url = "#{zenon_url}/api/v1/search?limit=100&#{ui_suffix}"
 
     suffixes = {api_suffix, :http_uri.encode(ui_suffix)
       |> String.replace("%3D", "=") |> String.replace("%26","&")}
+
+    IO.inspect query_url
+    IO.inspect "------------------------"
+
+    with {:ok, results} <- HTTPoison.get query_url, %{}, [] do
+      results = Poison.decode! results.body
+      
+      if is_nil(results["records"]) do
+         # reduce ui-suffix and query again once:
+          ui_suffix = reduce_ui_suffix(ui_suffix)
+          IO.inspect ui_suffix
+          api_suffix = reduce_api_suffix(api_suffix)
+          requery_with_reduced_suffix {api_suffix, ui_suffix}
+      else
+        {suffixes, {results["resultCount"], results["records"]}}
+      end
+    else
+      {:error, error} ->
+        IO.puts "Zenon Service not reachable"
+        IO.inspect error
+        {:error, :zenon_unreachable}
+    end
+  end
+
+  defp reduce_ui_suffix str do
+    str
+    |> String.split("&lookfor0[]")
+    |> Enum.at(0)
+
+    # |> Kernel.<>"&lookfor0[]"
+    # new_string = Enum.at(1)
+    # IO.inspect new_string
+    # split_string = splits.at[0] ++ "&lookfor0[]"
+
+    # | Enum.at(0) ++ Enum.at(1)
+    # ["lookfor0[]=Calomino&type0[]=Author", "=2016&type0[]=year", "=Defacing+the+Past:+Damnation+and+Desecration+in+Imperial+Rom&type0[]=AllFields"]
+  end
+
+  defp reduce_api_suffix str do
+    str
+    |> String.split(" and ")
+    |> Enum.at(0)
+  end
+
+  defp requery_with_reduced_suffix {api_suffix, ui_suffix} do
+
+    zenon_url = Application.fetch_env!(:assistant, :zenon_url)
+    query_url = "#{zenon_url}/api/v1/search?limit=100&#{ui_suffix}"
+
+    suffixes = {api_suffix, :http_uri.encode(ui_suffix)
+    |> String.replace("%3D", "=") |> String.replace("%26","&")}
 
     with {:ok, results} <- HTTPoison.get query_url, %{}, [] do
       results = Poison.decode! results.body
