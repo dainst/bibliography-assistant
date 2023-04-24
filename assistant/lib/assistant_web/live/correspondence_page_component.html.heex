@@ -1,14 +1,14 @@
 <div class="both">
   <div class="inner width">
-    
+
     <div class="list table-listing">
       <div class="separator">
       </div>
       <table phx-hook="ParserResultListHook" id="parser-result-list">
-      <%= for {[raw, 
-                {_item, converted_item}, 
-                {{_api_suffix, _ui_suffix}, 
-                 {_num_total_zenon_results, zenon_results, selected_zenon_result}}], 
+      <%= for {[raw,
+                {_item, converted_item},
+                {{_api_suffix, _ui_suffix},
+                 {_num_total_zenon_results, zenon_results, selected_zenon_result}}],
                idx} <- Enum.with_index(@state.list) do %>
           <tr id={"parser-result-item-#{idx}"}>
             <td>
@@ -40,7 +40,7 @@
                       <%= Translator.translate :no_search_results, @state.lang %>
                     </div>
                   <% _ ->  %>
-                  <div class={"card clickable-card empty-card #{if idx == @state.selected_item do 'selected-empty-card-anim' end}"}>
+                  <div class={"card clickable-card select-result-card #{if idx == @state.selected_item do 'selected-empty-card-anim' end}"}>
                     <%= Translator.translate :select_from_search_results, @state.lang %>
                   </div>
                 <% end %>

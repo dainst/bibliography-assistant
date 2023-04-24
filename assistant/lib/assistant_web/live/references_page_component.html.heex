@@ -1,22 +1,22 @@
-<section 
-  class="main-card width" 
-  style="margin-top: 20px;" 
-  phx-window-keydown="keydown" 
-  phx-window-keyup="keyup" 
+<section
+  class="main-card width"
+  style="margin-top: 20px;"
+  phx-window-keydown="keydown"
+  phx-window-keyup="keyup"
   phx-target={@myself}>
 
-  <.form 
-    let={f} 
+  <.form
+    let={f}
     id="raw-references-form"
-    for={:raw_references} 
-    phx-change="change" 
+    for={:raw_references}
+    phx-change="change"
     phx-target={@myself}>
 
     <h1><%= Translator.translate(:bibliographic_references, @state.lang) %></h1>
 
     <p><%= Translator.translate(:one_item_per_line, @state.lang) %></p>
 
-    <%= textarea f, :raw_references %>
+    <textarea id="raw-references-form_raw_references" name="raw_references[raw_references]" placeholder=""></textarea>
   </.form>
 
   <%= unless @state.show_spinner do %>
