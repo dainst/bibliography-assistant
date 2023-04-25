@@ -41,7 +41,7 @@
                     </div>
                   <% _ ->  %>
                   <div class={"card clickable-card select-result-card #{if idx == @state.selected_item do 'selected-empty-card-anim' end}"}>
-                    <%= Translator.translate :select_from_search_results, @state.lang %>
+                    <%= Translator.translate :select_from_search_results, @state.lang %> (<%= _num_total_zenon_results %>)
                   </div>
                 <% end %>
               <% end %>
