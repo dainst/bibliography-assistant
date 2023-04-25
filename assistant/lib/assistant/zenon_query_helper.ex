@@ -34,8 +34,8 @@ defmodule Assistant.ZenonQueryHelper do
         {author, title, date} ->
           t = String.replace(title," ","+")
           {
-            "author:#{author} and year:#{date} and title:#{title}",   # api-suffix
-            "lookfor0[]=#{author}&type0[]=Author&lookfor0[]=#{date}&type0[]=year&lookfor0[]=#{t}&type0[]=AllFields", # ui-suffix
+            "author:#{author} and year:#{date} and title:#{title}",
+            "lookfor0[]=#{author}&type0[]=Author&lookfor0[]=#{date}&type0[]=year&lookfor0[]=#{t}&type0[]=AllFields&sort=year",
           }
       end
   end
