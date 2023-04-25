@@ -63,23 +63,27 @@ defmodule Assistant.ZenonQueryProcessor do
     IO.inspect "api-suffix:"
     IO.inspect api_suffix
 
+    suffixes = {api_suffix, :http_uri.encode(ui_suffix)
+        |> String.replace("%3D", "=") |> String.replace("%26","&")}
+
     zenon_url = Application.fetch_env!(:assistant, :zenon_url)
     query_url = "#{zenon_url}/api/v1/search?limit=100&#{ui_suffix}"
-
-    suffixes = {api_suffix, :http_uri.encode(ui_suffix)
-      |> String.replace("%3D", "=") |> String.replace("%26","&")}
 
     IO.inspect query_url
     IO.inspect "------------------------"
 
     with {:ok, results} <- HTTPoison.get query_url, %{}, [] do
       results = Poison.decode! results.body
-      
+
       if is_nil(results["records"]) do
-         # reduce ui-suffix and query again once:
-          ui_suffix = reduce_ui_suffix(ui_suffix)
-          IO.inspect ui_suffix
-          api_suffix = reduce_api_suffix(api_suffix)
+         # reduce given ui- and api_suffix
+          ui_suffix_author = get_ui_suffix_parts(ui_suffix, 0)
+          ui_suffix_year = get_ui_suffix_parts(ui_suffix, 1)
+          ui_suffix = ui_suffix_author <> "&lookfor0[]" <> ui_suffix_year <> "&sort=year"
+          api_suffix_author = get_api_suffix_parts(api_suffix, 0)
+          api_suffix_year = get_api_suffix_parts(api_suffix, 1)
+          api_suffix = api_suffix_author <> " and " <> api_suffix_year # <> "&sort=year"
+          # query again once with author and year:
           requery_with_reduced_suffix {api_suffix, ui_suffix}
       else
         {suffixes, {results["resultCount"], results["records"]}}
@@ -92,24 +96,16 @@ defmodule Assistant.ZenonQueryProcessor do
     end
   end
 
-  defp reduce_ui_suffix str do
+  def get_ui_suffix_parts(str, parts) do
     str
     |> String.split("&lookfor0[]")
-    |> Enum.at(0)
-
-    # |> Kernel.<>"&lookfor0[]"
-    # new_string = Enum.at(1)
-    # IO.inspect new_string
-    # split_string = splits.at[0] ++ "&lookfor0[]"
-
-    # | Enum.at(0) ++ Enum.at(1)
-    # ["lookfor0[]=Calomino&type0[]=Author", "=2016&type0[]=year", "=Defacing+the+Past:+Damnation+and+Desecration+in+Imperial+Rom&type0[]=AllFields"]
+    |> Enum.at(parts)
   end
 
-  defp reduce_api_suffix str do
+  def get_api_suffix_parts(str, parts) do
     str
     |> String.split(" and ")
-    |> Enum.at(0)
+    |> Enum.at(parts)
   end
 
   defp requery_with_reduced_suffix {api_suffix, ui_suffix} do
