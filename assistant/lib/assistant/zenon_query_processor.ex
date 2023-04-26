@@ -21,7 +21,7 @@ defmodule Assistant.ZenonQueryProcessor do
   end
 
   defp is_rezension zenon_result do
-    Map.has_key?(zenon_result, "title") and String.match?(zenon_result["title"], ~r/^\[Rez\..*\]/)
+    Map.has_key?(zenon_result, "title") and String.match?(zenon_result["title"], ~r/^\[Rez|Review\..*\]/)
   end
 
   defp query_zenon_reducer queries_for_parser_result, results do
@@ -96,16 +96,16 @@ defmodule Assistant.ZenonQueryProcessor do
     end
   end
 
-  def get_ui_suffix_parts(str, parts) do
+  def get_ui_suffix_parts(str, part) do
     str
     |> String.split("&lookfor0[]")
-    |> Enum.at(parts)
+    |> Enum.at(part)
   end
 
-  def get_api_suffix_parts(str, parts) do
+  def get_api_suffix_parts(str, part) do
     str
     |> String.split(" and ")
-    |> Enum.at(parts)
+    |> Enum.at(part)
   end
 
   defp requery_with_reduced_suffix {api_suffix, ui_suffix} do
