@@ -21,7 +21,7 @@ defmodule Assistant.ZenonQueryProcessor do
   end
 
   defp is_rezension zenon_result do
-    Map.has_key?(zenon_result, "title") and String.match?(zenon_result["title"], ~r/^\[Rez|Review\..*\]/)
+    Map.has_key?(zenon_result, "title") and String.match?(zenon_result["title"], ~r/^\[Rez\..*\]/)
   end
 
   defp query_zenon_reducer queries_for_parser_result, results do
