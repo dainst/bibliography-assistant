@@ -5,6 +5,12 @@
   phx-window-keyup="keyup"
   phx-target={@myself}>
 
+  <h1><%= Translator.translate(:bibliography_assistant, @state.lang) %></h1>
+
+  <a href='http://confluence:8090/display/RED/Bibliographie-Assistent'>Tutorial (confluence)</a>
+
+  <p id="getting_started"><%= Translator.translate(:getting_started, @state.lang) %></p>
+
   <.form
     let={f}
     id="raw-references-form"
@@ -12,11 +18,8 @@
     phx-change="change"
     phx-target={@myself}>
 
-    <h1><%= Translator.translate(:bibliographic_references, @state.lang) %></h1>
+    <%= textarea f, :raw_references, placeholder: Translator.translate(:placeholder_examples, @state.lang) %>
 
-    <p><%= Translator.translate(:one_item_per_line, @state.lang) %></p>
-
-    <textarea id="raw-references-form_raw_references" name="raw_references[raw_references]" placeholder=""></textarea>
   </.form>
 
   <%= unless @state.show_spinner do %>

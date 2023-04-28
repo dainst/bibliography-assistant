@@ -103,3 +103,7 @@ footer a {
   float: right;
   padding: 0 1vw;
 }
+
+p#getting_started {
+  margin-top:2vh
+}

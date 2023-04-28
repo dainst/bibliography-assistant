@@ -1,13 +1,9 @@
 defmodule Assistant.Translator do
 
   @dictionary %{
-    bibliographic_references: %{
-      en: "Bibliographic references",
-      de: "Bibliographische Referenzen"
-    },
-    one_item_per_line: %{
-      en: "One item per line",
-      de: "Ein Eintrag pro Zeile"
+    bibliography_assistant: %{
+      en: "Bibliography-Assistant",
+      de: "Bibliographie-Assistent"
     },
     evaluate: %{
       en: "Evaluate",
@@ -25,6 +21,10 @@ defmodule Assistant.Translator do
       en: "Generate download link",
       de: "Download Link erzeugen"
     },
+    getting_started: %{
+    en: "Enter bibliographic references in the orange text field (one entry per line) and click on Evaluate!",
+    de: "Bibliographische Referenzen in das orangene Textfeld eingeben (ein Eintrag pro Zeile) und dann auf Auswerten klicken!"
+    },
     download: %{
       en: "Download",
       de: "Herunterladen"
@@ -32,6 +32,14 @@ defmodule Assistant.Translator do
     new_search: %{
       en: "New search",
       de: "Neue Suche"
+    },
+    placeholder_examples: %{
+      en: "F. P. Arata, Un curioso »palinsesto« lapideo. Note su una testa ad altorilievo e un inedito ritratto di Alessandro Severo, BMusRom 24, 2010, 5–14 \n
+M. Bergmann, Studien zum römischen Porträt des 3. Jahrhunderts nach Christus, Antiquitas. Abhandlungen zur Vor- und Frühgeschichte, zur klassischen und provinzial-römischen Archäologie und zur Geschichte des Altertums 18 (Bonn 1977)\n
+S. E. Wood, Roman Portrait Sculpture, 217–260 A.D.: the Transformation of an Artistic Tradition, Columbia Studies in the Classical Tradition 12 (Leiden 1986)",
+      de: "F. P. Arata, Un curioso »palinsesto« lapideo. Note su una testa ad altorilievo e un inedito ritratto di Alessandro Severo, BMusRom 24, 2010, 5–14 \n
+M. Bergmann, Studien zum römischen Porträt des 3. Jahrhunderts nach Christus, Antiquitas. Abhandlungen zur Vor- und Frühgeschichte, zur klassischen und provinzial-römischen Archäologie und zur Geschichte des Altertums 18 (Bonn 1977)\n
+S. E. Wood, Roman Portrait Sculpture, 217–260 A.D.: the Transformation of an Artistic Tradition, Columbia Studies in the Classical Tradition 12 (Leiden 1986)"
     },
     show_details: %{
       en: "Show details",

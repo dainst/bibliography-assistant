@@ -35,12 +35,13 @@ body {
 
     textarea {
 
+        width: 80vw;
         height: 300px;
         background: antiquewhite;
     }
 
     textarea::placeholder {
-
+        color:lightslategray;
     }
 }
 
